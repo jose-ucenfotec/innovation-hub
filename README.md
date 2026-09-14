@@ -35,6 +35,7 @@ _(se completa durante las semanas 2 a 4)_
 | # | Fecha | Hash | Mensaje |
 |---|-------|------|---------|
 | 1 | 2026-09-14 | 9726a0b | Crear estructura del avance 1 y documentacion inicial |
+| 2 | 2026-09-14 | f9593e9 | Automatizar la tabla de commits del README |
 
 <!-- FIN TABLA COMMITS -->
 
