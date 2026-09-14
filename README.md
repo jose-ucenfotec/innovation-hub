@@ -3,7 +3,7 @@
 Proyecto del curso SOFT-12 — Desarrollo Web Full Stack.
  
 **Estudiante:** Jose Ricardo Barrantes Saenz
-**Sección:**SCV2    **Periodo:** III cuatrimestre 2026
+**Sección:** SCV2    **Periodo:** III cuatrimestre 2026
 **Docente:** Alvaro Cordero Pena
  
 ## Descripción
@@ -30,6 +30,34 @@ Abrir `avance1/index.html` en el navegador. No requiere instalación.
 _(se completa durante las semanas 2 a 4)_
  
 ## Resumen de commits
- 
-_(ver la tabla al final de este archivo)_
 
+<!-- INICIO TABLA COMMITS -->
+| # | Fecha | Hash | Mensaje |
+|---|-------|------|---------|
+| 1 | 2026-09-14 | 9726a0b | Crear estructura del avance 1 y documentacion inicial |
+
+<!-- FIN TABLA COMMITS -->
+
+## Automatización de la tabla de commits
+
+La tabla anterior se genera con `herramientas/tabla-commits.sh`, que lee el
+historial real del repositorio y reemplaza únicamente el contenido entre las
+marcas `<!-- INICIO TABLA COMMITS -->` y `<!-- FIN TABLA COMMITS -->`.
+
+Para regenerarla manualmente:
+
+    bash herramientas/tabla-commits.sh
+
+Para que se actualice sola en cada commit hay que instalar el hook. La carpeta
+`.git` no se versiona, así que cada persona debe instalarlo en su copia local
+después de clonar:
+
+    cp herramientas/pre-commit .git/hooks/pre-commit
+    chmod +x .git/hooks/pre-commit
+
+Nota: el hook `pre-commit` se ejecuta antes de que el commit exista, por lo que
+la tabla refleja el historial hasta el commit anterior.
+
+Si el hook llegara a impedir los commits, se desactiva borrándolo:
+
+    rm .git/hooks/pre-commit
