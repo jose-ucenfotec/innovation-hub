@@ -37,6 +37,7 @@ _(se completa durante las semanas 2 a 4)_
 | 1 | 2026-09-14 | 9726a0b | Crear estructura del avance 1 y documentacion inicial |
 | 2 | 2026-09-14 | f9593e9 | Automatizar la tabla de commits del README |
 | 3 | 2026-09-14 | f75aa83 | Marcar los scripts como ejecutables |
+| 4 | 2026-09-14 | 4ed592b | Actualizar tabla de commits |
 
 <!-- FIN TABLA COMMITS -->
 
