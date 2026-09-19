@@ -1,30 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Iniciativas</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Innovation Hub</title>
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <section class="catalogo" aria-label="Iniciativas">
-      <article class="tarjeta tarjeta--idea">
-        <span class="tarjeta__tipo">Idea</span>
-        <h3 class="tarjeta__titulo">Plataforma de voluntariado universitario</h3>
-    <p class="tarjeta__resumen">Coordinar voluntarios de distintas carreras en una sola aplicación.</p>
-    <a class="tarjeta__enlace" href="#detalle">Ver detalle</a>
-      </article>
-      <article class="tarjeta tarjeta--necesidad">
-          <span class="tarjeta__tipo">Necesidad</span>
-          <h3 class="tarjeta__titulo">Acceso a laboratorios fuera de horario</h3>
-          <p class="tarjeta__resumen">Los estudiantes de ingeniería no tienen espacio para prototipar de noche.</p>
-          <a class="tarjeta__enlace" href="#detalle">Ver detalle</a>
-      </article>
-      <article class="tarjeta tarjeta--reto">
-          <span class="tarjeta__tipo">Reto</span>
-          <h3 class="tarjeta__titulo">Asignar tutores más rápido</h3>
-          <p class="tarjeta__resumen">Reducir el tiempo de asignación de tutorías de dos semanas a dos días.</p>
-          <a class="tarjeta__enlace" href="#detalle">Ver detalle</a>
-      </article>
-      </section>
+<header id="navbar"></header>
+
+<main>
+  <section class="hero text-center py-5" aria-labelledby="t-hero">
+    <div class="container">
+      <h1 id="t-hero" class="display-6 fw-bold">Innovation Hub</h1>
+      <p class="lead col-lg-8 mx-auto">Publicá ideas, necesidades y retos; encontrá las competencias que faltan y formá equipos interdisciplinarios dentro de la comunidad universitaria.</p>
+      <a class="btn btn-light btn-lg me-2" href="paginas/catalogo.html">Explorar iniciativas</a>
+      <a class="btn btn-outline-light btn-lg" href="paginas/formulario.html">Publicar una iniciativa</a>
+    </div>
+  </section>
+
+  <section class="container py-5" aria-labelledby="t-como">
+    <h2 id="t-como" class="h3 text-center mb-4">¿Cómo funciona?</h2>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+      <div class="col"><div class="card h-100"><div class="card-body">
+        <h3 class="h6">1. Explorá</h3>
+        <p class="small text-body-secondary">Buscá ideas, necesidades y retos por categoría o competencia.</p>
+      </div></div></div>
+      <div class="col"><div class="card h-100"><div class="card-body">
+        <h3 class="h6">2. Publicá</h3>
+        <p class="small text-body-secondary">Registrá tu iniciativa con el problema, los beneficiarios y las competencias que necesitás.</p>
+      </div></div></div>
+      <div class="col"><div class="card h-100"><div class="card-body">
+        <h3 class="h6">3. Postulate</h3>
+        <p class="small text-body-secondary">Solicitá participar en una iniciativa indicando qué competencia aportás.</p>
+      </div></div></div>
+      <div class="col"><div class="card h-100"><div class="card-body">
+        <h3 class="h6">4. Formá equipo</h3>
+        <p class="small text-body-secondary">El autor acepta participantes y la iniciativa se convierte en proyecto.</p>
+      </div></div></div>
+    </div>
+  </section>
+</main>
+
+<footer class="text-center py-3 small text-body-secondary border-top">Innovation Hub · SOFT-12</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/ui.js"></script>
+<script>
+  document.getElementById('navbar').innerHTML = IH.ui.renderNavbar('index.html', '');
+</script>
 </body>
+</html>
