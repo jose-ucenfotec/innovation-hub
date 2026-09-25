@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publicar iniciativa · Innovation Hub</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<header id="navbar"></header>
+<main class="container py-4">
+  <h1 class="h3 mb-4" id="titulo-pagina">Publicar iniciativa</h1>
+  <form id="formulario-iniciativa" novalidate>
+    <div class="row g-3">
+      <div class="col-12 col-md-8">
+        <label class="form-label" for="titulo">Título</label>
+        <input id="titulo" class="form-control" required>
+        <div class="invalid-feedback" id="error-titulo" hidden></div>
+      </div>
+      <div class="col-12 col-md-4">
+        <label class="form-label" for="tipo">Tipo</label>
+        <select id="tipo" class="form-select">
+          <option value="idea">Idea</option>
+          <option value="necesidad">Necesidad</option>
+          <option value="reto">Reto</option>
+        </select>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label" for="resumen">Resumen</label>
+        <input id="resumen" class="form-control" required>
+        <div class="invalid-feedback" id="error-resumen" hidden></div>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label" for="descripcion">Descripción</label>
+        <textarea id="descripcion" class="form-control" rows="3" required></textarea>
+        <div class="invalid-feedback" id="error-descripcion" hidden></div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label" for="problema">Problema identificado</label>
+        <textarea id="problema" class="form-control" rows="2" required></textarea>
+        <div class="invalid-feedback" id="error-problema" hidden></div>
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="form-label" for="beneficiarios">Beneficiarios</label>
+        <textarea id="beneficiarios" class="form-control" rows="2" required></textarea>
+        <div class="invalid-feedback" id="error-beneficiarios" hidden></div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label" for="categoria">Categoría</label>
+        <select id="categoria" class="form-select"><option value="">Elegí una categoría…</option></select>
+        <div class="invalid-feedback" id="error-categoria" hidden></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <label class="form-label" for="participantes">Participantes estimados</label>
+        <input id="participantes" type="number" min="1" max="20" class="form-control">
+        <div class="invalid-feedback" id="error-participantes" hidden></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <label class="form-label" for="visibilidad">Visibilidad</label>
+        <select id="visibilidad" class="form-select">
+          <option value="pública">Pública</option>
+          <option value="institucional">Institucional</option>
+          <option value="restringida">Restringida</option>
+          <option value="privada">Privada</option>
+        </select>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label" for="competencia-nueva">Competencias necesarias</label>
+        <div class="input-group">
+          <select id="competencia-nueva" class="form-select"><option value="">Elegí una competencia…</option></select>
+          <button type="button" id="agregar-competencia" class="btn btn-outline-primary">Agregar</button>
+        </div>
+        <ul id="competencias-elegidas" class="list-inline mt-2" aria-live="polite"></ul>
+        <div class="invalid-feedback d-block" id="error-competencias" hidden></div>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label" for="etiquetas">Etiquetas (separadas por coma)</label>
+        <input id="etiquetas" class="form-control" placeholder="voluntariado, comunidad">
+      </div>
+    </div>
+
+    <div class="mt-4 d-flex gap-2">
+      <button type="submit" class="btn btn-primary">Guardar iniciativa</button>
+      <a href="catalogo.html" class="btn btn-outline-secondary">Cancelar</a>
+    </div>
+  </form>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/datos.js"></script>
+<script src="../js/almacen.js"></script>
+<script src="../js/reglas.js"></script>
+<script src="../js/validacion.js"></script>
+<script src="../js/formulario.js"></script>
+</body>
+</html>
