@@ -1,0 +1,7 @@
+[
+  { "id": "cat-tecnologia", "nombre": "Tecnología" },
+  { "id": "cat-ambiente", "nombre": "Ambiente y sostenibilidad" },
+  { "id": "cat-salud", "nombre": "Salud y bienestar" },
+  { "id": "cat-educacion", "nombre": "Educación" },
+  { "id": "cat-emprendimiento", "nombre": "Emprendimiento" }
+]

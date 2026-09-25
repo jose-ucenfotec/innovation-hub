@@ -1,0 +1,8 @@
+[
+  { "id": "comp-javascript", "nombre": "JavaScript", "area": "Desarrollo" },
+  { "id": "comp-diseno-ux", "nombre": "Diseño UX", "area": "Diseño" },
+  { "id": "comp-analisis-datos", "nombre": "Análisis de datos", "area": "Datos" },
+  { "id": "comp-gestion", "nombre": "Gestión de proyectos", "area": "Gestión" },
+  { "id": "comp-redes", "nombre": "Redes y ciberseguridad", "area": "Infraestructura" },
+  { "id": "comp-marketing", "nombre": "Marketing digital", "area": "Negocios" }
+]

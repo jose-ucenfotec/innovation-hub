@@ -39,6 +39,7 @@ _(se completa durante las semanas 2 a 4)_
 | 3 | 2026-09-14 | f75aa83 | Marcar los scripts como ejecutables |
 | 4 | 2026-09-14 | 4ed592b | Actualizar tabla de commits |
 | 5 | 2026-09-15 | 4526bff | Creacion de HTML base semantico y la seccion catalogo de manera estructurada |
+| 6 | 2026-09-18 | 308f2ee | Modificar index.html con base en uso de bootstrap |
 
 <!-- FIN TABLA COMMITS -->
 

@@ -1,0 +1,11 @@
+[
+  { "id": "u1", "nombre": "Ana Mora", "carrera": "Ingeniería de Software", "correo": "ana.mora@ucenfotec.ac.cr",
+    "competencias": ["comp-javascript", "comp-gestion"], "intereses": ["comunidad", "educación"],
+    "bio": "Tercer año. Me interesa el impacto social de la tecnología." },
+  { "id": "u2", "nombre": "Luis Pérez", "carrera": "Ciberseguridad", "correo": "luis.perez@ucenfotec.ac.cr",
+    "competencias": ["comp-analisis-datos", "comp-redes"], "intereses": ["energía", "datos"], "bio": "" },
+  { "id": "u3", "nombre": "María Solís", "carrera": "Agronomía", "correo": "maria.solis@ucenfotec.ac.cr",
+    "competencias": ["comp-gestion"], "intereses": ["ambiente"], "bio": "Coordino el huerto del campus." },
+  { "id": "u4", "nombre": "Diego Vargas", "carrera": "Administración", "correo": "diego.vargas@ucenfotec.ac.cr",
+    "competencias": ["comp-marketing", "comp-diseno-ux"], "intereses": ["emprendimiento"], "bio": "" }
+]

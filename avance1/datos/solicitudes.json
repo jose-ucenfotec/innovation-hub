@@ -1,0 +1,8 @@
+[
+  { "id": "sol-01", "iniciativaId": "ini-02", "usuarioId": "u3", "mensaje": "Puedo aportar análisis de datos del consumo eléctrico.",
+    "competencia": "comp-analisis-datos", "rol": "Analista de datos", "disponibilidad": "6 h/semana", "estado": "aceptada", "fecha": "2026-09-10" },
+  { "id": "sol-02", "iniciativaId": "ini-06", "usuarioId": "u4", "mensaje": "Tengo experiencia en marketing para emprendimientos estudiantiles.",
+    "competencia": "comp-marketing", "rol": "Encargado de difusión", "disponibilidad": "4 h/semana", "estado": "aceptada", "fecha": "2026-09-12" },
+  { "id": "sol-03", "iniciativaId": "ini-01", "usuarioId": "u3", "mensaje": "Me gustaría ayudar con la gestión de voluntarios.",
+    "competencia": "comp-gestion", "rol": "Coordinadora", "disponibilidad": "3 h/semana", "estado": "pendiente", "fecha": "2026-09-16" }
+]
