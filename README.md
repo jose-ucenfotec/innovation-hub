@@ -40,6 +40,7 @@ _(se completa durante las semanas 2 a 4)_
 | 4 | 2026-09-14 | 4ed592b | Actualizar tabla de commits |
 | 5 | 2026-09-15 | 4526bff | Creacion de HTML base semantico y la seccion catalogo de manera estructurada |
 | 6 | 2026-09-18 | 308f2ee | Modificar index.html con base en uso de bootstrap |
+| 7 | 2026-09-24 | e045ca8 | Creacion de JSON para los key-value pair de esta primer entrega, con base en las necesidades de la pagina. Ajustes en index para reflejar el JS que los llamara |
 
 <!-- FIN TABLA COMMITS -->
 

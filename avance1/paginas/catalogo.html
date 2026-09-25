@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catálogo · Innovation Hub</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<header id="navbar"></header>
+
+<main class="container py-4">
+  <h1 class="h3 mb-4">Catálogo de iniciativas</h1>
+
+  <form id="filtros" class="row g-2 mb-4" role="search" aria-label="Buscar y filtrar iniciativas">
+    <div class="col-12 col-md-4">
+      <label class="form-label" for="buscar">Buscar</label>
+      <input id="buscar" name="texto" type="search" class="form-control" placeholder="Título o resumen...">
+    </div>
+    <div class="col-6 col-md-2">
+      <label class="form-label" for="f-tipo">Tipo</label>
+      <select id="f-tipo" name="tipo" class="form-select">
+        <option value="">Todos</option>
+        <option value="idea">Idea</option>
+        <option value="necesidad">Necesidad</option>
+        <option value="reto">Reto</option>
+      </select>
+    </div>
+    <div class="col-6 col-md-3">
+      <label class="form-label" for="f-categoria">Categoría</label>
+      <select id="f-categoria" name="categoria" class="form-select"><option value="">Todas</option></select>
+    </div>
+    <div class="col-9 col-md-2">
+      <label class="form-label" for="f-competencia">Competencia</label>
+      <select id="f-competencia" name="competencia" class="form-select"><option value="">Todas</option></select>
+    </div>
+    <div class="col-3 col-md-1 d-flex align-items-end">
+      <button type="reset" id="limpiar" class="btn btn-outline-secondary w-100">Limpiar</button>
+    </div>
+  </form>
+
+  <div id="cargando" class="text-center py-5">
+    <div class="spinner-border" role="status"><span class="visually-hidden">Cargando…</span></div>
+  </div>
+  <div id="error" class="alert alert-danger" role="alert" hidden></div>
+  <p id="vacio" class="alert alert-secondary" role="status" hidden>No hay iniciativas que coincidan con la búsqueda.</p>
+  <div id="lista" class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4"></div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/datos.js"></script>
+<script src="../js/almacen.js"></script>
+<script src="../js/reglas.js"></script>
+<script src="../js/catalogo.js"></script>
+</body>
+</html>
