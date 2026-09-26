@@ -53,6 +53,7 @@ _(se completa durante las semanas 2 a 4)_
 | 17 | 2026-09-25 | 3be9179 | Creacion de JS para perfil de usuario |
 | 18 | 2026-09-26 | d52bd44 | Creacion de JS para solicitud |
 | 19 | 2026-09-26 | 7004692 | Creacion de pagina HTML semantico para perfil y JS de catalogo |
+| 20 | 2026-09-26 | 1a2bcd7 | Agregar CDN de bootstrap a las paginas, para luego empatar y cambiar en CSS |
 
 <!-- FIN TABLA COMMITS -->
 
