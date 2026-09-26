@@ -3,52 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Innovation Hub</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <title>Innovation Hub · Conectá ideas con personas</title>
+  <meta name="description" content="Publicá ideas, necesidades y retos; encontrá competencias y formá equipos interdisciplinarios en la comunidad universitaria.">
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 btn btn-primary btn-sm" href="#contenido">Saltar al contenido</a>
 <header id="navbar"></header>
 
-<main>
-  <section class="hero text-center py-5" aria-labelledby="t-hero">
+<main id="contenido">
+  <section class="hero" aria-labelledby="t-hero">
     <div class="container">
-      <h1 id="t-hero" class="display-6 fw-bold">Innovation Hub</h1>
-      <p class="lead col-lg-8 mx-auto">Publicá ideas, necesidades y retos; encontrá las competencias que faltan y formá equipos interdisciplinarios dentro de la comunidad universitaria.</p>
-      <a class="btn btn-light btn-lg me-2" href="paginas/catalogo.html">Explorar iniciativas</a>
-      <a class="btn btn-outline-light btn-lg" href="paginas/formulario.html">Publicar una iniciativa</a>
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7 text-center text-lg-start">
+          <h1 id="t-hero">Conectá ideas con las personas que las hacen realidad</h1>
+          <p class="lead mt-3 mb-4">Publicá ideas, necesidades y retos; encontrá las competencias que faltan y formá equipos interdisciplinarios dentro de la comunidad universitaria.</p>
+          <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center justify-content-lg-start">
+            <a class="btn btn-light btn-lg" href="paginas/catalogo.html"><i class="bi bi-search" aria-hidden="true"></i> Explorar iniciativas</a>
+            <a class="btn btn-outline-light btn-lg" href="paginas/formulario.html"><i class="bi bi-plus-circle" aria-hidden="true"></i> Publicar una iniciativa</a>
+          </div>
+        </div>
+        <div class="col-lg-5 d-none d-lg-block">
+          <img class="hero-imagen" src="img/hero.webp" alt="Estudiantes de distintas carreras conectando ideas en una red" width="600" height="450">
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="container py-5" aria-labelledby="t-como">
-    <h2 id="t-como" class="h3 text-center mb-4">¿Cómo funciona?</h2>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-      <div class="col"><div class="card h-100"><div class="card-body">
-        <h3 class="h6">1. Explorá</h3>
-        <p class="small text-body-secondary">Buscá ideas, necesidades y retos por categoría o competencia.</p>
-      </div></div></div>
-      <div class="col"><div class="card h-100"><div class="card-body">
-        <h3 class="h6">2. Publicá</h3>
-        <p class="small text-body-secondary">Registrá tu iniciativa con el problema, los beneficiarios y las competencias que necesitás.</p>
-      </div></div></div>
-      <div class="col"><div class="card h-100"><div class="card-body">
-        <h3 class="h6">3. Postulate</h3>
-        <p class="small text-body-secondary">Solicitá participar en una iniciativa indicando qué competencia aportás.</p>
-      </div></div></div>
-      <div class="col"><div class="card h-100"><div class="card-body">
-        <h3 class="h6">4. Formá equipo</h3>
-        <p class="small text-body-secondary">El autor acepta participantes y la iniciativa se convierte en proyecto.</p>
-      </div></div></div>
+    <h2 id="t-como" class="h3 text-center mb-2">¿Cómo funciona?</h2>
+    <p class="text-center text-body-secondary col-lg-8 mx-auto mb-4">Cuatro pasos para pasar de una idea suelta a un equipo trabajando.</p>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+      <div class="col">
+        <article class="card h-100 text-center">
+          <div class="card-body">
+            <img class="paso-imagen mb-3" src="img/paso-explorar.webp" alt="Lupa sobre tarjetas de iniciativas" width="240" height="180" loading="lazy">
+            <span class="paso-numero mx-auto mb-3" aria-hidden="true">1</span>
+            <h3 class="h6">Explorá</h3>
+            <p class="small text-body-secondary mb-0">Buscá ideas, necesidades y retos por texto, tipo, categoría o competencia.</p>
+          </div>
+        </article>
+      </div>
+      <div class="col">
+        <article class="card h-100 text-center">
+          <div class="card-body">
+            <img class="paso-imagen mb-3" src="img/paso-publicar.webp" alt="Persona lanzando una idea representada por una bombilla" width="240" height="180" loading="lazy">
+            <span class="paso-numero mx-auto mb-3" aria-hidden="true">2</span>
+            <h3 class="h6">Publicá</h3>
+            <p class="small text-body-secondary mb-0">Registrá tu iniciativa con el problema, los beneficiarios y las competencias que necesitás.</p>
+          </div>
+        </article>
+      </div>
+      <div class="col">
+        <article class="card h-100 text-center">
+          <div class="card-body">
+            <img class="paso-imagen mb-3" src="img/paso-postular.webp" alt="Mano entregando una pieza de rompecabezas que encaja" width="240" height="180" loading="lazy">
+            <span class="paso-numero mx-auto mb-3" aria-hidden="true">3</span>
+            <h3 class="h6">Postulate</h3>
+            <p class="small text-body-secondary mb-0">Solicitá participar indicando qué competencia aportás, tu rol deseado y tu disponibilidad.</p>
+          </div>
+        </article>
+      </div>
+      <div class="col">
+        <article class="card h-100 text-center">
+          <div class="card-body">
+            <img class="paso-imagen mb-3" src="img/paso-equipo.webp" alt="Equipo interdisciplinario alrededor de una mesa con un cohete" width="240" height="180" loading="lazy">
+            <span class="paso-numero mx-auto mb-3" aria-hidden="true">4</span>
+            <h3 class="h6">Formá equipo</h3>
+            <p class="small text-body-secondary mb-0">El autor acepta participantes y, con equipo, la iniciativa se convierte en proyecto.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="container pb-5" aria-labelledby="t-caminos">
+    <h2 id="t-caminos" class="visually-hidden">Publicar o participar</h2>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <article class="card h-100">
+          <div class="card-body">
+            <h3 class="h5"><i class="bi bi-lightbulb-fill text-primary" aria-hidden="true"></i> Tenés una idea, una necesidad o un reto</h3>
+            <ul class="small text-body-secondary mb-3">
+              <li>Describí el problema y a quién beneficia.</li>
+              <li>Indicá las competencias que buscás y cuántas personas necesitás.</li>
+              <li>Elegí la visibilidad: pública, institucional, restringida o privada.</li>
+              <li>Recibí solicitudes y armá tu equipo.</li>
+            </ul>
+            <a class="btn btn-primary" href="paginas/formulario.html">Publicar iniciativa <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6">
+        <article class="card h-100">
+          <div class="card-body">
+            <h3 class="h5"><i class="bi bi-people-fill text-info" aria-hidden="true"></i> Querés sumarte a un proyecto real</h3>
+            <ul class="small text-body-secondary mb-3">
+              <li>Completá tu perfil con competencias e intereses.</li>
+              <li>Filtrá el catálogo por lo que sabés hacer.</li>
+              <li>Enviá una solicitud con tu mensaje de presentación.</li>
+              <li>Cuando te acepten, pasás a formar parte del equipo.</li>
+            </ul>
+            <a class="btn btn-outline-primary" href="paginas/catalogo.html">Ver iniciativas <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="estadisticas" class="container pb-5" aria-label="Cifras de la plataforma" hidden>
+    <div class="row row-cols-2 row-cols-md-4 g-3 text-center">
+      <div class="col"><div class="card"><div class="card-body"><p class="estadistica mb-1" id="n-iniciativas">0</p><p class="small text-body-secondary mb-0">iniciativas activas</p></div></div></div>
+      <div class="col"><div class="card"><div class="card-body"><p class="estadistica mb-1" id="n-proyectos">0</p><p class="small text-body-secondary mb-0">convertidas en proyecto</p></div></div></div>
+      <div class="col"><div class="card"><div class="card-body"><p class="estadistica mb-1" id="n-personas">0</p><p class="small text-body-secondary mb-0">personas registradas</p></div></div></div>
+      <div class="col"><div class="card"><div class="card-body"><p class="estadistica mb-1" id="n-competencias">0</p><p class="small text-body-secondary mb-0">competencias en el catálogo</p></div></div></div>
     </div>
   </section>
 </main>
 
-<footer class="text-center py-3 small text-body-secondary border-top">Innovation Hub</footer>
+<footer class="pie text-center py-4 small">
+  <div class="container">Innovation Hub · Proyecto SOFT-12 · Universidad CENFOTEC · 2026</div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/ui.js"></script>
-<script>
-  document.getElementById('navbar').innerHTML = IH.ui.renderNavbar('index.html', '');
-</script>
+<script src="js/sesion.js"></script>
+<script src="js/datos.js"></script>
+<script src="js/almacen.js"></script>
+<script src="js/inicio.js"></script>
 </body>
 </html>

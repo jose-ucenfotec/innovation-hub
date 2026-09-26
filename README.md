@@ -56,6 +56,7 @@ _(se completa durante las semanas 2 a 4)_
 | 20 | 2026-09-26 | 1a2bcd7 | Agregar CDN de bootstrap a las paginas, para luego empatar y cambiar en CSS |
 | 21 | 2026-09-26 | 1d41874 | Creacion de JS para manejar reglas de negocio |
 | 22 | 2026-09-26 | 2b398fd | Editar el gitignore, para remover la compilacion de Sass |
+| 23 | 2026-09-26 | dffd008 | Creaciones de paginas SCSS, usando bootstrap como base. Para compilar el CSS |
 
 <!-- FIN TABLA COMMITS -->
 
