@@ -1,0 +1,113 @@
+//  Paleta de colores 
+$azul:     #2563EB;
+$marino:   #1E3A8A;
+$petroleo: #0E7490;
+$cian:     #06B6D4; 
+$cielo:    #38BDF8; 
+$menta:    #34D399;   
+$tinta:    #0B1F4B;
+
+//  Colores de tema con variable 
+$primary:   $azul;
+$secondary: #64748B;
+$success:   #10B981;
+$info:      $petroleo;
+$warning:   #F59E0B;
+$danger:    #EF4444;
+$light:     #EEF2F9;
+$dark:      $tinta;
+
+$body-bg:               #F4F7FC;
+$body-color:            #1E293B;
+$body-secondary-color:  #475569;
+$headings-color:        $tinta;
+$link-color:            $azul;
+$link-decoration:       none;
+$link-hover-decoration: underline;
+$border-color:          #E2E8F0;
+
+// Tipografía 
+$font-family-sans-serif: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$headings-font-family:   "Sora", $font-family-sans-serif;
+$headings-font-weight:   700;
+$font-size-base:         1rem;
+$lead-font-size:         1.125rem;
+$lead-font-weight:       400;
+
+//  Espaciado 
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 4.5,
+  7: $spacer * 6
+);
+$grid-gutter-width: 1.75rem;
+
+//  Formas y sombras 
+$border-radius:    .75rem;
+$border-radius-sm: .5rem;
+$border-radius-lg: 1rem;
+$border-radius-xl: 1.5rem;
+$box-shadow-sm:    0 2px 8px rgba(11, 31, 75, .06);
+$box-shadow:       0 10px 30px rgba(11, 31, 75, .10);
+$box-shadow-lg:    0 20px 50px rgba(11, 31, 75, .16);
+
+//  Botones 
+$btn-border-radius:    50rem;
+$btn-border-radius-sm: 50rem;
+$btn-border-radius-lg: 50rem;
+$btn-font-weight:      600;
+$btn-padding-x:        1.25rem;
+$btn-padding-y:        .55rem;
+
+//  Tarjetas 
+$card-border-width:  0;
+$card-border-radius: $border-radius-lg;
+$card-spacer-y:      1.25rem;
+$card-spacer-x:      1.25rem;
+$card-cap-bg:        transparent;
+
+//  Badges 
+$badge-font-weight:   600;
+$badge-font-size:     .72em;
+$badge-padding-x:     .7em;
+$badge-padding-y:     .4em;
+$badge-border-radius: 50rem;
+
+//  Formularios 
+$input-border-radius:      $border-radius-sm;
+$input-padding-y:          .625rem;
+$input-padding-x:          .875rem;
+$input-border-color:       #CBD5E1;
+$input-focus-border-color: tint-color($primary, 25%);
+$input-focus-box-shadow:   0 0 0 .25rem rgba($primary, .18);
+$form-label-font-weight:   600;
+$form-label-font-size:     .875rem;
+$form-feedback-font-size:  .8125rem;
+
+//  Navegación 
+$navbar-padding-y:          .75rem;
+$navbar-light-color:        #334155;
+$navbar-light-hover-color:  $primary;
+$navbar-light-active-color: $primary;
+$nav-link-font-weight:      500;
+$nav-tabs-border-color:     $border-color;
+$nav-tabs-border-radius:    0;
+$nav-tabs-link-active-color: $primary;
+$nav-tabs-link-active-bg:   transparent;
+$nav-tabs-link-active-border-color: transparent transparent $primary;
+
+//  Modal, toast, alertas 
+$modal-content-border-radius:     $border-radius-lg;
+$modal-content-border-width:      0;
+$modal-content-box-shadow-sm-up:  $box-shadow-lg;
+$toast-border-radius:             $border-radius;
+$toast-border-width:              0;
+$toast-box-shadow:                $box-shadow;
+$alert-border-radius:             $border-radius;
+$alert-border-width:              0;

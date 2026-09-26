@@ -1,0 +1,25 @@
+.formulario-tarjeta {
+  background: #fff;
+  border-radius: $border-radius-lg;
+  box-shadow: $box-shadow-sm;
+  padding: 1.5rem;
+  @include media-breakpoint-up(md) { padding: 2rem; }
+}
+
+.invalid-feedback { font-weight: 500; }
+
+.contador {
+  display: block;
+  text-align: right;
+  font-size: .75rem;
+  color: $body-secondary-color;
+  margin-top: .25rem;
+}
+
+.competencia-elegida {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .45rem .9rem;
+  .btn-close { width: .6em; height: .6em; }
+}
