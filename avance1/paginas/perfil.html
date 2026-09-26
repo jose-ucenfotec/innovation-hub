@@ -4,30 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mi perfil · Innovation Hub</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/main.css">
+  <link rel="icon" href="../img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
+<a class="visually-hidden-focusable position-absolute top-0 start-0 m-2 btn btn-primary btn-sm" href="#contenido">Saltar al contenido</a>
 <header id="navbar"></header>
-<main class="container py-4">
-  <div class="row g-4">
-    <div class="col-md-4">
+
+<main id="contenido" class="container py-4">
+  <h1 class="h3 mb-4">Mi perfil</h1>
+
+  <div id="cargando" class="text-center py-5" aria-live="polite">
+    <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando perfil…</span></div>
+  </div>
+  <div id="error" class="estado-error text-center py-5" role="alert" hidden></div>
+  <div id="sin-sesion" class="alert alert-warning d-flex gap-2" role="status" hidden>
+    <i class="bi bi-person-lock" aria-hidden="true"></i>
+    <div>Estás navegando como visitante. Elegí un usuario en <strong>Ver como</strong>, en la barra superior, para ver su perfil.</div>
+  </div>
+
+  <div id="perfil" class="row g-4" hidden>
+    <div class="col-md-5 col-lg-4">
       <div class="card"><div class="card-body" id="tarjeta-perfil"></div></div>
     </div>
-    <div class="col-md-8">
-      <ul class="nav nav-tabs" id="pestanas" role="tablist">
-        <li class="nav-item"><button class="nav-link active" data-tab="propias">Mis iniciativas</button></li>
-        <li class="nav-item"><button class="nav-link" data-tab="participo">Participo en</button></li>
-        <li class="nav-item"><button class="nav-link" data-tab="solicitudes">Mis solicitudes</button></li>
-      </ul>
-      <div id="contenido-pestanas" class="pt-3"></div>
+    <div class="col-md-7 col-lg-8">
+      <div class="nav nav-tabs" id="pestanas" role="tablist" aria-label="Actividad del usuario">
+        <button class="nav-link active" id="tab-propias" role="tab" type="button" data-tab="propias" aria-selected="true" aria-controls="contenido-pestanas">
+          <i class="bi bi-lightbulb" aria-hidden="true"></i> Mis iniciativas <span class="badge text-bg-light border ms-1" id="n-propias">0</span>
+        </button>
+        <button class="nav-link" id="tab-participo" role="tab" type="button" data-tab="participo" aria-selected="false" aria-controls="contenido-pestanas" tabindex="-1">
+          <i class="bi bi-people" aria-hidden="true"></i> Participo en <span class="badge text-bg-light border ms-1" id="n-participo">0</span>
+        </button>
+        <button class="nav-link" id="tab-solicitudes" role="tab" type="button" data-tab="solicitudes" aria-selected="false" aria-controls="contenido-pestanas" tabindex="-1">
+          <i class="bi bi-send" aria-hidden="true"></i> Mis solicitudes <span class="badge text-bg-light border ms-1" id="n-solicitudes">0</span>
+        </button>
+      </div>
+      <div id="contenido-pestanas" class="pt-2" role="tabpanel" aria-labelledby="tab-propias" tabindex="0"></div>
+
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mt-4 pt-3 border-top">
+        <p id="nota-local" class="small text-body-secondary mb-0" hidden><i class="bi bi-database" aria-hidden="true"></i> Hay cambios guardados en este navegador.</p>
+        <button type="button" id="restablecer" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i> Restablecer datos de ejemplo</button>
+      </div>
     </div>
   </div>
 </main>
+
+<footer class="pie text-center py-4 small">
+  <div class="container">Innovation Hub · Universidad CENFOTEC · 2026</div>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../js/ui.js"></script>
+<script src="../js/sesion.js"></script>
 <script src="../js/datos.js"></script>
 <script src="../js/almacen.js"></script>
+<script src="../js/reglas.js"></script>
 <script src="../js/perfil.js"></script>
 </body>
 </html>
