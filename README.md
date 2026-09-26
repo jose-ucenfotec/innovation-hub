@@ -43,6 +43,7 @@ _(se completa durante las semanas 2 a 4)_
 | 7 | 2026-09-24 | e045ca8 | Creacion de JSON para los key-value pair de esta primer entrega, con base en las necesidades de la pagina. Ajustes en index para reflejar el JS que los llamara |
 | 8 | 2026-09-24 | 0a6e481 | Creacion de esqueleto para pagina catalogo. Con base en los JS mapeados necesarios de momento |
 | 9 | 2026-09-24 | 9cea2c6 | Creacion de esqueleto para pagina detalle. Con base en los JS mapeados necesarios de momento |
+| 10 | 2026-09-24 | dad34ec | Creacion de esqueleto para pagina formulario. Con base en los JS mapeados necesarios de momento |
 
 <!-- FIN TABLA COMMITS -->
 
