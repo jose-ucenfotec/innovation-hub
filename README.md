@@ -57,6 +57,7 @@ _(se completa durante las semanas 2 a 4)_
 | 21 | 2026-09-26 | 1d41874 | Creacion de JS para manejar reglas de negocio |
 | 22 | 2026-09-26 | 2b398fd | Editar el gitignore, para remover la compilacion de Sass |
 | 23 | 2026-09-26 | dffd008 | Creaciones de paginas SCSS, usando bootstrap como base. Para compilar el CSS |
+| 24 | 2026-09-26 | 6db0da3 | Correciones en elementos y clases de Index.html, para matchear bootstrap |
 
 <!-- FIN TABLA COMMITS -->
 

@@ -1,0 +1,26 @@
+{
+  "name": "innovation-hub",
+  "version": "1.0.0",
+  "description": "Proyecto del curso SOFT-12 — Desarrollo Web Full Stack.",
+  "main": "index.js",
+  "scripts": {
+    "css": "sass --load-path=node_modules --no-source-map --quiet-deps --silence-deprecation=import avance1/scss/main.scss avance1/css/main.css",
+    "css:watch": "npm run css -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jose-ucenfotec/innovation-hub.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jose-ucenfotec/innovation-hub/issues"
+  },
+  "homepage": "https://github.com/jose-ucenfotec/innovation-hub#readme",
+  "devDependencies": {
+    "bootstrap": "^5.3.3",
+    "sass": "^1.105.0"
+  }
+}
