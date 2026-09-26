@@ -58,6 +58,7 @@ _(se completa durante las semanas 2 a 4)_
 | 22 | 2026-09-26 | 2b398fd | Editar el gitignore, para remover la compilacion de Sass |
 | 23 | 2026-09-26 | dffd008 | Creaciones de paginas SCSS, usando bootstrap como base. Para compilar el CSS |
 | 24 | 2026-09-26 | 6db0da3 | Correciones en elementos y clases de Index.html, para matchear bootstrap |
+| 25 | 2026-09-26 | 4cd4ff6 | Cambio Sass y Bootstrap como dependencias, con nodejs |
 
 <!-- FIN TABLA COMMITS -->
 
