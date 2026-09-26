@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Innovation Hub">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1E40AF"/><stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <path d="M16 2 28 9v14l-12 7L4 23V9z" fill="none" stroke="url(#g)" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M16 10 10.5 20M16 10l5.5 10M10.5 20h11" stroke="#2563EB" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="16" cy="10" r="2.4" fill="#2563EB"/>
+  <circle cx="10.5" cy="20" r="2.4" fill="#0E7490"/>
+  <circle cx="21.5" cy="20" r="2.4" fill="#06B6D4"/>
+</svg>

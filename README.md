@@ -59,6 +59,7 @@ _(se completa durante las semanas 2 a 4)_
 | 23 | 2026-09-26 | dffd008 | Creaciones de paginas SCSS, usando bootstrap como base. Para compilar el CSS |
 | 24 | 2026-09-26 | 6db0da3 | Correciones en elementos y clases de Index.html, para matchear bootstrap |
 | 25 | 2026-09-26 | 4cd4ff6 | Cambio Sass y Bootstrap como dependencias, con nodejs |
+| 26 | 2026-09-26 | e594c6b | CSS compilado con npm run css -- ls -la avance1/css/main.css |
 
 <!-- FIN TABLA COMMITS -->
 
