@@ -50,6 +50,7 @@ _(se completa durante las semanas 2 a 4)_
 | 14 | 2026-09-25 | c2357a1 | Creacion de JS para formulario, con validacion de campos |
 | 15 | 2026-09-25 | 65151dd | Creacion de JS para validacion |
 | 16 | 2026-09-25 | 947a13d | Creacion de pagina base en HTML semantico para solicitud |
+| 17 | 2026-09-25 | 3be9179 | Creacion de JS para perfil de usuario |
 
 <!-- FIN TABLA COMMITS -->
 
