@@ -45,6 +45,7 @@ _(se completa durante las semanas 2 a 4)_
 | 9 | 2026-09-24 | 9cea2c6 | Creacion de esqueleto para pagina detalle. Con base en los JS mapeados necesarios de momento |
 | 10 | 2026-09-24 | dad34ec | Creacion de esqueleto para pagina formulario. Con base en los JS mapeados necesarios de momento |
 | 11 | 2026-09-25 | c944b09 | Creacion de navbar compartido |
+| 12 | 2026-09-25 | 7bfb074 | Creacion de JS para carga de datos quemados en los JSON |
 
 <!-- FIN TABLA COMMITS -->
 
