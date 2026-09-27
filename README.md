@@ -3,7 +3,11 @@
 Proyecto del curso SOFT-12 — Desarrollo Web Full Stack.
  
 **Estudiante:** Jose Ricardo Barrantes Saenz
-**Sección:** SCV2    **Periodo:** III cuatrimestre 2026
+
+**Sección:** SCV2   
+
+**Periodo:** III cuatrimestre 2026
+
 **Docente:** Alvaro Cordero Pena
  
 ## Descripción
@@ -23,11 +27,39 @@ equipos interdisciplinarios dentro de la comunidad universitaria.
  
 ## Cómo ejecutar
  
-Abrir `avance1/index.html` en el navegador. No requiere instalación.
- 
+Debido a las acciones fetch del JS y la necesidad de JSON para este avance, el fetch falla si se carga como un avance, para la visualizacion de datos.
+La pagina se puede abrir de dos maneras segun el proposito final:
+
+1. Para visualizacion e inspecion del diseno con clonar el repo y abrir index.html sera suficiente, sin embargo ninguna otra pagina cargara dato y mostrara mensaje de error.
+2. Para una correcta visualizacion de los datos y mejor experiencia de usuario se requiere la extension "Live Server" en IDE de preferencia o si se tiene Python instalado, se podria ejectuar un local server de la siguiente manera desde la raiz del repo:
+        a. python3 -m http.server 5500
+        b. Luego abrir http://localhost:5500/index.html
+
 ## Decisiones de diseño
  
-_(se completa durante las semanas 2 a 4)_
+1. **Sass sobre Bootstrap.** `scss/_variables.scss` sobrescribe algunas variables  (colores de tema, tipografía, radios, espaciado, formularios,
+   navbar, modal, toast) antes de importar Bootstrap. Los parciales `_base`, `_navbar`, `_hero`, `_tarjetas` y `_formularios` agregan solo lo que Bootstrap no ofrece.
+2. **Identidad visual.** Pense en la identidad de marca de Cenfotec, con un fuerte color azul como color primario primario `#2563EB`. Luego, tomando en cuenta
+   que es un proyecto independiente opte por una paleta de colores mas viva, que tuviera relacion directa en la rueda de colores con ese azul. Un degradado marino → azul →
+   petróleo en el hero, verde menta y ámbar para necesidad y reto. Tipografía Sora para títulos y DM Sans para texto. Botones y badges en forma de píldora,
+   tarjetas sin borde con sombra suave. Iconografía de Bootstrap Icons para mayor facilidad no buscarlos en otro lugar o generarlos uno a uno.
+3. **Contenido generado desde datos.** Tarjetas, detalle, perfil, selects y badges se construyen en JavaScript a partir de los JSON para esta primer entrega que no 
+   hay bases de datos. El HTML solo contiene la estructura y el contenido fijo de la portada.
+4. **Persistencia.** Los JSON son los datos estaticos para esta entrega. Las altas, ediciones,
+   eliminaciones y solicitudes se guardan además en `localStorage` para que el catálogo refleje los cambios entre páginas, y la experiencia visual sea un poco mas enriquecedora. 
+   El botón **Restablecer datos de ejemplo** del perfil vuelve a los JSON originales.
+5. **Eliminar o archivar.** Si la iniciativa tiene equipo, solicitudes o proyecto, se archiva en lugar de eliminarse como pide las reglas de negocio. La confirmación se hace con
+   un modal de Bootstrap que muestra el título y la acción que se ejecutará.
+6. **Validación propia.** Obligatoriedad, longitud mínima y máxima, rango,
+   selección válida, formato (etiquetas y disponibilidad) y relación entre campos
+   (los integrantes estimados no pueden ser menos que el equipo actual). Los
+   mensajes son específicos por campo y se anuncian con `aria-invalid` y
+   `aria-describedby`.
+7. **Accesibilidad.** HTML semántico, enlace para saltar al contenido, jerarquía
+   de encabezados, etiquetas asociadas, pestañas con roles ARIA y navegación por
+   teclado, textos alternativos, estados que combinan icono, texto y color, y
+   respeto a `prefers-reduced-motion`.
+8. **Preparación para el Avance 2.** Cada página es un módulo con estado propio. Lo que facilitaria la escalabilidad o movilidad.
  
 ## Resumen de commits
 
@@ -66,29 +98,6 @@ _(se completa durante las semanas 2 a 4)_
 | 30 | 2026-09-26 | 06e3d05 | Ajustes en datos JSON, para terminar con categorias con iconos |
 | 31 | 2026-09-26 | 7bda382 | Creacion de sesion.js para arreglar bug de visualizacion, al no existir una sesion en este Avance |
 | 32 | 2026-09-26 | 3f53f5b | Ajustes en mensaje de error al cargar datos. Mejora de UX |
+| 33 | 2026-09-26 | 7563611 | Agregar imagenes genai para landing page. Mejora visual |
 
 <!-- FIN TABLA COMMITS -->
-
-## Automatización de la tabla de commits
-
-La tabla anterior se genera con `herramientas/tabla-commits.sh`, que lee el
-historial real del repositorio y reemplaza únicamente el contenido entre las
-marcas `<!-- INICIO TABLA COMMITS -->` y `<!-- FIN TABLA COMMITS -->`.
-
-Para regenerarla manualmente:
-
-    bash herramientas/tabla-commits.sh
-
-Para que se actualice sola en cada commit hay que instalar el hook. La carpeta
-`.git` no se versiona, así que cada persona debe instalarlo en su copia local
-después de clonar:
-
-    cp herramientas/pre-commit .git/hooks/pre-commit
-    chmod +x .git/hooks/pre-commit
-
-Nota: el hook `pre-commit` se ejecuta antes de que el commit exista, por lo que
-la tabla refleja el historial hasta el commit anterior.
-
-Si el hook llegara a impedir los commits, se desactiva borrándolo:
-
-    rm .git/hooks/pre-commit
