@@ -1,59 +1,74 @@
-document.getElementById('navbar').innerHTML = IH.ui.renderNavbar('solicitud.html', '../');
-const USUARIO_ACTUAL_ID = 'u3';
+(() => {
+  IH.ui.montarNavbar('solicitud.html', '../');
+  const U = IH.ui;
+  const V = IH.validacion;
+  const $ = (id) => document.getElementById(id);
+  const REGEX_DISPONIBILIDAD = /^\d{1,2}\s?h\/semana$/i;
+  const val = (id) => $(id).value;
 
-async function iniciar() {
-  const datos = await IH.datos.cargarDatos('../datos/');
-  IH.almacen.inicializar(datos);
-
-  const id = new URLSearchParams(window.location.search).get('id');
-  const ini = IH.almacen.obtenerIniciativa(id);
-  const usuarioActual = IH.almacen.obtenerUsuario(USUARIO_ACTUAL_ID);
-  const verificacion = IH.reglas.puedeSolicitar(ini, usuarioActual, IH.almacen.obtenerSolicitudes());
-
-  if (!verificacion.ok) {
-    document.getElementById('bloqueo').hidden = false;
-    document.getElementById('bloqueo').textContent = verificacion.motivo;
-    return;
+  function renderResumen(ini, ctx) {
+    const propietario = ctx.usuarios.get(ini.propietario);
+    const buscan = ini.competencias
+      .map((id) => `<li>${U.chip(ctx.competencias.get(id)?.nombre ?? id, { icono: 'bi-stars' })}</li>`).join('');
+    $('resumen-iniciativa').innerHTML = `<div class="card-body">
+      <h2 class="seccion-titulo">Iniciativa</h2>
+      <p class="fw-semibold mb-2"><a href="detalle.html?id=${encodeURIComponent(ini.id)}">${U.escapar(ini.titulo)}</a></p>
+      <div class="d-flex flex-wrap gap-2 mb-3">${U.badgeTipo(ini.tipo)} ${U.chip(`${IH.reglas.espaciosDisponibles(ini)} espacios libres`, { icono: 'bi-person-plus' })}</div>
+      <h2 class="seccion-titulo">Buscan</h2>
+      <ul class="lista-chips mb-3">${buscan}</ul>
+      <p class="small text-body-secondary mb-0">${U.icono('bi-person')} Tu solicitud llegará a <strong>${U.escapar(propietario?.nombre ?? 'el propietario')}</strong>.</p>
+    </div>`;
+    $('resumen-iniciativa').hidden = false;
   }
 
-  document.getElementById('formulario-solicitud').hidden = false;
-  const selCompetencia = document.getElementById('competencia');
-  selCompetencia.innerHTML = usuarioActual.competencias
-    .map((cid) => `<option value="${cid}">${IH.ui.escapar(datos.competencias.find((c) => c.id === cid)?.nombre ?? cid)}</option>`)
-    .join('');
+  function bloquear(mensaje) {
+    $('bloqueo').hidden = false;
+    $('bloqueo').innerHTML = `${U.icono('bi-info-circle-fill')}<div>${U.escapar(mensaje)}</div>`;
+  }
 
-  document.getElementById('formulario-solicitud').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const V = IH.validacion;
-    let valido = true;
-    [
-      ['mensaje', () => V.longitudMinima(document.getElementById('mensaje').value, 15)],
-      ['rol', () => V.requerido(document.getElementById('rol').value)],
-      ['disponibilidad', () => V.requerido(document.getElementById('disponibilidad').value)]
-    ].forEach(([campo, validar]) => {
-      const mensaje = validar();
-      V.mostrarError(campo, mensaje);
-      if (mensaje) valido = false;
+  IH.ui.cargarPagina('../', () => {
+    const ctx = IH.almacen.contexto();
+    const id = new URLSearchParams(window.location.search).get('id');
+    const ini = IH.almacen.obtenerIniciativa(id);
+    if (!ini) { bloquear('No encontramos la iniciativa indicada.'); return; }
+
+    renderResumen(ini, ctx);
+    document.title = `Solicitar participación · ${ini.titulo}`;
+
+    const usuario = IH.sesion.usuarioActual();
+    const verificacion = IH.reglas.puedeSolicitar(ini, usuario, IH.almacen.obtenerSolicitudes());
+    if (!verificacion.ok) { bloquear(verificacion.motivo); return; }
+
+    const idsCompetencias = usuario.competencias.map((c) => c.id);
+    $('competencia').innerHTML = '<option value="">Elegí una competencia…</option>' +
+      usuario.competencias.map((c) => `<option value="${c.id}">${U.escapar(ctx.competencias.get(c.id)?.nombre ?? c.id)} · ${U.etiqueta('nivel', c.nivel)}</option>`).join('');
+    if (usuario.disponibilidad?.horasSemana) $('disponibilidad').value = `${usuario.disponibilidad.horasSemana} h/semana`;
+    $('formulario-solicitud').hidden = false;
+
+    $('mensaje').addEventListener('input', () => { $('contador-mensaje').textContent = `${val('mensaje').length} / 300`; });
+
+    $('formulario-solicitud').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const ok = V.validarCampos([
+        ['mensaje', () => V.combinar(() => V.requerido(val('mensaje')), () => V.longitudMinima(val('mensaje'), 15), () => V.longitudMaxima(val('mensaje'), 300))],
+        ['competencia', () => V.seleccionValida(val('competencia'), idsCompetencias)],
+        ['rol', () => V.combinar(() => V.requerido(val('rol')), () => V.longitudMaxima(val('rol'), 40))],
+        ['disponibilidad', () => V.combinar(() => V.requerido(val('disponibilidad')), () => V.formato(val('disponibilidad'), REGEX_DISPONIBILIDAD, 'Usá el formato "N h/semana", por ejemplo 4 h/semana.'))]
+      ]);
+      if (!ok) return;
+
+      IH.almacen.agregarSolicitud({
+        id: 'sol-' + Date.now(),
+        iniciativaId: ini.id,
+        usuarioId: usuario.id,
+        mensaje: val('mensaje').trim(),
+        competencia: val('competencia'),
+        rol: val('rol').trim(),
+        disponibilidad: val('disponibilidad').trim(),
+        estado: 'pendiente',
+        fecha: new Date().toISOString().slice(0, 10)
+      });
+      window.location.href = `detalle.html?id=${encodeURIComponent(ini.id)}&msg=solicitud`;
     });
-    if (!valido) return;
-
-    IH.almacen.agregarSolicitud({
-      id: 'sol-' + Date.now(),
-      iniciativaId: ini.id,
-      usuarioId: USUARIO_ACTUAL_ID,
-      mensaje: document.getElementById('mensaje').value.trim(),
-      competencia: document.getElementById('competencia').value,
-      rol: document.getElementById('rol').value.trim(),
-      disponibilidad: document.getElementById('disponibilidad').value.trim(),
-      estado: 'pendiente',
-      fecha: new Date().toISOString().slice(0, 10)
-    });
-
-    document.getElementById('formulario-solicitud').hidden = true;
-    const exito = document.getElementById('exito');
-    exito.hidden = false;
-    exito.innerHTML = `Solicitud enviada (simulada). <a href="detalle.html?id=${ini.id}">Volver al detalle</a>`;
   });
-}
-
-iniciar();
+})();

@@ -1,41 +1,58 @@
 window.IH = window.IH || {};
 
 IH.reglas = (function () {
-  // Niveles de acceso
-  function nivelDeAcceso(iniciativa, usuarioActual) {
-    if (iniciativa.visibilidad === 'pública') return 'completo';
-    if (iniciativa.visibilidad === 'institucional') return usuarioActual ? 'completo' : 'bloqueado';
-    if (iniciativa.visibilidad === 'restringida') return 'resumen';
-    if (iniciativa.visibilidad === 'privada') {
-      const esPropietario = usuarioActual && iniciativa.propietario === usuarioActual.id;
-      const esMiembro = usuarioActual && iniciativa.equipo.includes(usuarioActual.id);
-      return (esPropietario || esMiembro) ? 'completo' : 'bloqueado';
-    }
-    return 'bloqueado';
+  function esPropietario(ini, usuario) {
+    return !!usuario && ini.propietario === usuario.id;
+  }
+  function esMiembro(ini, usuario) {
+    return !!usuario && ini.equipo.includes(usuario.id);
   }
 
-  // Propietario de la iniciativa
-  function esPropietario(iniciativa, usuarioActual) {
-    return !!usuarioActual && iniciativa.propietario === usuarioActual.id;
+  // RN-20: toda consulta respeta la visibilidad. Propietario y equipo siempre ven todo.
+  function nivelDeAcceso(ini, usuario) {
+    if (esPropietario(ini, usuario) || esMiembro(ini, usuario)) return 'completo';
+    switch (ini.visibilidad) {
+      case 'pública': return 'completo';
+      case 'institucional': return usuario ? 'completo' : 'bloqueado';
+      case 'restringida': return 'resumen';
+      case 'privada': return 'bloqueado';
+      default: return 'bloqueado';
+    }
   }
 
-  // Solicitudes de participación
-  function puedeSolicitar(iniciativa, usuarioActual, solicitudes) {
-    if (!usuarioActual) return { ok: false, motivo: 'Iniciá sesión para solicitar participación.' };
-    if (iniciativa.propietario === usuarioActual.id) {
-      return { ok: false, motivo: 'No podés solicitar participación en tu propia iniciativa.' };
-    }
+  // Las privadas no aparecen en el catálogo general salvo para propietario y equipo.
+  function visibleEnCatalogo(ini, usuario) {
+    return ini.visibilidad !== 'privada' || esPropietario(ini, usuario) || esMiembro(ini, usuario);
+  }
+
+  // RN-16.
+  function espaciosDisponibles(ini) {
+    return Math.max(0, ini.participantesEstimados - ini.equipo.length - 1);
+  }
+
+  // RN-10, RN-11, RN-15
+  function puedeSolicitar(ini, usuario, solicitudes) {
+    if (!usuario) return { ok: false, motivo: 'Elegí un usuario en "Ver como" para simular la sesión y poder solicitar participación.' };
+    if (esPropietario(ini, usuario)) return { ok: false, motivo: 'No podés solicitar participación en tu propia iniciativa.' };
+    if (esMiembro(ini, usuario)) return { ok: false, motivo: 'Ya formás parte del equipo de esta iniciativa.' };
+    if (['archivada', 'proyecto'].includes(ini.estado)) return { ok: false, motivo: 'Esta iniciativa ya no recibe solicitudes.' };
+    if (espaciosDisponibles(ini) === 0) return { ok: false, motivo: 'La iniciativa ya completó los espacios previstos.' };
     const yaPendiente = solicitudes.some(
-      (s) => s.iniciativaId === iniciativa.id && s.usuarioId === usuarioActual.id && s.estado === 'pendiente'
+      (s) => s.iniciativaId === ini.id && s.usuarioId === usuario.id && s.estado === 'pendiente'
     );
     if (yaPendiente) return { ok: false, motivo: 'Ya tenés una solicitud pendiente para esta iniciativa.' };
     return { ok: true, motivo: '' };
   }
 
-  // Verificar si la iniciativa puede convertirse en proyecto
-  function puedeConvertirseEnProyecto(iniciativa) {
-    return iniciativa.equipo.length >= 1;
+  // RN-17, RN-18
+  function puedeConvertirseEnProyecto(ini) {
+    return ini.equipo.length >= 1 && !['proyecto', 'archivada'].includes(ini.estado);
   }
 
-  return { nivelDeAcceso, esPropietario, puedeSolicitar, puedeConvertirseEnProyecto };
+  // RF-A-INI-03
+  function puedeEditarse(ini) {
+    return ini.estado !== 'archivada';
+  }
+
+  return { esPropietario, esMiembro, nivelDeAcceso, visibleEnCatalogo, espaciosDisponibles, puedeSolicitar, puedeConvertirseEnProyecto, puedeEditarse };
 })();

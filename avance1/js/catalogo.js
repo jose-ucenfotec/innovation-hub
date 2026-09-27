@@ -1,53 +1,52 @@
-document.getElementById('navbar').innerHTML = IH.ui.renderNavbar('catalogo.html', '../');
+(() => {
+  IH.ui.montarNavbar('catalogo.html', '../');
 
-const filtrosEstado = { texto: '', tipo: '', categoria: '', competencia: '' };
+  const filtros = { texto: '', tipo: '', categoria: '', competencia: '' };
+  const $ = (id) => document.getElementById(id);
 
-function llenarSelect(select, opciones, etiqueta) {
-  select.innerHTML = `<option value="">${etiqueta}</option>` +
-    opciones.map((o) => `<option value="${o.id}">${IH.ui.escapar(o.nombre)}</option>`).join('');
-}
-
-function coincide(ini) {
-  const texto = filtrosEstado.texto.trim().toLowerCase();
-  const coincideTexto = !texto ||
-    ini.titulo.toLowerCase().includes(texto) ||
-    ini.resumen.toLowerCase().includes(texto);
-  const coincideTipo = !filtrosEstado.tipo || ini.tipo === filtrosEstado.tipo;
-  const coincideCategoria = !filtrosEstado.categoria || ini.categoria === filtrosEstado.categoria;
-  const coincideCompetencia = !filtrosEstado.competencia || ini.competencias.includes(filtrosEstado.competencia);
-  return coincideTexto && coincideTipo && coincideCategoria && coincideCompetencia;
-}
-
-function renderLista() {
-  const ctx = IH.almacen.contexto();
-  const visibles = IH.almacen.obtenerIniciativas().filter(coincide);
-  document.getElementById('lista').innerHTML = visibles.map((i) => IH.ui.tarjetaIniciativa(i, ctx)).join('');
-  document.getElementById('vacio').hidden = visibles.length > 0;
-}
-
-async function iniciar() {
-  const cargando = document.getElementById('cargando');
-  const error = document.getElementById('error');
-  try {
-    const datos = await IH.datos.cargarDatos('../datos/');
-    IH.almacen.inicializar(datos);
-    llenarSelect(document.getElementById('f-categoria'), datos.categorias, 'Todas');
-    llenarSelect(document.getElementById('f-competencia'), datos.competencias, 'Todas');
-    cargando.hidden = true;
-    renderLista();
-  } catch (e) {
-    cargando.hidden = true;
-    error.hidden = false;
-    error.textContent = 'No se pudieron cargar las iniciativas. Recargá la página para volver a intentar.';
+  function llenarSelect(select, opciones, etiqueta) {
+    select.innerHTML = `<option value="">${etiqueta}</option>` +
+      opciones.map((o) => `<option value="${o.id}">${IH.ui.escapar(o.nombre)}</option>`).join('');
   }
-}
 
-document.getElementById('filtros').addEventListener('input', (e) => {
-  if (e.target.name) filtrosEstado[e.target.name] = e.target.value;
-  renderLista();
-});
-document.getElementById('limpiar').addEventListener('click', () => {
-  setTimeout(() => { Object.keys(filtrosEstado).forEach((k) => (filtrosEstado[k] = '')); renderLista(); }, 0);
-});
+  // Búsqueda textual sobre título, resumen y etiquetas.
+  function coincide(ini) {
+    const texto = filtros.texto.trim().toLowerCase();
+    const enTexto = !texto || [ini.titulo, ini.resumen, ...ini.etiquetas].some((t) => t.toLowerCase().includes(texto));
+    const enTipo = !filtros.tipo || ini.tipo === filtros.tipo;
+    const enCategoria = !filtros.categoria || ini.categoria === filtros.categoria;
+    const enCompetencia = !filtros.competencia || ini.competencias.includes(filtros.competencia);
+    return enTexto && enTipo && enCategoria && enCompetencia;
+  }
 
-iniciar();
+  function renderLista() {
+    const ctx = IH.almacen.contexto();
+    const usuario = IH.sesion.usuarioActual();
+    const visibles = IH.almacen.obtenerIniciativas()
+      .filter((i) => IH.reglas.visibleEnCatalogo(i, usuario))
+      .filter(coincide);
+    $('lista').innerHTML = visibles.map((i) => IH.ui.tarjetaIniciativa(i, ctx)).join('');
+    $('vacio').hidden = visibles.length > 0;
+    $('conteo').textContent = visibles.length === 1 ? '1 iniciativa' : `${visibles.length} iniciativas`;
+  }
+
+  function limpiar() {
+    Object.keys(filtros).forEach((k) => (filtros[k] = ''));
+    renderLista();
+  }
+
+  $('filtros').addEventListener('input', (e) => {
+    if (e.target.name) filtros[e.target.name] = e.target.value;
+    renderLista();
+  });
+  // El evento reset se dispara antes de que el navegador vacíe los campos.
+  $('filtros').addEventListener('reset', () => setTimeout(limpiar, 0));
+  $('limpiar-desde-vacio').addEventListener('click', () => $('filtros').reset());
+
+  IH.ui.cargarPagina('../', (datos) => {
+    llenarSelect($('f-categoria'), datos.categorias, 'Todas');
+    llenarSelect($('f-competencia'), datos.competencias, 'Todas');
+    renderLista();
+    IH.ui.mostrarMensajeDeUrl();
+  });
+})();
