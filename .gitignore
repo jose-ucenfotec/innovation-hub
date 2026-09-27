@@ -17,3 +17,6 @@ Thumbs.db
 
 # compilación de Sass
 .sass-cache/
+
+# herramientas locales (metadata de commits, scripts internos)
+/herramientas/
