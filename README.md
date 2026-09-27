@@ -62,6 +62,7 @@ _(se completa durante las semanas 2 a 4)_
 | 26 | 2026-09-26 | e594c6b | CSS compilado con npm run css -- ls -la avance1/css/main.css |
 | 27 | 2026-09-26 | fe01469 | Imagenes para el header y acorde a la identidad del hub |
 | 28 | 2026-09-26 | 7e48e6a | Ajustes en HTML semantico para matchear botones/icones de Bootstrap y CSS compilado |
+| 29 | 2026-09-26 | f060ab1 | Ajustes en archivos de JS acorde a las clases de Bootstrap y correciones en bugs de carga |
 
 <!-- FIN TABLA COMMITS -->
 

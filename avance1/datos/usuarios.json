@@ -1,11 +1,33 @@
 [
-  { "id": "u1", "nombre": "Ana Mora", "carrera": "Ingeniería de Software", "correo": "ana.mora@ucenfotec.ac.cr",
-    "competencias": ["comp-javascript", "comp-gestion"], "intereses": ["comunidad", "educación"],
+  { "id": "u1", "nombre": "Ana Mora", "tipoMiembro": "estudiante", "carrera": "Ingeniería de Software",
+    "correo": "ana.mora@ucenfotec.ac.cr",
+    "competencias": [ { "id": "comp-javascript", "nivel": "avanzado" }, { "id": "comp-gestion", "nivel": "intermedio" } ],
+    "intereses": ["comunidad", "educación"],
+    "disponibilidad": { "horasSemana": 6, "detalle": "tardes y fines de semana" },
+    "portafolio": "https://github.com/anamora",
     "bio": "Tercer año. Me interesa el impacto social de la tecnología." },
-  { "id": "u2", "nombre": "Luis Pérez", "carrera": "Ciberseguridad", "correo": "luis.perez@ucenfotec.ac.cr",
-    "competencias": ["comp-analisis-datos", "comp-redes"], "intereses": ["energía", "datos"], "bio": "" },
-  { "id": "u3", "nombre": "María Solís", "carrera": "Agronomía", "correo": "maria.solis@ucenfotec.ac.cr",
-    "competencias": ["comp-gestion"], "intereses": ["ambiente"], "bio": "Coordino el huerto del campus." },
-  { "id": "u4", "nombre": "Diego Vargas", "carrera": "Administración", "correo": "diego.vargas@ucenfotec.ac.cr",
-    "competencias": ["comp-marketing", "comp-diseno-ux"], "intereses": ["emprendimiento"], "bio": "" }
+
+  { "id": "u2", "nombre": "Luis Pérez", "tipoMiembro": "docente", "carrera": "Ciberseguridad",
+    "correo": "luis.perez@ucenfotec.ac.cr",
+    "competencias": [ { "id": "comp-analisis-datos", "nivel": "avanzado" }, { "id": "comp-redes", "nivel": "avanzado" } ],
+    "intereses": ["energía", "datos"],
+    "disponibilidad": { "horasSemana": 4, "detalle": "martes y jueves" },
+    "portafolio": null,
+    "bio": "Docente de redes. Busco proyectos aplicados para mis cursos." },
+
+  { "id": "u3", "nombre": "María Solís", "tipoMiembro": "estudiante", "carrera": "Agronomía",
+    "correo": "maria.solis@ucenfotec.ac.cr",
+    "competencias": [ { "id": "comp-gestion", "nivel": "intermedio" }, { "id": "comp-comunicacion", "nivel": "avanzado" } ],
+    "intereses": ["ambiente", "voluntariado"],
+    "disponibilidad": { "horasSemana": 3, "detalle": "mañanas" },
+    "portafolio": null,
+    "bio": "Coordino el huerto del campus." },
+
+  { "id": "u4", "nombre": "Diego Vargas", "tipoMiembro": "administrativo", "carrera": "Administración",
+    "correo": "diego.vargas@ucenfotec.ac.cr",
+    "competencias": [ { "id": "comp-marketing", "nivel": "avanzado" }, { "id": "comp-diseno-ux", "nivel": "basico" } ],
+    "intereses": ["emprendimiento"],
+    "disponibilidad": { "horasSemana": 0, "detalle": "" },
+    "portafolio": "https://www.behance.net/diegovargas",
+    "bio": "" }
 ]

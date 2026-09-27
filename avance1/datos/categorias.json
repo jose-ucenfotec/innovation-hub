@@ -1,7 +1,10 @@
 [
-  { "id": "cat-tecnologia", "nombre": "Tecnología" },
-  { "id": "cat-ambiente", "nombre": "Ambiente y sostenibilidad" },
-  { "id": "cat-salud", "nombre": "Salud y bienestar" },
-  { "id": "cat-educacion", "nombre": "Educación" },
-  { "id": "cat-emprendimiento", "nombre": "Emprendimiento" }
+  { "id": "cat-tecnologia",     "nombre": "Tecnología",                "icono": "bi-cpu" },
+  { "id": "cat-educacion",      "nombre": "Educación",                 "icono": "bi-mortarboard" },
+  { "id": "cat-sostenibilidad", "nombre": "Sostenibilidad",            "icono": "bi-tree" },
+  { "id": "cat-impacto-social", "nombre": "Impacto social",            "icono": "bi-people" },
+  { "id": "cat-negocios",       "nombre": "Negocios y emprendimiento", "icono": "bi-graph-up-arrow" },
+  { "id": "cat-salud",          "nombre": "Salud y bienestar",         "icono": "bi-heart-pulse" },
+  { "id": "cat-cultura",        "nombre": "Cultura y creatividad",     "icono": "bi-palette" },
+  { "id": "cat-otro",           "nombre": "Otro",                      "icono": "bi-three-dots" }
 ]
