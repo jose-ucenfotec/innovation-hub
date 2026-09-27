@@ -101,5 +101,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 33 | 2026-09-26 | 7563611 | Agregar imagenes genai para landing page. Mejora visual |
 | 34 | 2026-09-27 | 575d11a | Ajustes en readme |
 | 35 | 2026-09-27 | 0714c8c | Ajustes en readme |
+| 36 | 2026-09-27 | 6be2a8e | Ajustes en readme |
 
 <!-- FIN TABLA COMMITS -->
