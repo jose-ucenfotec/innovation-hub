@@ -99,5 +99,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 31 | 2026-09-26 | 7bda382 | Creacion de sesion.js para arreglar bug de visualizacion, al no existir una sesion en este Avance |
 | 32 | 2026-09-26 | 3f53f5b | Ajustes en mensaje de error al cargar datos. Mejora de UX |
 | 33 | 2026-09-26 | 7563611 | Agregar imagenes genai para landing page. Mejora visual |
+| 34 | 2026-09-27 | 575d11a | Ajustes en readme |
 
 <!-- FIN TABLA COMMITS -->
