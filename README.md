@@ -64,43 +64,44 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 ## Resumen de commits
 
 <!-- INICIO TABLA COMMITS -->
-| # | Fecha | Hash | Mensaje |
-|---|-------|------|---------|
-| 1 | 2026-09-14 | 9726a0b | Crear estructura del avance 1 y documentacion inicial |
-| 2 | 2026-09-14 | f9593e9 | Automatizar la tabla de commits del README |
-| 3 | 2026-09-14 | f75aa83 | Marcar los scripts como ejecutables |
-| 4 | 2026-09-14 | 4ed592b | Actualizar tabla de commits |
-| 5 | 2026-09-15 | 4526bff | Creacion de HTML base semantico y la seccion catalogo de manera estructurada |
-| 6 | 2026-09-18 | 308f2ee | Modificar index.html con base en uso de bootstrap |
-| 7 | 2026-09-24 | e045ca8 | Creacion de JSON para los key-value pair de esta primer entrega, con base en las necesidades de la pagina. Ajustes en index para reflejar el JS que los llamara |
-| 8 | 2026-09-24 | 0a6e481 | Creacion de esqueleto para pagina catalogo. Con base en los JS mapeados necesarios de momento |
-| 9 | 2026-09-24 | 9cea2c6 | Creacion de esqueleto para pagina detalle. Con base en los JS mapeados necesarios de momento |
-| 10 | 2026-09-24 | dad34ec | Creacion de esqueleto para pagina formulario. Con base en los JS mapeados necesarios de momento |
-| 11 | 2026-09-25 | c944b09 | Creacion de navbar compartido |
-| 12 | 2026-09-25 | 7bfb074 | Creacion de JS para carga de datos quemados en los JSON |
-| 13 | 2026-09-25 | 7c8b13b | Creacion de JS para reglas de negocio en visibilidad |
-| 14 | 2026-09-25 | c2357a1 | Creacion de JS para formulario, con validacion de campos |
-| 15 | 2026-09-25 | 65151dd | Creacion de JS para validacion |
-| 16 | 2026-09-25 | 947a13d | Creacion de pagina base en HTML semantico para solicitud |
-| 17 | 2026-09-25 | 3be9179 | Creacion de JS para perfil de usuario |
-| 18 | 2026-09-26 | d52bd44 | Creacion de JS para solicitud |
-| 19 | 2026-09-26 | 7004692 | Creacion de pagina HTML semantico para perfil y JS de catalogo |
-| 20 | 2026-09-26 | 1a2bcd7 | Agregar CDN de bootstrap a las paginas, para luego empatar y cambiar en CSS |
-| 21 | 2026-09-26 | 1d41874 | Creacion de JS para manejar reglas de negocio |
-| 22 | 2026-09-26 | 2b398fd | Editar el gitignore, para remover la compilacion de Sass |
-| 23 | 2026-09-26 | dffd008 | Creaciones de paginas SCSS, usando bootstrap como base. Para compilar el CSS |
-| 24 | 2026-09-26 | 6db0da3 | Correciones en elementos y clases de Index.html, para matchear bootstrap |
-| 25 | 2026-09-26 | 4cd4ff6 | Cambio Sass y Bootstrap como dependencias, con nodejs |
-| 26 | 2026-09-26 | e594c6b | CSS compilado con npm run css -- ls -la avance1/css/main.css |
-| 27 | 2026-09-26 | fe01469 | Imagenes para el header y acorde a la identidad del hub |
-| 28 | 2026-09-26 | 7e48e6a | Ajustes en HTML semantico para matchear botones/icones de Bootstrap y CSS compilado |
-| 29 | 2026-09-26 | f060ab1 | Ajustes en archivos de JS acorde a las clases de Bootstrap y correciones en bugs de carga |
-| 30 | 2026-09-26 | 06e3d05 | Ajustes en datos JSON, para terminar con categorias con iconos |
-| 31 | 2026-09-26 | 7bda382 | Creacion de sesion.js para arreglar bug de visualizacion, al no existir una sesion en este Avance |
-| 32 | 2026-09-26 | 3f53f5b | Ajustes en mensaje de error al cargar datos. Mejora de UX |
-| 33 | 2026-09-26 | 7563611 | Agregar imagenes genai para landing page. Mejora visual |
-| 34 | 2026-09-27 | 575d11a | Ajustes en readme |
-| 35 | 2026-09-27 | 0714c8c | Ajustes en readme |
-| 36 | 2026-09-27 | 6be2a8e | Ajustes en readme |
+| # | Fecha | Hash | Mensaje | Sección | Cambio |
+|---|-------|------|---------|---------------------|------------------|
+| 1 | 2026-09-14 | 9726a0b | Crear estructura del avance 1 y documentacion inicial | General | Crear estructura del avance 1 y documentacion inicial |
+| 2 | 2026-09-14 | f9593e9 | Automatizar la tabla de commits del README | General | Automatizar la tabla de commits del README |
+| 3 | 2026-09-14 | f75aa83 | Marcar los scripts como ejecutables | General | Marcar los scripts como ejecutables |
+| 4 | 2026-09-14 | 4ed592b | Actualizar tabla de commits | General | Actualizar tabla de commits |
+| 5 | 2026-09-15 | 4526bff | Creacion de HTML base semantico y la seccion catalogo de manera estructurada | General | Creacion de HTML base semantico y la seccion catalogo de manera estructurada |
+| 6 | 2026-09-18 | 308f2ee | Modificar index.html con base en uso de bootstrap | General | Modificar index.html con base en uso de bootstrap |
+| 7 | 2026-09-24 | e045ca8 | Creacion de JSON para los key-value pair de esta primer entrega, con base en las necesidades de la pagina. Ajustes en index para reflejar el JS que los llamara | General | Creacion de JSON para los key-value pair de esta primer entrega, con base en las necesidades de la pagina. Ajustes en index para reflejar el JS que los llamara |
+| 8 | 2026-09-24 | 0a6e481 | Creacion de esqueleto para pagina catalogo. Con base en los JS mapeados necesarios de momento | General | Creacion de esqueleto para pagina catalogo. Con base en los JS mapeados necesarios de momento |
+| 9 | 2026-09-24 | 9cea2c6 | Creacion de esqueleto para pagina detalle. Con base en los JS mapeados necesarios de momento | General | Creacion de esqueleto para pagina detalle. Con base en los JS mapeados necesarios de momento |
+| 10 | 2026-09-24 | dad34ec | Creacion de esqueleto para pagina formulario. Con base en los JS mapeados necesarios de momento | General | Creacion de esqueleto para pagina formulario. Con base en los JS mapeados necesarios de momento |
+| 11 | 2026-09-25 | c944b09 | Creacion de navbar compartido | General | Creacion de navbar compartido |
+| 12 | 2026-09-25 | 7bfb074 | Creacion de JS para carga de datos quemados en los JSON | General | Creacion de JS para carga de datos quemados en los JSON |
+| 13 | 2026-09-25 | 7c8b13b | Creacion de JS para reglas de negocio en visibilidad | General | Creacion de JS para reglas de negocio en visibilidad |
+| 14 | 2026-09-25 | c2357a1 | Creacion de JS para formulario, con validacion de campos | General | Creacion de JS para formulario, con validacion de campos |
+| 15 | 2026-09-25 | 65151dd | Creacion de JS para validacion | General | Creacion de JS para validacion |
+| 16 | 2026-09-25 | 947a13d | Creacion de pagina base en HTML semantico para solicitud | General | Creacion de pagina base en HTML semantico para solicitud |
+| 17 | 2026-09-25 | 3be9179 | Creacion de JS para perfil de usuario | General | Creacion de JS para perfil de usuario |
+| 18 | 2026-09-26 | d52bd44 | Creacion de JS para solicitud | General | Creacion de JS para solicitud |
+| 19 | 2026-09-26 | 7004692 | Creacion de pagina HTML semantico para perfil y JS de catalogo | General | Creacion de pagina HTML semantico para perfil y JS de catalogo |
+| 20 | 2026-09-26 | 1a2bcd7 | Agregar CDN de bootstrap a las paginas, para luego empatar y cambiar en CSS | General | Agregar CDN de bootstrap a las paginas, para luego empatar y cambiar en CSS |
+| 21 | 2026-09-26 | 1d41874 | Creacion de JS para manejar reglas de negocio | General | Creacion de JS para manejar reglas de negocio |
+| 22 | 2026-09-26 | 2b398fd | Editar el gitignore, para remover la compilacion de Sass | General | Editar el gitignore, para remover la compilacion de Sass |
+| 23 | 2026-09-26 | dffd008 | Creaciones de paginas SCSS, usando bootstrap como base. Para compilar el CSS | General | Creaciones de paginas SCSS, usando bootstrap como base. Para compilar el CSS |
+| 24 | 2026-09-26 | 6db0da3 | Correciones en elementos y clases de Index.html, para matchear bootstrap | General | Correciones en elementos y clases de Index.html, para matchear bootstrap |
+| 25 | 2026-09-26 | 4cd4ff6 | Cambio Sass y Bootstrap como dependencias, con nodejs | General | Cambio Sass y Bootstrap como dependencias, con nodejs |
+| 26 | 2026-09-26 | e594c6b | CSS compilado con npm run css -- ls -la avance1/css/main.css | General | CSS compilado con npm run css -- ls -la avance1/css/main.css |
+| 27 | 2026-09-26 | fe01469 | Imagenes para el header y acorde a la identidad del hub | General | Imagenes para el header y acorde a la identidad del hub |
+| 28 | 2026-09-26 | 7e48e6a | Ajustes en HTML semantico para matchear botones/icones de Bootstrap y CSS compilado | General | Ajustes en HTML semantico para matchear botones/icones de Bootstrap y CSS compilado |
+| 29 | 2026-09-26 | f060ab1 | Ajustes en archivos de JS acorde a las clases de Bootstrap y correciones en bugs de carga | General | Ajustes en archivos de JS acorde a las clases de Bootstrap y correciones en bugs de carga |
+| 30 | 2026-09-26 | 06e3d05 | Ajustes en datos JSON, para terminar con categorias con iconos | General | Ajustes en datos JSON, para terminar con categorias con iconos |
+| 31 | 2026-09-26 | 7bda382 | Creacion de sesion.js para arreglar bug de visualizacion, al no existir una sesion en este Avance | General | Creacion de sesion.js para arreglar bug de visualizacion, al no existir una sesion en este Avance |
+| 32 | 2026-09-26 | 3f53f5b | Ajustes en mensaje de error al cargar datos. Mejora de UX | General | Ajustes en mensaje de error al cargar datos. Mejora de UX |
+| 33 | 2026-09-26 | 7563611 | Agregar imagenes genai para landing page. Mejora visual | General | Agregar imagenes genai para landing page. Mejora visual |
+| 34 | 2026-09-27 | 575d11a | Ajustes en readme | General | Ajustes en readme |
+| 35 | 2026-09-27 | 0714c8c | Ajustes en readme | General | Ajustes en readme |
+| 36 | 2026-09-27 | 6be2a8e | Ajustes en readme | General | Ajustes en readme |
+| 37 | 2026-09-27 | f6127af | Ajustes en readme | General | Ajustes en readme |
 
 <!-- FIN TABLA COMMITS -->
