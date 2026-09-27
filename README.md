@@ -64,6 +64,7 @@ _(se completa durante las semanas 2 a 4)_
 | 28 | 2026-09-26 | 7e48e6a | Ajustes en HTML semantico para matchear botones/icones de Bootstrap y CSS compilado |
 | 29 | 2026-09-26 | f060ab1 | Ajustes en archivos de JS acorde a las clases de Bootstrap y correciones en bugs de carga |
 | 30 | 2026-09-26 | 06e3d05 | Ajustes en datos JSON, para terminar con categorias con iconos |
+| 31 | 2026-09-26 | 7bda382 | Creacion de sesion.js para arreglar bug de visualizacion, al no existir una sesion en este Avance |
 
 <!-- FIN TABLA COMMITS -->
 

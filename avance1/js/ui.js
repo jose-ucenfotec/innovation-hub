@@ -212,7 +212,7 @@ IH.ui = (function () {
         <img src="${base}img/error-carga.svg" alt="" width="220" height="160" class="mb-3">
         <h2 class="h5">No se pudieron cargar los datos</h2>
         <p class="text-body-secondary mb-3">${esArchivo
-          ? 'El navegador bloquea la lectura de archivos JSON cuando la página se abre directamente desde el disco. Abrí el proyecto en VS Code, hacé clic derecho sobre <code>avance1/index.html</code> y elegí <strong>Open with Live Server</strong>.'
+          ? 'El navegador bloquea la lectura de archivos JSON cuando la página se abre directamente desde el archivo directo. Cargalo desde server.'
           : 'Ocurrió un error al leer los archivos JSON. Recargá la página para volver a intentar.'}</p>
         <button type="button" class="btn btn-outline-primary btn-sm" onclick="window.location.reload()">${icono('bi-arrow-clockwise')} Reintentar</button>`;
     }
