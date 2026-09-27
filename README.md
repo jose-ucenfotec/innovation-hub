@@ -103,5 +103,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 35 | 2026-09-27 | 0714c8c | Ajustes en readme | General | Ajustes en readme |
 | 36 | 2026-09-27 | 6be2a8e | Ajustes en readme | General | Ajustes en readme |
 | 37 | 2026-09-27 | f6127af | Ajustes en readme | General | Ajustes en readme |
+| 38 | 2026-09-27 | ab02b3b | Ajustes en readme y bug en el script de bash | General | Ajustes en readme y bug en el script de bash |
 
 <!-- FIN TABLA COMMITS -->

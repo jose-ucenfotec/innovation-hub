@@ -20,22 +20,23 @@ trap 'rm -f "$TABLA"' EXIT
   echo "|---|-------|------|---------|---------------------|------------------|"
   if git rev-parse HEAD >/dev/null 2>&1; then
     git log --reverse --date=short \
-      --pretty=format:"%h%x1f%ad%x1f%s%x1f%(trailers:key=Seccion,valueonly,separator=%x2c%x20)%x1f%(trailers:key=Cambio,valueonly,separator=%x2c%x20)%x1e" \
+      --pretty=format:"%h%x1f%ad%x1f%s%x1e" \
       | tr -d '\n' | tr "$REG" '\n' \
       | awk -F "$SEP" -v meta="$META" '
           BEGIN {
+            FS="\t"
             while ((getline linea < meta) > 0) {
               if (linea ~ /^#/ || linea == "") continue
-              split(linea, col, "\t")
+              n_fields = split(linea, col, "\t")
+              if (n_fields < 3) continue
               sec[col[1]] = col[2]; cam[col[1]] = col[3]
             }
+            FS="'"$SEP"'"
           }
           NF >= 3 {
-            n++; h = $1; f = $2; m = $3; s = $4; c = $5
-            if (s == "" && (h in sec)) s = sec[h]
-            if (c == "" && (h in cam)) c = cam[h]
-            if (s == "") s = "General"
-            if (c == "") c = m
+            n++; h = $1; f = $2; m = $3
+            s = (h in sec) ? sec[h] : "General"
+            c = (h in cam) ? cam[h] : m
             gsub(/\|/, "\\|", m); gsub(/\|/, "\\|", s); gsub(/\|/, "\\|", c)
             print "| " n " | " f " | " h " | " m " | " s " | " c " |"
           }'
