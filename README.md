@@ -100,5 +100,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 32 | 2026-09-26 | 3f53f5b | Ajustes en mensaje de error al cargar datos. Mejora de UX |
 | 33 | 2026-09-26 | 7563611 | Agregar imagenes genai para landing page. Mejora visual |
 | 34 | 2026-09-27 | 575d11a | Ajustes en readme |
+| 35 | 2026-09-27 | 0714c8c | Ajustes en readme |
 
 <!-- FIN TABLA COMMITS -->
