@@ -1,0 +1,51 @@
+h1, h2, h3, .navbar-brand { letter-spacing: -.02em; }
+
+main { min-height: 60vh; }
+
+// Las utilidades de Bootstrap (.d-flex, .d-block) también usan !important y se
+// declaran antes, por lo que esta regla ganaria y respeta [hidden].
+[hidden] { display: none !important; }
+
+:focus-visible {
+  outline: 3px solid rgba($primary, .45);
+  outline-offset: 2px;
+}
+
+.bi { vertical-align: -.125em; }
+
+.texto-gradiente {
+  background: linear-gradient(90deg, shade-color($azul, 25%), $cian);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.seccion-titulo {
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: $body-secondary-color;
+  margin-bottom: .5rem;
+}
+
+.lista-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.estado-vacio img,
+.estado-error img { max-width: 220px; height: auto; }
+
+.pie {
+  border-top: 1px solid $border-color;
+  color: $body-secondary-color;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}

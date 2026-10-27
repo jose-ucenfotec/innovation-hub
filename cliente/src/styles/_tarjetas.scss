@@ -1,0 +1,94 @@
+.tarjeta-iniciativa {
+  box-shadow: $box-shadow-sm;
+  border-top: 4px solid transparent;
+  transition: transform .2s ease, box-shadow .2s ease;
+
+  &:hover,
+  &:focus-within { transform: translateY(-4px); box-shadow: $box-shadow; }
+
+  &--idea      { border-top-color: $primary; }
+  &--necesidad { border-top-color: $success; }
+  &--reto      { border-top-color: $warning; }
+
+  .card-title { font-size: 1rem; }
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .3em .75em;
+  font-size: .78rem;
+  font-weight: 500;
+  border-radius: 50rem;
+  background: tint-color($primary, 88%);
+  color: shade-color($primary, 30%);
+
+  &--neutro { background: $light; color: $tinta; }
+  &--nivel  { opacity: .75; font-weight: 400; }
+}
+
+.avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: .8rem;
+  color: #fff;
+  background: $primary;
+  flex-shrink: 0;
+
+  &--lg {
+    width: 4.5rem;
+    height: 4.5rem;
+    font-size: 1.5rem;
+    font-family: $headings-font-family;
+    font-weight: 800;
+    background: linear-gradient(135deg, shade-color($azul, 25%), $cian);
+  }
+}
+
+.metrica {
+  background: $body-bg;
+  border-radius: $border-radius;
+  padding: .75rem 1rem;
+
+  .valor {
+    font-family: $headings-font-family;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    color: $tinta;
+  }
+
+  &--acento {
+    background: tint-color($primary, 88%);
+    .valor, .seccion-titulo { color: shade-color($primary, 30%); }
+  }
+}
+
+.bloque-acento {
+  background: #fff;
+  border-left: 4px solid $primary;
+  border-radius: 0 $border-radius $border-radius 0;
+  padding: .75rem 1rem;
+  &--teal { border-left-color: $petroleo; }
+}
+
+.fila-lista {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: .75rem .25rem;
+  border-bottom: 1px solid $border-color;
+  color: inherit;
+  text-decoration: none;
+  &:hover { background: rgba($primary, .03); color: inherit; }
+}
+
+@include media-breakpoint-up(lg) {
+  .tarjeta-lateral { position: sticky; top: 5.5rem; }
+}

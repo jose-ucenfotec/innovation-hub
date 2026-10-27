@@ -1,0 +1,64 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  padding: 3.5rem 0 4rem;
+  background: linear-gradient(135deg, $marino 0%, $azul 55%, $petroleo 100%);
+  border-radius: 0 0 $border-radius-xl $border-radius-xl;
+
+  @include media-breakpoint-up(md) { padding: 5.5rem 0 6rem; }
+
+  h1 {
+    color: #fff;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+  .lead { color: rgba(#fff, .9); }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: .5;
+    pointer-events: none;
+  }
+  &::before { width: 22rem; height: 22rem; background: $cielo; top: -8rem; right: -6rem; }
+  &::after  { width: 18rem; height: 18rem; background: $menta; bottom: -9rem; left: -5rem; }
+
+  .container { position: relative; z-index: 1; }
+
+  .hero-imagen {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, .25));
+  }
+}
+
+.paso-numero {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  font-family: $headings-font-family;
+  font-weight: 800;
+  color: #fff;
+  border-radius: 50%;
+  background: linear-gradient(135deg, shade-color($azul, 25%), $cian);
+}
+
+.paso-imagen {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+}
+
+.estadistica {
+  font-family: $headings-font-family;
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1;
+  color: $tinta;
+}
