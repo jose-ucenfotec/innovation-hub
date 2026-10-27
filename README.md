@@ -108,5 +108,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 40 | 2026-09-27 | 7c0ab47 | Dejar de trackear herramientas/ y ajuste en readme segun consigna | General | Dejar de trackear herramientas/ y ajuste en readme segun consigna |
 | 41 | 2026-10-26 | e437e75 | Crear el cliente React con Vite y dependencias | Cliente | Proyecto Vite con React Router, Bootstrap y Sass |
 | 42 | 2026-10-26 | 685f5bc | Trasladar los estilos Sass y las imágenes del Avance 1 al cliente | Estilos | Mismo diseño compilado por Vite |
+| 43 | 2026-10-26 | 70c9d9c | Agregar layout, navbar, pie y manejo de rutas inexistentes | General | Agregar layout, navbar, pie y manejo de rutas inexistentes |
 
 <!-- FIN TABLA COMMITS -->
