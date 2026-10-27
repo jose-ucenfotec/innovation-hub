@@ -20,3 +20,7 @@ Thumbs.db
 
 # herramientas locales (metadata de commits, scripts internos)
 /herramientas/
+
+.env
+cliente/dist/
+servidor/logs/

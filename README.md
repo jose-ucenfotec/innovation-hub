@@ -105,5 +105,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 37 | 2026-09-27 | f6127af | Ajustes en readme | Documentación | Ajustes en el README |
 | 38 | 2026-09-27 | ab02b3b | Ajustes en readme y bug en el script de bash | Documentación | Ajustes en el README y corrección de bug en el script de bash |
 | 39 | 2026-09-27 | 544c9e2 | Ajustes en readme y bug en el script de bash | General | Ajustes en readme y bug en el script de bash |
+| 40 | 2026-09-27 | 7c0ab47 | Dejar de trackear herramientas/ y ajuste en readme segun consigna | General | Dejar de trackear herramientas/ y ajuste en readme segun consigna |
 
 <!-- FIN TABLA COMMITS -->
