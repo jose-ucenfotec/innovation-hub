@@ -1,0 +1,10 @@
+[
+  { "id": "rol-frontend", "name": "Desarrollo frontend" },
+  { "id": "rol-backend", "name": "Desarrollo backend" },
+  { "id": "rol-ux", "name": "Diseño UX/UI" },
+  { "id": "rol-datos", "name": "Análisis de datos" },
+  { "id": "rol-coordinacion", "name": "Coordinación" },
+  { "id": "rol-comunicacion", "name": "Comunicación y difusión" },
+  { "id": "rol-investigacion", "name": "Investigación" },
+  { "id": "rol-infraestructura", "name": "Infraestructura y seguridad" }
+]

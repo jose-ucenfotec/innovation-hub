@@ -109,5 +109,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 41 | 2026-10-26 | e437e75 | Crear el cliente React con Vite y dependencias | Cliente | Proyecto Vite con React Router, Bootstrap y Sass |
 | 42 | 2026-10-26 | 685f5bc | Trasladar los estilos Sass y las imágenes del Avance 1 al cliente | Estilos | Mismo diseño compilado por Vite |
 | 43 | 2026-10-26 | 70c9d9c | Agregar layout, navbar, pie y manejo de rutas inexistentes | General | Agregar layout, navbar, pie y manejo de rutas inexistentes |
+| 44 | 2026-10-27 | 96e5633 | Mover la portada del Avance 1 a componentes React | General | Mover la portada del Avance 1 a componentes React |
 
 <!-- FIN TABLA COMMITS -->

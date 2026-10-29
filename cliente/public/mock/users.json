@@ -1,0 +1,33 @@
+[
+  { "id": "650000000000000000000001", "firstName": "Ana", "lastName": "Mora", "secondLastName": "Jiménez",
+    "email": "ana.mora@ucenfotec.ac.cr", "memberType": "student", "career": "Ingeniería de Software",
+    "bio": "Tercer año. Me interesa el impacto social de la tecnología.",
+    "skills": [ { "skillId": "comp-javascript", "level": "advanced" }, { "skillId": "comp-gestion", "level": "intermediate" } ],
+    "interests": ["comunidad", "educación"], "availability": { "hoursPerWeek": 6, "detail": "tardes y fines de semana" },
+    "portfolioUrl": "https://github.com/anamora", "status": "active",
+    "createdAt": "2026-09-01T14:00:00.000Z", "updatedAt": "2026-09-20T14:00:00.000Z" },
+
+  { "id": "650000000000000000000002", "firstName": "Luis", "lastName": "Pérez", "secondLastName": null,
+    "email": "luis.perez@ucenfotec.ac.cr", "memberType": "teacher", "career": "Ciberseguridad",
+    "bio": "Docente de redes. Busco proyectos aplicados para mis cursos.",
+    "skills": [ { "skillId": "comp-analisis-datos", "level": "advanced" }, { "skillId": "comp-redes", "level": "advanced" } ],
+    "interests": ["energía", "datos"], "availability": { "hoursPerWeek": 4, "detail": "martes y jueves" },
+    "portfolioUrl": null, "status": "active",
+    "createdAt": "2026-09-01T14:00:00.000Z", "updatedAt": "2026-09-01T14:00:00.000Z" },
+
+  { "id": "650000000000000000000003", "firstName": "María", "lastName": "Solís", "secondLastName": "Rojas",
+    "email": "maria.solis@ucenfotec.ac.cr", "memberType": "student", "career": "Agronomía",
+    "bio": "Coordino el huerto del campus.",
+    "skills": [ { "skillId": "comp-gestion", "level": "intermediate" }, { "skillId": "comp-comunicacion", "level": "advanced" }, { "skillId": "comp-analisis-datos", "level": "basic" } ],
+    "interests": ["ambiente", "voluntariado"], "availability": { "hoursPerWeek": 3, "detail": "mañanas" },
+    "portfolioUrl": null, "status": "active",
+    "createdAt": "2026-09-02T14:00:00.000Z", "updatedAt": "2026-09-02T14:00:00.000Z" },
+
+  { "id": "650000000000000000000004", "firstName": "Diego", "lastName": "Vargas", "secondLastName": null,
+    "email": "diego.vargas@ucenfotec.ac.cr", "memberType": "staff", "career": "Administración",
+    "bio": "",
+    "skills": [ { "skillId": "comp-marketing", "level": "advanced" }, { "skillId": "comp-diseno-ux", "level": "basic" } ],
+    "interests": ["emprendimiento"], "availability": { "hoursPerWeek": 0, "detail": "" },
+    "portfolioUrl": "https://www.behance.net/diegovargas", "status": "active",
+    "createdAt": "2026-09-03T14:00:00.000Z", "updatedAt": "2026-09-03T14:00:00.000Z" }
+]
