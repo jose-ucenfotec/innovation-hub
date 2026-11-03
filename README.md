@@ -112,5 +112,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 44 | 2026-10-27 | 96e5633 | Mover la portada del Avance 1 a componentes React | General | Mover la portada del Avance 1 a componentes React |
 | 45 | 2026-10-28 | 88faa2b | Traducir los datos del Avance 1 al formato del contrato del API | Datos | JSON con enums en inglés, equipo embebido y catálogo de roles, como mockup antes de BD |
 | 46 | 2026-10-28 | 7ba54ab | Agregar reglas de negocio y servidor simulado con las rutas del contrato. Luego migrarlas a BD. | Cliente | Simulado temporal con visibilidad, solicitudes y proyectos |
+| 47 | 2026-11-02 | 88fad42 | Agregar la capa de API y consulta | General | Agregar la capa de API y consulta |
 
 <!-- FIN TABLA COMMITS -->

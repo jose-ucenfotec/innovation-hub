@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import TarjetaPaso from './TarjetaPaso.jsx';
 import { useTituloPagina } from '../../hooks/useTituloPagina.js';
+import CifrasPlataforma from './CifrasPlataforma.jsx';
 
 const PASOS = [
   { numero: 1, titulo: 'Explorá', imagen: '/img/paso-explorar.webp', alt: 'Lupa sobre tarjetas de iniciativas',
@@ -91,6 +92,9 @@ export default function InicioPage() {
             </article>
           </div>
         </div>
+      </section>
+      <section className="container pb-5" aria-label="Cifras de la plataforma">
+        <CifrasPlataforma />
       </section>
     </>
   );
