@@ -4,11 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './styles/main.scss';
 import App from './App.jsx';
+import { SesionProvider } from './context/SesionContext.jsx';
+import { ToastProvider } from './context/ToastContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <ToastProvider>
+        <SesionProvider>
+          <App />
+        </SesionProvider>
+      </ToastProvider>
     </BrowserRouter>
   </StrictMode>
 );

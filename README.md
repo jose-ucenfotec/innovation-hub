@@ -111,5 +111,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 43 | 2026-10-26 | 70c9d9c | Agregar layout, navbar, pie y manejo de rutas inexistentes | General | Agregar layout, navbar, pie y manejo de rutas inexistentes |
 | 44 | 2026-10-27 | 96e5633 | Mover la portada del Avance 1 a componentes React | General | Mover la portada del Avance 1 a componentes React |
 | 45 | 2026-10-28 | 88faa2b | Traducir los datos del Avance 1 al formato del contrato del API | Datos | JSON con enums en inglés, equipo embebido y catálogo de roles, como mockup antes de BD |
+| 46 | 2026-10-28 | 7ba54ab | Agregar reglas de negocio y servidor simulado con las rutas del contrato. Luego migrarlas a BD. | Cliente | Simulado temporal con visibilidad, solicitudes y proyectos |
 
 <!-- FIN TABLA COMMITS -->
