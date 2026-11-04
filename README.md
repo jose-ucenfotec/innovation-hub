@@ -121,5 +121,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 53 | 2026-11-03 | 9a483cd | Agregar proyectos, consumo de GitHub con manejo de errores y todas las rutas | Proyectos | Conversión del Avance 1 a React completa sobre el servidor simulado |
 | 54 | 2026-11-03 | 061bfea | Documentar el modelo de datos con decisiones de embebido y referencia | Modelo de datos | Colecciones, índices, atomicidad y equivalencia en SQL |
 | 55 | 2026-11-03 | 2058476 | Restaurar el layout de solicitudes con pestañas | Cliente | SolicitudesLayout con NavLink y Outlet para enviadas y recibidas |
+| 56 | 2026-11-03 | b01861f | Crear el servidor Express con configuración, manejo central de errores y modelos | Servidor | Esquemas Mongoose con índices y formato de error del contrato |
 
 <!-- FIN TABLA COMMITS -->
