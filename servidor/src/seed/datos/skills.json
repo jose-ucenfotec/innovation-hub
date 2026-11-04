@@ -1,0 +1,10 @@
+[
+  { "id": "comp-javascript", "name": "JavaScript", "area": "Desarrollo" },
+  { "id": "comp-diseno-ux", "name": "Diseño UX", "area": "Diseño" },
+  { "id": "comp-diseno-grafico", "name": "Diseño gráfico", "area": "Diseño" },
+  { "id": "comp-analisis-datos", "name": "Análisis de datos", "area": "Datos" },
+  { "id": "comp-gestion", "name": "Gestión de proyectos", "area": "Gestión" },
+  { "id": "comp-redes", "name": "Redes y ciberseguridad", "area": "Infraestructura" },
+  { "id": "comp-marketing", "name": "Marketing digital", "area": "Negocios" },
+  { "id": "comp-comunicacion", "name": "Comunicación", "area": "Negocios" }
+]

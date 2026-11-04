@@ -1,0 +1,10 @@
+[
+  { "id": "680000000000000000000001", "initiativeId": "660000000000000000000002",
+    "name": "Monitoreo de energía en laboratorios",
+    "objective": "Medir el consumo de cada laboratorio y reducirlo un 15 % en un semestre.",
+    "description": "Red de sensores de bajo costo, tablero web en tiempo real y alertas de consumo anómalo.",
+    "technologies": ["Arduino", "Node.js", "Grafana"],
+    "startDate": "2026-09-20", "estimatedEndDate": "2026-12-15",
+    "repositoryUrl": "https://github.com/twbs/bootstrap", "status": "in_progress",
+    "createdAt": "2026-09-20T15:00:00.000Z", "updatedAt": "2026-09-20T15:00:00.000Z" }
+]
