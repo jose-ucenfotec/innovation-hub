@@ -118,5 +118,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 50 | 2026-11-03 | 2491dd4 | Agregar detalle completo y restringido, equipo y acciones del propietario | Detalle | RN-03 estricta y eliminación desde la lista |
 | 51 | 2026-11-03 | 9e161f9 | Agregar formulario controlado para crear y editar iniciativas | Formulario | Visibilidad vacía, etiquetas como chips, confirmación al quitar y Cancelar como botón |
 | 52 | 2026-11-03 | 6abc5f4 | Agregar mis solicitudes y solicitudes recibidas con filtros y resolución | Solicitudes | Modificar, cancelar, aceptar y rechazar con confirmación |
+| 53 | 2026-11-03 | 9a483cd | Agregar proyectos, consumo de GitHub con manejo de errores y todas las rutas | Proyectos | Conversión del Avance 1 a React completa sobre el servidor simulado |
 
 <!-- FIN TABLA COMMITS -->
