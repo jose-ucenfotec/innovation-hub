@@ -1,14 +1,12 @@
 import { useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
 import Navbar from './Navbar.jsx';
 import Footer from './Footer.jsx';
-import ControlesSesion from './ControlesSesion.jsx';
-import { useSesion } from '../../context/SesionContext.jsx';
 
 export default function Layout() {
   const { pathname } = useLocation();
-  const { usuario } = useSesion();
 
+  // Al cambiar de ruta, la nueva pantalla empieza arriba.
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -20,11 +18,13 @@ export default function Layout() {
       </a>
       <header>
         <Navbar>
-          <ControlesSesion />
+          <Link className="btn btn-primary btn-sm" to="/iniciativas/nueva">
+            <i className="bi bi-plus-circle-fill" aria-hidden="true"></i> Publicar iniciativa
+          </Link>
         </Navbar>
       </header>
       <main id="contenido" tabIndex={-1}>
-        <Outlet key={usuario?.id ?? 'visitante'} />
+        <Outlet />
       </main>
       <Footer />
     </>
