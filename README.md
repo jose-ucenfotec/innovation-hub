@@ -115,5 +115,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 47 | 2026-11-02 | 88fad42 | Agregar la capa de API y consulta | General | Agregar la capa de API y consulta |
 | 48 | 2026-11-02 | 55a339e | Agregar componentes de estado, modal, badges, paginación y selector de sesión | Cliente | Componentes reutilizables con props y children |
 | 49 | 2026-11-03 | 5b17281 | Agregar catálogo con filtros en la URL, orden y paginación | Catálogo | Filtros combinados resueltos por la API con estados de carga, error y vacío |
+| 50 | 2026-11-03 | 2491dd4 | Agregar detalle completo y restringido, equipo y acciones del propietario | Detalle | RN-03 estricta y eliminación desde la lista |
 
 <!-- FIN TABLA COMMITS -->
