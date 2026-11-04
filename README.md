@@ -117,5 +117,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 49 | 2026-11-03 | 5b17281 | Agregar catálogo con filtros en la URL, orden y paginación | Catálogo | Filtros combinados resueltos por la API con estados de carga, error y vacío |
 | 50 | 2026-11-03 | 2491dd4 | Agregar detalle completo y restringido, equipo y acciones del propietario | Detalle | RN-03 estricta y eliminación desde la lista |
 | 51 | 2026-11-03 | 9e161f9 | Agregar formulario controlado para crear y editar iniciativas | Formulario | Visibilidad vacía, etiquetas como chips, confirmación al quitar y Cancelar como botón |
+| 52 | 2026-11-03 | 6abc5f4 | Agregar mis solicitudes y solicitudes recibidas con filtros y resolución | Solicitudes | Modificar, cancelar, aceptar y rechazar con confirmación |
 
 <!-- FIN TABLA COMMITS -->
