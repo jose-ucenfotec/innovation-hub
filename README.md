@@ -122,5 +122,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 54 | 2026-11-03 | 061bfea | Documentar el modelo de datos con decisiones de embebido y referencia | Modelo de datos | Colecciones, índices, atomicidad y equivalencia en SQL |
 | 55 | 2026-11-03 | 2058476 | Restaurar el layout de solicitudes con pestañas | Cliente | SolicitudesLayout con NavLink y Outlet para enviadas y recibidas |
 | 56 | 2026-11-03 | b01861f | Crear el servidor Express con configuración, manejo central de errores y modelos | Servidor | Esquemas Mongoose con índices y formato de error del contrato |
+| 57 | 2026-11-03 | 5cbeb06 | Agregar seed con los datos del Avance 1, catálogos y arranque del servidor | Servidor | Datos de prueba deterministas y CORS explícito |
 
 <!-- FIN TABLA COMMITS -->
