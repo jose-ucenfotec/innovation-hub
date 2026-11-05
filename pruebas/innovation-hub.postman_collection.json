@@ -1,0 +1,1812 @@
+{
+  "info": {
+    "name": "Innovation Hub API",
+    "description": "Casos correctos, inválidos, inexistentes y no autorizados por recurso. Ejecutar después de npm run seed.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test('Sin datos sensibles en la respuesta', () => {",
+          "  const texto = pm.response.text();",
+          "  // '\"password\":' detecta un valor filtrado; '\"field\":\"password\"' en un error de validación es legítimo.",
+          "  ['passwordHash', '\"password\":', 'mongodb://', 'stack'].forEach((s) => pm.expect(texto).to.not.include(s));",
+          "});",
+          "if (pm.response.code >= 400) pm.test('Formato de error uniforme', () => pm.expect(pm.response.json().error).to.have.all.keys('code', 'message', 'details'));"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "nuevaIniciativa",
+      "value": ""
+    },
+    {
+      "key": "nuevaSolicitud",
+      "value": ""
+    },
+    {
+      "key": "nuevoProyecto",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "03 Catálogos",
+      "item": [
+        {
+          "name": "Categorías",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Ocho categorías', () => pm.expect(pm.response.json()).to.have.length(8));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/categories"
+          }
+        },
+        {
+          "name": "Competencias",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/skills"
+          }
+        },
+        {
+          "name": "Roles",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/roles"
+          }
+        },
+        {
+          "name": "Ruta inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Código de error NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/no-existe"
+          }
+        }
+      ]
+    },
+    {
+      "name": "04 Iniciativas",
+      "item": [
+        {
+          "name": "Listar con filtros combinados",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Sobre de paginación', () => pm.expect(pm.response.json()).to.have.all.keys('items', 'page', 'size', 'totalItems', 'totalPages'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives?type=challenge&category=cat-sostenibilidad&sort=title"
+          }
+        },
+        {
+          "name": "Tamaño de página limitado a 50",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+                  "pm.test('size = 50', () => pm.expect(pm.response.json().size).to.eql(50));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives?size=1000"
+          }
+        },
+        {
+          "name": "Listar con tipo inválido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Código de error VALIDATION_ERROR', () => pm.expect(pm.response.json().error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives?type=cualquiera"
+          }
+        },
+        {
+          "name": "Mis iniciativas sin token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 401', () => pm.response.to.have.status(401));",
+                  "pm.test('Código de error UNAUTHORIZED', () => pm.expect(pm.response.json().error.code).to.eql('UNAUTHORIZED'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives?owner=me"
+          }
+        },
+        {
+          "name": "Restringida vista por un tercero",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Solo el resumen', () => pm.expect(Object.keys(pm.response.json()).sort()).to.eql(['accessLevel','category','id','requiredSkills','summary','title','type','visibility']));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000005"
+          }
+        },
+        {
+          "name": "Privada vista por un tercero",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Código de error NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000004"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000007"
+          }
+        },
+        {
+          "name": "Institucional sin sesión",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 401', () => pm.response.to.have.status(401));",
+                  "pm.test('Código de error UNAUTHORIZED', () => pm.expect(pm.response.json().error.code).to.eql('UNAUTHORIZED'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000003"
+          }
+        },
+        {
+          "name": "Detalle inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Código de error NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/6a0000000000000000000099"
+          }
+        },
+        {
+          "name": "Crear",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 201', () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('nuevaIniciativa', pm.response.json().id);",
+                  "pm.test('Location', () => pm.response.to.have.header('Location'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Crear con datos inválidos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Código de error VALIDATION_ERROR', () => pm.expect(pm.response.json().error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"abc\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 50,\n  \"visibility\": \"secreta\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Crear sin sesión",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 401', () => pm.response.to.have.status(401));",
+                  "pm.test('Código de error UNAUTHORIZED', () => pm.expect(pm.response.json().error.code).to.eql('UNAUTHORIZED'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Modificar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 5,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Modificar iniciativa ajena",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 403', () => pm.response.to.have.status(403));",
+                  "pm.test('Código de error FORBIDDEN', () => pm.expect(pm.response.json().error.code).to.eql('FORBIDDEN'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Modificar inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Código de error NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/6a0000000000000000000099",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Integrantes menores que el equipo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error PARTICIPANTS_BELOW_TEAM', () => pm.expect(pm.response.json().error.code).to.eql('PARTICIPANTS_BELOW_TEAM'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000001",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Plataforma de voluntariado universitario\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 1,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar con información relacionada",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error HAS_RELATED_DATA', () => pm.expect(pm.response.json().error.code).to.eql('HAS_RELATED_DATA'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000001"
+          }
+        },
+        {
+          "name": "Eliminar iniciativa ajena",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 403', () => pm.response.to.have.status(403));",
+                  "pm.test('Código de error FORBIDDEN', () => pm.expect(pm.response.json().error.code).to.eql('FORBIDDEN'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}"
+          }
+        },
+        {
+          "name": "Archivar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Archivada', () => pm.expect(pm.response.json().status).to.eql('archived'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}/archive"
+          }
+        },
+        {
+          "name": "Modificar archivada",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error ARCHIVED', () => pm.expect(pm.response.json().error.code).to.eql('ARCHIVED'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar sin relaciones",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 204', () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}"
+          }
+        },
+        {
+          "name": "Eliminar inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Código de error NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/6a0000000000000000000099"
+          }
+        }
+      ]
+    },
+    {
+      "name": "05 Equipo",
+      "item": [
+        {
+          "name": "Listar miembros",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000001/members"
+          }
+        },
+        {
+          "name": "Miembros de una restringida ajena",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 403', () => pm.response.to.have.status(403));",
+                  "pm.test('Código de error FORBIDDEN', () => pm.expect(pm.response.json().error.code).to.eql('FORBIDDEN'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000005/members"
+          }
+        },
+        {
+          "name": "Retirar al propietario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error CANNOT_REMOVE_OWNER', () => pm.expect(pm.response.json().error.code).to.eql('CANNOT_REMOVE_OWNER'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000001/members/650000000000000000000001"
+          }
+        },
+        {
+          "name": "Retirar sin ser propietario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 403', () => pm.response.to.have.status(403));",
+                  "pm.test('Código de error FORBIDDEN', () => pm.expect(pm.response.json().error.code).to.eql('FORBIDDEN'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000006/members/650000000000000000000004"
+          }
+        },
+        {
+          "name": "Retirar a quien no es miembro",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Código de error NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000001/members/650000000000000000000004"
+          }
+        },
+        {
+          "name": "Retirar miembro",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 204', () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000006/members/650000000000000000000004"
+          }
+        }
+      ]
+    },
+    {
+      "name": "06 Solicitudes",
+      "item": [
+        {
+          "name": "Crear solicitud",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 201', () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('nuevaSolicitud', pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000003"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000006/requests",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Solicitud duplicada pendiente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error DUPLICATE_PENDING', () => pm.expect(pm.response.json().error.code).to.eql('DUPLICATE_PENDING'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000003"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000006/requests",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Competencia que no tiene",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Código de error VALIDATION_ERROR', () => pm.expect(pm.response.json().error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000008/requests",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-redes\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Solicitar en la propia",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error SELF_REQUEST', () => pm.expect(pm.response.json().error.code).to.eql('SELF_REQUEST'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000001/requests",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Solicitar en un proyecto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error INITIATIVE_CLOSED', () => pm.expect(pm.response.json().error.code).to.eql('INITIATIVE_CLOSED'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000004"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000002/requests",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Solicitar en inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Código de error NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000003"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/6a0000000000000000000099/requests",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Solicitar sin sesión",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 401', () => pm.response.to.have.status(401));",
+                  "pm.test('Código de error UNAUTHORIZED', () => pm.expect(pm.response.json().error.code).to.eql('UNAUTHORIZED'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000006/requests",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Mis solicitudes",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000003"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/mine?status=pending"
+          }
+        },
+        {
+          "name": "Recibidas con filtros",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/received?initiativeId=660000000000000000000006&status=pending"
+          }
+        },
+        {
+          "name": "Recibidas con fechas invertidas",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Código de error VALIDATION_ERROR', () => pm.expect(pm.response.json().error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/received?from=2026-12-01&to=2026-01-01"
+          }
+        },
+        {
+          "name": "Ver solicitud ajena",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 403', () => pm.response.to.have.status(403));",
+                  "pm.test('Código de error FORBIDDEN', () => pm.expect(pm.response.json().error.code).to.eql('FORBIDDEN'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}"
+          }
+        },
+        {
+          "name": "Modificar pendiente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000003"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"4 h/semana\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Resolver sin ser propietario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 403', () => pm.response.to.have.status(403));",
+                  "pm.test('Código de error FORBIDDEN', () => pm.expect(pm.response.json().error.code).to.eql('FORBIDDEN'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000003"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"accepted\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Decisión inválida",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Código de error VALIDATION_ERROR', () => pm.expect(pm.response.json().error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"tal vez\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Aceptar e incorporar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"accepted\",\n  \"comment\": \"Bienvenida\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Resolver de nuevo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error NOT_PENDING', () => pm.expect(pm.response.json().error.code).to.eql('NOT_PENDING'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"rejected\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Cancelar ya resuelta",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error NOT_PENDING', () => pm.expect(pm.response.json().error.code).to.eql('NOT_PENDING'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000003"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/cancel"
+          }
+        },
+        {
+          "name": "Cancelar pendiente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000003"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/670000000000000000000003/cancel"
+          }
+        },
+        {
+          "name": "Cancelar inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Código de error NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000003"
+              }
+            ],
+            "url": "{{baseUrl}}/requests/6a0000000000000000000099/cancel"
+          }
+        }
+      ]
+    },
+    {
+      "name": "07 Proyectos",
+      "item": [
+        {
+          "name": "Convertir con datos inválidos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Código de error VALIDATION_ERROR', () => pm.expect(pm.response.json().error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"\",\n  \"objective\": \"Centralizar convocatorias de voluntariado del campus.\",\n  \"description\": \"Aplicación web para publicar convocatorias, inscribirse y certificar horas de voluntariado.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2026-01-01\",\n  \"repositoryUrl\": null\n}"
+            }
+          }
+        },
+        {
+          "name": "Convertir sin ser propietario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 403', () => pm.response.to.have.status(403));",
+                  "pm.test('Código de error FORBIDDEN', () => pm.expect(pm.response.json().error.code).to.eql('FORBIDDEN'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Plataforma de voluntariado\",\n  \"objective\": \"Centralizar convocatorias de voluntariado del campus.\",\n  \"description\": \"Aplicación web para publicar convocatorias, inscribirse y certificar horas de voluntariado.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
+            }
+          }
+        },
+        {
+          "name": "Convertir sin integrantes",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error NO_MEMBERS', () => pm.expect(pm.response.json().error.code).to.eql('NO_MEMBERS'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000004"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000008/project",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Plataforma de voluntariado\",\n  \"objective\": \"Centralizar convocatorias de voluntariado del campus.\",\n  \"description\": \"Aplicación web para publicar convocatorias, inscribirse y certificar horas de voluntariado.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
+            }
+          }
+        },
+        {
+          "name": "Convertir",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 201', () => pm.response.to.have.status(201));",
+                  "pm.collectionVariables.set('nuevoProyecto', pm.response.json().id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Plataforma de voluntariado\",\n  \"objective\": \"Centralizar convocatorias de voluntariado del campus.\",\n  \"description\": \"Aplicación web para publicar convocatorias, inscribirse y certificar horas de voluntariado.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
+            }
+          }
+        },
+        {
+          "name": "Convertir de nuevo",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error ALREADY_PROJECT', () => pm.expect(pm.response.json().error.code).to.eql('ALREADY_PROJECT'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000001"
+              }
+            ],
+            "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Plataforma de voluntariado\",\n  \"objective\": \"Centralizar convocatorias de voluntariado del campus.\",\n  \"description\": \"Aplicación web para publicar convocatorias, inscribirse y certificar horas de voluntariado.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
+            }
+          }
+        },
+        {
+          "name": "Listar proyectos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/projects?sort=name"
+          }
+        },
+        {
+          "name": "Detalle de proyecto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Conserva la iniciativa de origen', () => pm.expect(pm.response.json().initiative.id).to.eql('660000000000000000000001'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/projects/{{nuevoProyecto}}"
+          }
+        },
+        {
+          "name": "Proyecto inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Código de error NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Dev-User",
+                "value": "650000000000000000000002"
+              }
+            ],
+            "url": "{{baseUrl}}/projects/6a0000000000000000000099"
+          }
+        },
+        {
+          "name": "Proyectos sin sesión",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 401', () => pm.response.to.have.status(401));",
+                  "pm.test('Código de error UNAUTHORIZED', () => pm.expect(pm.response.json().error.code).to.eql('UNAUTHORIZED'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/projects"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -2,7 +2,6 @@ import { ErrorApi } from './errores.js';
 import { cabecerasAuth } from './sesion.js';
 
 const BASE = import.meta.env.VITE_API_URL;
-const USAR_MOCK = import.meta.env.VITE_USE_MOCK === 'true';
 
 function construirQuery(params) {
   if (!params) return '';
@@ -12,11 +11,6 @@ function construirQuery(params) {
 
 export async function solicitar(metodo, ruta, { cuerpo, params, signal } = {}) {
   const url = ruta + construirQuery(params);
-
-  if (USAR_MOCK) {
-    const { atenderMock } = await import('../mock/servidorMock.js');
-    return atenderMock(metodo, url, cuerpo, cabecerasAuth());
-  }
 
   let respuesta;
   try {
