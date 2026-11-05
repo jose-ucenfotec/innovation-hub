@@ -47,3 +47,31 @@ export async function quitarMiembro(id, userId) {
   }
   return resultado.modifiedCount > 0;
 }
+
+// Visibles con acceso completo para el usuario: públicas, institucionales (con sesión) y las propias o de su equipo.
+export function idsConAccesoCompleto(usuario) {
+  const uid = new Types.ObjectId(usuario.id);
+  return Initiative.distinct('_id', {
+    $or: [{ visibility: { $in: ['public', 'institutional'] } }, { ownerId: uid }, { 'members.userId': uid }],
+  });
+}
+
+export const idsDePropietario = (userId) => Initiative.distinct('_id', { ownerId: new Types.ObjectId(userId) });
+export const buscarVarias = (ids) => Initiative.find({ _id: { $in: ids } }).lean();
+
+// RN-14 y RN-15 en una sola operación atómica: solo agrega si sigue abierta, hay cupo y no es miembro.
+export function agregarMiembroSiHayCupo(id, miembro) {
+  return Initiative.findOneAndUpdate(
+    {
+      _id: id,
+      status: { $in: ['published', 'forming'] },
+      'members.userId': { $ne: miembro.userId },
+      $expr: { $gt: ['$estimatedMembers', { $add: [{ $size: '$members' }, 1] }] },
+    },
+    { $push: { members: miembro }, $set: { status: 'forming' } },
+    { new: true }
+  ).lean();
+}
+
+export const marcarComoProyecto = (id) =>
+  Initiative.findOneAndUpdate({ _id: id, status: { $in: ['published', 'forming'] } }, { status: 'project' }, { new: true }).lean();
