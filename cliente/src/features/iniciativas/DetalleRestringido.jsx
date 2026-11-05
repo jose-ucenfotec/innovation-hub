@@ -32,6 +32,7 @@ export default function DetalleRestringido({ ini }) {
             <i className="bi bi-send" aria-hidden="true"></i> Solicitar participación
           </Link>
         )}
+        {!usuario && <Link className="btn btn-outline-primary" to="/login" state={{ desde: { pathname: `/iniciativas/${ini.id}` } }}>Iniciá sesión para solicitar participación</Link>}
       </div>
     </article>
   );

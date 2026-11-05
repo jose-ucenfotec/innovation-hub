@@ -1,18 +1,12 @@
+import { Navigate, useLocation } from 'react-router-dom';
 import { useSesion } from '../../context/SesionContext.jsx';
 import EstadoCarga from '../ui/EstadoCarga.jsx';
-import EstadoVacio from '../ui/EstadoVacio.jsx';
 
+// Este componente solo evita mostrar pantallas que de todos modos responderían 401.
 export default function RutaProtegida({ children }) {
   const { usuario, cargandoSesion } = useSesion();
+  const location = useLocation();
   if (cargandoSesion) return <EstadoCarga texto="Verificando la sesión…" />;
-  if (!usuario) {
-    return (
-      <div className="container py-5">
-        <EstadoVacio titulo="Necesitás una sesión">
-          Elegí un usuario en "Ver como", en la barra superior.
-        </EstadoVacio>
-      </div>
-    );
-  }
+  if (!usuario) return <Navigate to="/login" replace state={{ desde: location }} />;
   return children;
 }

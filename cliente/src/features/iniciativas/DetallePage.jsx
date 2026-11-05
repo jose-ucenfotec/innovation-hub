@@ -18,7 +18,7 @@ export default function DetallePage() {
   let contenido;
   if (cargando) contenido = <EstadoCarga texto="Cargando iniciativa…" />;
   else if (error?.status === 404) contenido = <EstadoVacio titulo="No encontramos esa iniciativa" accion={volver}>Puede haberse eliminado o no estar disponible para vos.</EstadoVacio>;
-  else if (error?.status === 401) contenido = <EstadoVacio titulo="Iniciativa institucional" accion={volver}>Solo la pueden consultar usuarios con sesión iniciada.</EstadoVacio>;
+  else if (error?.status === 401) contenido = <EstadoVacio titulo="Iniciativa institucional" accion={<Link className="btn btn-primary" to="/login" state={{ desde: { pathname: `/iniciativas/${id}` } }}>Iniciar sesión</Link>}>Solo la pueden consultar usuarios con sesión iniciada.</EstadoVacio>;
   else if (error) contenido = <EstadoError error={error} onReintentar={recargar} />;
   else if (ini.accessLevel === 'summary') contenido = <DetalleRestringido ini={ini} />;
   else {

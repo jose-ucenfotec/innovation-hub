@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import TarjetaPerfil from './TarjetaPerfil.jsx';
 import ListaIniciativasPerfil from './ListaIniciativasPerfil.jsx';
 import EstadoCarga from '../../components/ui/EstadoCarga.jsx';
@@ -67,7 +67,9 @@ export default function PerfilPage() {
       {persona && (
         <div className="row g-4">
           <div className="col-md-5 col-lg-4">
-            <TarjetaPerfil persona={persona} propio={propio} />
+            <TarjetaPerfil persona={persona} propio={propio}>
+              {propio && <Link className="btn btn-outline-primary w-100 mt-3" to="/perfil/editar"><i className="bi bi-pencil" aria-hidden="true"></i> Editar perfil</Link>}
+            </TarjetaPerfil>
           </div>
           <div className="col-md-7 col-lg-8">
             {propio ? <Pestanas /> : (

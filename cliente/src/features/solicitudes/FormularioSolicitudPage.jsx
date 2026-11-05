@@ -97,7 +97,7 @@ export default function FormularioSolicitudPage() {
         <div className="col-lg-7">
           {bloqueo && <div className="alert alert-warning" role="status">{bloqueo} <Link to={`/iniciativas/${ini.id}`}>Volver a la iniciativa</Link></div>}
           {!bloqueo && ofrecibles.length === 0 && (
-            <EstadoVacio titulo="No tenés competencias que esta iniciativa requiera" accion={<Link className="btn btn-outline-primary btn-sm" to="/perfil">Ir a mi perfil</Link>}>
+            <EstadoVacio titulo="No tenés competencias que esta iniciativa requiera" accion={<Link className="btn btn-outline-primary btn-sm" to="/perfil/editar">Editar mi perfil</Link>}>
               Agregá a tu perfil alguna de las competencias que se buscan para poder postularte.
             </EstadoVacio>
           )}

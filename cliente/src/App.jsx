@@ -14,6 +14,10 @@ import ProyectosPage from './features/proyectos/ProyectosPage.jsx';
 import DetalleProyectoPage from './features/proyectos/DetalleProyectoPage.jsx';
 import PerfilPage from './features/usuarios/PerfilPage.jsx';
 import NoEncontradoPage from './pages/NoEncontradoPage.jsx';
+import LoginPage from './features/auth/LoginPage.jsx';
+import RegistroPage from './features/auth/RegistroPage.jsx';
+import EditarPerfilPage from './features/usuarios/EditarPerfilPage.jsx';
+import BuscarUsuariosPage from './features/usuarios/BuscarUsuariosPage.jsx';
 
 const protegida = (elemento) => <RutaProtegida>{elemento}</RutaProtegida>;
 
@@ -23,14 +27,18 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<InicioPage />} />
         <Route path="iniciativas" element={<CatalogoPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="registro" element={<RegistroPage />} />
+        <Route path="perfil/editar" element={protegida(<EditarPerfilPage />)} />
+        <Route path="usuarios" element={protegida(<BuscarUsuariosPage />)} />
         <Route path="iniciativas/nueva" element={protegida(<FormularioIniciativaPage />)} />
         <Route path="iniciativas/:id" element={<DetallePage />} />
         <Route path="iniciativas/:id/editar" element={protegida(<FormularioIniciativaPage />)} />
         <Route path="iniciativas/:id/solicitar" element={protegida(<FormularioSolicitudPage />)} />
         <Route path="iniciativas/:id/proyecto" element={protegida(<ConvertirProyectoPage />)} />
         <Route path="solicitudes" element={protegida(<SolicitudesLayout />)}>
-          <Route index element={<MisSolicitudesPage />} />
-          <Route path="recibidas" element={<SolicitudesRecibidasPage />} />
+        <Route index element={<MisSolicitudesPage />} />
+        <Route path="recibidas" element={<SolicitudesRecibidasPage />} />
         </Route>
         <Route path="solicitudes/:solicitudId/editar" element={protegida(<FormularioSolicitudPage />)} />
         <Route path="proyectos" element={protegida(<ProyectosPage />)} />

@@ -1,5 +1,5 @@
 import { ErrorApi } from './errores.js';
-import { cabecerasAuth } from './sesion.js';
+import { cabecerasAuth, obtenerToken, borrarToken } from './sesion.js';
 
 const BASE = import.meta.env.VITE_API_URL;
 
@@ -28,6 +28,10 @@ export async function solicitar(metodo, ruta, { cuerpo, params, signal } = {}) {
   if (respuesta.status === 204) return null;
   const datos = await respuesta.json().catch(() => null);
   if (!respuesta.ok) {
+    if (respuesta.status === 401 && obtenerToken()) {
+      borrarToken();
+      window.dispatchEvent(new Event('ih:sesion-expirada'));
+    }
     const e = datos?.error;
     throw new ErrorApi(respuesta.status, e?.code ?? 'UNKNOWN_ERROR', e?.message ?? 'Ocurrió un error inesperado.', e?.details ?? []);
   }

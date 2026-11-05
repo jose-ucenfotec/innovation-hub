@@ -2,7 +2,7 @@
 // Uso: node pruebas/generar-coleccion.mjs
 import { writeFileSync } from 'node:fs';
 
-const MODO_AUTH = 'dev';
+const MODO_AUTH = 'jwt';
 
 const ID = {
   ana: '650000000000000000000001', luis: '650000000000000000000002', maria: '650000000000000000000003', diego: '650000000000000000000004',

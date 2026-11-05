@@ -125,5 +125,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 57 | 2026-11-03 | 5cbeb06 | Agregar seed con los datos del Avance 1, catálogos y arranque del servidor | Servidor | Datos de prueba deterministas y CORS explícito |
 | 58 | 2026-11-03 | 6ec68bd | Implementar iniciativas y equipo en el servidor con visibilidad y propiedad | Servidor | Filtros, orden y paginación en MongoDB; RN-03, RN-06 a RN-09 |
 | 59 | 2026-11-04 | 8e485e2 | Implementar solicitudes, decisión con incorporación al equipo y proyectos | Servidor | RN-10 a RN-18 verificadas en el servidor con actualizaciones condicionales |
+| 60 | 2026-11-04 | 52fe144 | Agregar colección Postman generada con casos por recurso | Pruebas | Correcto, inválido, inexistente y no autorizado; ejecución con Newman |
 
 <!-- FIN TABLA COMMITS -->

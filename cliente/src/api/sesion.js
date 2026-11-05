@@ -1,14 +1,11 @@
-// Credencial que acompaña cada petición.
-const CLAVE = 'ih.devUser';
+// El token vive en sessionStorage: se pierde al cerrar la pestaña.
+const CLAVE = 'ih.token';
 
-export const obtenerUsuarioDev = () => sessionStorage.getItem(CLAVE) || '';
-
-export function fijarUsuarioDev(id) {
-  if (id) sessionStorage.setItem(CLAVE, id);
-  else sessionStorage.removeItem(CLAVE);
-}
+export const obtenerToken = () => sessionStorage.getItem(CLAVE);
+export const guardarToken = (token) => sessionStorage.setItem(CLAVE, token);
+export const borrarToken = () => sessionStorage.removeItem(CLAVE);
 
 export function cabecerasAuth() {
-  const id = obtenerUsuarioDev();
-  return id ? { 'X-Dev-User': id } : {};
+  const token = obtenerToken();
+  return token ? { Authorization: `Bearer ${token}` } : {};
 }

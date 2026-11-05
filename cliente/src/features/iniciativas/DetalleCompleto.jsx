@@ -10,8 +10,8 @@ function AccionesVisitante({ ini, usuario }) {
   const esMiembro = ini.members.some((m) => m.userId === usuario?.id);
   if (esMiembro) return <p className="small text-success mb-0"><i className="bi bi-check-circle-fill" aria-hidden="true"></i> Formás parte del equipo.</p>;
   if (!['published', 'forming'].includes(ini.status)) return <p className="small text-body-secondary mb-0">Esta iniciativa ya no recibe solicitudes.</p>;
-  if (!usuario) return <p className="small text-body-secondary mb-0">Iniciá sesión para solicitar participación.</p>;
-  return (
+  if (!usuario) return <Link className="btn btn-outline-primary" to="/login" state={{ desde: { pathname: `/iniciativas/${ini.id}` } }}>Iniciá sesión para solicitar</Link>;
+    return (
     <Link className="btn btn-primary" to={`/iniciativas/${ini.id}/solicitar`}>
       <i className="bi bi-send" aria-hidden="true"></i> Solicitar participación
     </Link>

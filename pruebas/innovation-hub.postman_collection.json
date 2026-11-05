@@ -36,6 +36,568 @@
   ],
   "item": [
     {
+      "name": "00 Preparación",
+      "item": [
+        {
+          "name": "Login ana",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+                  "pm.collectionVariables.set('token_ana', pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ana.mora@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login luis",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+                  "pm.collectionVariables.set('token_luis', pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"luis.perez@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login maria",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+                  "pm.collectionVariables.set('token_maria', pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"maria.solis@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login diego",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+                  "pm.collectionVariables.set('token_diego', pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"diego.vargas@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "01 Autenticación",
+      "item": [
+        {
+          "name": "Registro correcto",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 201', () => pm.response.to.have.status(201));",
+                  "pm.test('No devuelve contraseña', () => pm.expect(pm.response.json()).to.not.have.any.keys('password', 'passwordHash'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Sofía\",\n  \"lastName\": \"Quesada\",\n  \"email\": \"sofia.quesada@ucenfotec.ac.cr\",\n  \"password\": \"Clave2026x\",\n  \"confirmPassword\": \"Clave2026x\",\n  \"memberType\": \"student\",\n  \"career\": \"Diseño\",\n  \"acceptTerms\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Registro con datos inválidos",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Código de error VALIDATION_ERROR', () => pm.expect(pm.response.json().error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"S\",\n  \"email\": \"no-es-correo\",\n  \"password\": \"123\",\n  \"confirmPassword\": \"456\",\n  \"acceptTerms\": false\n}"
+            }
+          }
+        },
+        {
+          "name": "Registro con correo existente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 409', () => pm.response.to.have.status(409));",
+                  "pm.test('Código de error EMAIL_TAKEN', () => pm.expect(pm.response.json().error.code).to.eql('EMAIL_TAKEN'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Otra\",\n  \"lastName\": \"Persona\",\n  \"email\": \"ana.mora@ucenfotec.ac.cr\",\n  \"password\": \"Clave2026x\",\n  \"confirmPassword\": \"Clave2026x\",\n  \"memberType\": \"student\",\n  \"career\": \"Diseño\",\n  \"acceptTerms\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Login con contraseña incorrecta",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 401', () => pm.response.to.have.status(401));",
+                  "pm.test('Código de error INVALID_CREDENTIALS', () => pm.expect(pm.response.json().error.code).to.eql('INVALID_CREDENTIALS'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"ana.mora@ucenfotec.ac.cr\",\n  \"password\": \"incorrecta1\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login de la cuenta nueva",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));",
+                  "pm.collectionVariables.set('token_sofia', pm.response.json().token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"sofia.quesada@ucenfotec.ac.cr\",\n  \"password\": \"Clave2026x\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Perfil propio",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_sofia}}"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        },
+        {
+          "name": "Perfil propio sin token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 401', () => pm.response.to.have.status(401));",
+                  "pm.test('Código de error UNAUTHORIZED', () => pm.expect(pm.response.json().error.code).to.eql('UNAUTHORIZED'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        },
+        {
+          "name": "Logout",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 204', () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_sofia}}"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/logout"
+          }
+        },
+        {
+          "name": "Token revocado tras logout",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 401', () => pm.response.to.have.status(401));",
+                  "pm.test('Código de error UNAUTHORIZED', () => pm.expect(pm.response.json().error.code).to.eql('UNAUTHORIZED'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_sofia}}"
+              }
+            ],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "02 Usuarios",
+      "item": [
+        {
+          "name": "Buscar por competencia y disponibilidad",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
+              }
+            ],
+            "url": "{{baseUrl}}/users?skill=comp-gestion&available=true"
+          }
+        },
+        {
+          "name": "Buscar con tamaño inválido",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Código de error VALIDATION_ERROR', () => pm.expect(pm.response.json().error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
+              }
+            ],
+            "url": "{{baseUrl}}/users?size=abc"
+          }
+        },
+        {
+          "name": "Perfil inexistente",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 404', () => pm.response.to.have.status(404));",
+                  "pm.test('Código de error NOT_FOUND', () => pm.expect(pm.response.json().error.code).to.eql('NOT_FOUND'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
+              }
+            ],
+            "url": "{{baseUrl}}/users/6a0000000000000000000099"
+          }
+        },
+        {
+          "name": "Buscar sin token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 401', () => pm.response.to.have.status(401));",
+                  "pm.test('Código de error UNAUTHORIZED', () => pm.expect(pm.response.json().error.code).to.eql('UNAUTHORIZED'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/users"
+          }
+        },
+        {
+          "name": "Modificar perfil",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_diego}}"
+              }
+            ],
+            "url": "{{baseUrl}}/users/me",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Diego\",\n  \"lastName\": \"Vargas\",\n  \"secondLastName\": null,\n  \"career\": \"Administración\",\n  \"bio\": \"Marketing para emprendimientos.\",\n  \"skills\": [\n    {\n      \"skillId\": \"comp-marketing\",\n      \"level\": \"advanced\"\n    }\n  ],\n  \"interests\": [\n    \"emprendimiento\"\n  ],\n  \"availability\": {\n    \"hoursPerWeek\": 2,\n    \"detail\": \"viernes\"\n  },\n  \"portfolioUrl\": null\n}"
+            }
+          }
+        },
+        {
+          "name": "Modificar el correo desde el perfil",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Responde 400', () => pm.response.to.have.status(400));",
+                  "pm.test('Código de error VALIDATION_ERROR', () => pm.expect(pm.response.json().error.code).to.eql('VALIDATION_ERROR'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token_diego}}"
+              }
+            ],
+            "url": "{{baseUrl}}/users/me",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Diego\",\n  \"lastName\": \"Vargas\",\n  \"career\": \"Administración\",\n  \"email\": \"otro@ucenfotec.ac.cr\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "03 Catálogos",
       "item": [
         {
@@ -263,8 +825,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000005"
@@ -292,8 +854,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000004"
+                "key": "Authorization",
+                "value": "Bearer {{token_diego}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000007"
@@ -372,8 +934,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives",
@@ -405,8 +967,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives",
@@ -466,8 +1028,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}",
@@ -499,8 +1061,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}",
@@ -532,8 +1094,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/6a0000000000000000000099",
@@ -565,8 +1127,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001",
@@ -598,8 +1160,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001"
@@ -627,8 +1189,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}"
@@ -656,8 +1218,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}/archive"
@@ -685,8 +1247,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}",
@@ -717,8 +1279,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}"
@@ -746,8 +1308,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/6a0000000000000000000099"
@@ -779,8 +1341,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/members"
@@ -808,8 +1370,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000005/members"
@@ -837,8 +1399,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/members/650000000000000000000001"
@@ -866,8 +1428,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000006/members/650000000000000000000004"
@@ -895,8 +1457,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/members/650000000000000000000004"
@@ -923,8 +1485,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000006/members/650000000000000000000004"
@@ -957,8 +1519,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000003"
+                "key": "Authorization",
+                "value": "Bearer {{token_maria}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000006/requests",
@@ -990,8 +1552,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000003"
+                "key": "Authorization",
+                "value": "Bearer {{token_maria}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000006/requests",
@@ -1023,8 +1585,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000008/requests",
@@ -1056,8 +1618,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/requests",
@@ -1089,8 +1651,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000004"
+                "key": "Authorization",
+                "value": "Bearer {{token_diego}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000002/requests",
@@ -1122,8 +1684,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000003"
+                "key": "Authorization",
+                "value": "Bearer {{token_maria}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/6a0000000000000000000099/requests",
@@ -1183,8 +1745,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000003"
+                "key": "Authorization",
+                "value": "Bearer {{token_maria}}"
               }
             ],
             "url": "{{baseUrl}}/requests/mine?status=pending"
@@ -1211,8 +1773,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/requests/received?initiativeId=660000000000000000000006&status=pending"
@@ -1240,8 +1802,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/requests/received?from=2026-12-01&to=2026-01-01"
@@ -1269,8 +1831,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}"
@@ -1297,8 +1859,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000003"
+                "key": "Authorization",
+                "value": "Bearer {{token_maria}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}",
@@ -1330,8 +1892,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000003"
+                "key": "Authorization",
+                "value": "Bearer {{token_maria}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
@@ -1363,8 +1925,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
@@ -1395,8 +1957,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
@@ -1428,8 +1990,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
@@ -1461,8 +2023,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000003"
+                "key": "Authorization",
+                "value": "Bearer {{token_maria}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/cancel"
@@ -1489,8 +2051,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000003"
+                "key": "Authorization",
+                "value": "Bearer {{token_maria}}"
               }
             ],
             "url": "{{baseUrl}}/requests/670000000000000000000003/cancel"
@@ -1518,8 +2080,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000003"
+                "key": "Authorization",
+                "value": "Bearer {{token_maria}}"
               }
             ],
             "url": "{{baseUrl}}/requests/6a0000000000000000000099/cancel"
@@ -1552,8 +2114,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
@@ -1585,8 +2147,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
@@ -1618,8 +2180,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000004"
+                "key": "Authorization",
+                "value": "Bearer {{token_diego}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000008/project",
@@ -1651,8 +2213,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
@@ -1684,8 +2246,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000001"
+                "key": "Authorization",
+                "value": "Bearer {{token_ana}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
@@ -1716,8 +2278,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/projects?sort=name"
@@ -1745,8 +2307,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/projects/{{nuevoProyecto}}"
@@ -1774,8 +2336,8 @@
                 "value": "application/json"
               },
               {
-                "key": "X-Dev-User",
-                "value": "650000000000000000000002"
+                "key": "Authorization",
+                "value": "Bearer {{token_luis}}"
               }
             ],
             "url": "{{baseUrl}}/projects/6a0000000000000000000099"
