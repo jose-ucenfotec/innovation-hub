@@ -16,7 +16,7 @@ export function crearApp() {
   app.use(cors({
     origin: config.origenCliente,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization', ...(config.authDev ? ['X-Dev-User'] : [])],
+    allowedHeaders: ['Content-Type', 'Authorization'],
     exposedHeaders: ['Location'],
   }));
   app.use(express.json({ limit: '100kb' }));

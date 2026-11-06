@@ -15,5 +15,4 @@ export const config = Object.freeze({
   jwtSecreto: process.env.JWT_SECRET,
   jwtExpira: process.env.JWT_EXPIRES_IN || '2h',
   rondasBcrypt: Number(process.env.BCRYPT_ROUNDS) || 12,
-  authDev: process.env.DEV_AUTH === 'true' && process.env.NODE_ENV !== 'production',
 });

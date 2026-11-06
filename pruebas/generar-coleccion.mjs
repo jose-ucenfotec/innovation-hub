@@ -2,8 +2,6 @@
 // Uso: node pruebas/generar-coleccion.mjs
 import { writeFileSync } from 'node:fs';
 
-const MODO_AUTH = 'jwt';
-
 const ID = {
   ana: '650000000000000000000001', luis: '650000000000000000000002', maria: '650000000000000000000003', diego: '650000000000000000000004',
   voluntariado: '660000000000000000000001', energia: '660000000000000000000002', tutorias: '660000000000000000000003',
@@ -18,9 +16,7 @@ const CORREOS = { ana: 'ana.mora@ucenfotec.ac.cr', luis: 'luis.perez@ucenfotec.a
 function cabeceras(quien) {
   const lista = [{ key: 'Content-Type', value: 'application/json' }];
   if (!quien) return lista;
-  lista.push(MODO_AUTH === 'jwt'
-    ? { key: 'Authorization', value: `Bearer {{token_${quien}}}` }
-    : { key: 'X-Dev-User', value: ID[quien] });
+  lista.push({ key: 'Authorization', value: `Bearer {{token_${quien}}}` });
   return lista;
 }
 
@@ -59,45 +55,43 @@ const proyecto = {
 
 const carpetas = [];
 
-if (MODO_AUTH === 'jwt') {
-  carpetas.push(carpeta('00 Preparación', Object.keys(CORREOS).map((quien) => caso(`Login ${quien}`, 'POST', '/auth/login', {
-    cuerpo: { email: CORREOS[quien], password: CONTRASENA_PRUEBA }, estado: 200,
-    extra: [guardar(`token_${quien}`, 'pm.response.json().token')],
-  }))));
+carpetas.push(carpeta('00 Preparación', Object.keys(CORREOS).map((quien) => caso(`Login ${quien}`, 'POST', '/auth/login', {
+  cuerpo: { email: CORREOS[quien], password: CONTRASENA_PRUEBA }, estado: 200,
+  extra: [guardar(`token_${quien}`, 'pm.response.json().token')],
+}))));
 
-  carpetas.push(carpeta('01 Autenticación', [
-    caso('Registro correcto', 'POST', '/auth/register', {
-      cuerpo: { firstName: 'Sofía', lastName: 'Quesada', email: 'sofia.quesada@ucenfotec.ac.cr', password: 'Clave2026x', confirmPassword: 'Clave2026x', memberType: 'student', career: 'Diseño', acceptTerms: true },
-      estado: 201, extra: ["pm.test('No devuelve contraseña', () => pm.expect(pm.response.json()).to.not.have.any.keys('password', 'passwordHash'));"],
-    }),
-    caso('Registro con datos inválidos', 'POST', '/auth/register', { cuerpo: { firstName: 'S', email: 'no-es-correo', password: '123', confirmPassword: '456', acceptTerms: false }, estado: 400, codigo: 'VALIDATION_ERROR' }),
-    caso('Registro con correo existente', 'POST', '/auth/register', {
-      cuerpo: { firstName: 'Otra', lastName: 'Persona', email: CORREOS.ana, password: 'Clave2026x', confirmPassword: 'Clave2026x', memberType: 'student', career: 'Diseño', acceptTerms: true },
-      estado: 409, codigo: 'EMAIL_TAKEN',
-    }),
-    caso('Login con contraseña incorrecta', 'POST', '/auth/login', { cuerpo: { email: CORREOS.ana, password: 'incorrecta1' }, estado: 401, codigo: 'INVALID_CREDENTIALS' }),
-    caso('Login de la cuenta nueva', 'POST', '/auth/login', { cuerpo: { email: 'sofia.quesada@ucenfotec.ac.cr', password: 'Clave2026x' }, estado: 200, extra: [guardar('token_sofia', 'pm.response.json().token')] }),
-    caso('Perfil propio', 'GET', '/auth/me', { quien: 'sofia', estado: 200 }),
-    caso('Perfil propio sin token', 'GET', '/auth/me', { estado: 401, codigo: 'UNAUTHORIZED' }),
-    caso('Logout', 'POST', '/auth/logout', { quien: 'sofia', estado: 204 }),
-    caso('Token revocado tras logout', 'GET', '/auth/me', { quien: 'sofia', estado: 401, codigo: 'UNAUTHORIZED' }),
-  ]));
+carpetas.push(carpeta('01 Autenticación', [
+  caso('Registro correcto', 'POST', '/auth/register', {
+    cuerpo: { firstName: 'Sofía', lastName: 'Quesada', email: 'sofia.quesada@ucenfotec.ac.cr', password: 'Clave2026x', confirmPassword: 'Clave2026x', memberType: 'student', career: 'Diseño', acceptTerms: true },
+    estado: 201, extra: ["pm.test('No devuelve contraseña', () => pm.expect(pm.response.json()).to.not.have.any.keys('password', 'passwordHash'));"],
+  }),
+  caso('Registro con datos inválidos', 'POST', '/auth/register', { cuerpo: { firstName: 'S', email: 'no-es-correo', password: '123', confirmPassword: '456', acceptTerms: false }, estado: 400, codigo: 'VALIDATION_ERROR' }),
+  caso('Registro con correo existente', 'POST', '/auth/register', {
+    cuerpo: { firstName: 'Otra', lastName: 'Persona', email: CORREOS.ana, password: 'Clave2026x', confirmPassword: 'Clave2026x', memberType: 'student', career: 'Diseño', acceptTerms: true },
+    estado: 409, codigo: 'EMAIL_TAKEN',
+  }),
+  caso('Login con contraseña incorrecta', 'POST', '/auth/login', { cuerpo: { email: CORREOS.ana, password: 'incorrecta1' }, estado: 401, codigo: 'INVALID_CREDENTIALS' }),
+  caso('Login de la cuenta nueva', 'POST', '/auth/login', { cuerpo: { email: 'sofia.quesada@ucenfotec.ac.cr', password: 'Clave2026x' }, estado: 200, extra: [guardar('token_sofia', 'pm.response.json().token')] }),
+  caso('Perfil propio', 'GET', '/auth/me', { quien: 'sofia', estado: 200 }),
+  caso('Perfil propio sin token', 'GET', '/auth/me', { estado: 401, codigo: 'UNAUTHORIZED' }),
+  caso('Logout', 'POST', '/auth/logout', { quien: 'sofia', estado: 204 }),
+  caso('Token revocado tras logout', 'GET', '/auth/me', { quien: 'sofia', estado: 401, codigo: 'UNAUTHORIZED' }),
+]));
 
-  carpetas.push(carpeta('02 Usuarios', [
-    caso('Buscar por competencia y disponibilidad', 'GET', '/users?skill=comp-gestion&available=true', { quien: 'ana', estado: 200 }),
-    caso('Buscar con tamaño inválido', 'GET', '/users?size=abc', { quien: 'ana', estado: 400, codigo: 'VALIDATION_ERROR' }),
-    caso('Perfil inexistente', 'GET', `/users/${ID.inexistente}`, { quien: 'ana', estado: 404, codigo: 'NOT_FOUND' }),
-    caso('Buscar sin token', 'GET', '/users', { estado: 401, codigo: 'UNAUTHORIZED' }),
-    caso('Modificar perfil', 'PUT', '/users/me', {
-      quien: 'diego', estado: 200,
-      cuerpo: { firstName: 'Diego', lastName: 'Vargas', secondLastName: null, career: 'Administración', bio: 'Marketing para emprendimientos.', skills: [{ skillId: 'comp-marketing', level: 'advanced' }], interests: ['emprendimiento'], availability: { hoursPerWeek: 2, detail: 'viernes' }, portfolioUrl: null },
-    }),
-    caso('Modificar el correo desde el perfil', 'PUT', '/users/me', {
-      quien: 'diego', estado: 400, codigo: 'VALIDATION_ERROR',
-      cuerpo: { firstName: 'Diego', lastName: 'Vargas', career: 'Administración', email: 'otro@ucenfotec.ac.cr' },
-    }),
-  ]));
-}
+carpetas.push(carpeta('02 Usuarios', [
+  caso('Buscar por competencia y disponibilidad', 'GET', '/users?skill=comp-gestion&available=true', { quien: 'ana', estado: 200 }),
+  caso('Buscar con tamaño inválido', 'GET', '/users?size=abc', { quien: 'ana', estado: 400, codigo: 'VALIDATION_ERROR' }),
+  caso('Perfil inexistente', 'GET', `/users/${ID.inexistente}`, { quien: 'ana', estado: 404, codigo: 'NOT_FOUND' }),
+  caso('Buscar sin token', 'GET', '/users', { estado: 401, codigo: 'UNAUTHORIZED' }),
+  caso('Modificar perfil', 'PUT', '/users/me', {
+    quien: 'diego', estado: 200,
+    cuerpo: { firstName: 'Diego', lastName: 'Vargas', secondLastName: null, career: 'Administración', bio: 'Marketing para emprendimientos.', skills: [{ skillId: 'comp-marketing', level: 'advanced' }], interests: ['emprendimiento'], availability: { hoursPerWeek: 2, detail: 'viernes' }, portfolioUrl: null },
+  }),
+  caso('Modificar el correo desde el perfil', 'PUT', '/users/me', {
+    quien: 'diego', estado: 400, codigo: 'VALIDATION_ERROR',
+    cuerpo: { firstName: 'Diego', lastName: 'Vargas', career: 'Administración', email: 'otro@ucenfotec.ac.cr' },
+  }),
+]));
 
 carpetas.push(carpeta('03 Catálogos', [
   caso('Categorías', 'GET', '/categories', { estado: 200, extra: ["pm.test('Ocho categorías', () => pm.expect(pm.response.json()).to.have.length(8));"] }),

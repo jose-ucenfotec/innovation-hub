@@ -34,18 +34,4 @@
       background: $primary;
     }
   }
-
-  .ver-como {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    font-size: .8125rem;
-    color: $body-secondary-color;
-    .form-select {
-      width: auto;
-      padding-block: .3rem;
-      border-radius: 50rem;
-      font-size: .8125rem;
-    }
-  }
 }
