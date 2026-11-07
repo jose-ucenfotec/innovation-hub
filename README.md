@@ -1,66 +1,151 @@
 # Innovation Hub
- 
-Proyecto del curso SOFT-12 — Desarrollo Web Full Stack.
- 
-**Estudiante:** Jose Ricardo Barrantes Saenz
 
-**Sección:** SCV2   
+Proyecto del curso SOFT-12 — Programación web avanzada · Universidad CENFOTEC
 
-**Periodo:** III cuatrimestre 2026
+**Estudiante:** Jose Ricardo Barrantes Sáenz · **Sección:** SCV2 · **Periodo:** III cuatrimestre 2026
+**Docente:** Álvaro Cordero Peña
 
-**Docente:** Alvaro Cordero Pena
- 
 ## Descripción
- 
-Aplicación web que permite publicar ideas, necesidades y retos,
-declarar las competencias que cada iniciativa requiere y conformar
-equipos interdisciplinarios dentro de la comunidad universitaria.
- 
-## Estructura del repositorio
- 
-- `avance1/` - prototipo con HTML, CSS, JavaScript, Bootstrap y Sass
-  - `paginas/` - pantallas del prototipo
-  - `datos/`   - archivos JSON con datos simulados
-  - `js/`      - módulos de JavaScript
-  - `scss/`    - variables y parciales de Sass
-  - `css/`     - hoja de estilos compilada
- 
-## Cómo ejecutar
- 
-Debido a las acciones fetch del JS y la necesidad de JSON para este avance, el fetch falla si se carga como un avance, para la visualizacion de datos.
-La pagina se puede abrir de dos maneras segun el proposito final:
 
-1. Para visualizacion e inspecion del diseno con clonar el repo y abrir index.html sera suficiente, sin embargo ninguna otra pagina cargara dato y mostrara mensaje de error.
-2. Para una correcta visualizacion de los datos y mejor experiencia de usuario se requiere la extension "Live Server" en IDE de preferencia o si se tiene Python instalado, se podria ejectuar un local server de la siguiente manera desde la raiz del repo:
-        a. python3 -m http.server 5500
-        b. Luego abrir http://localhost:5500/index.html
+Aplicación web para publicar ideas, necesidades y retos, declarar las competencias que cada iniciativa
+requiere, solicitar participación, conformar equipos interdisciplinarios y convertir iniciativas en
+proyectos con su repositorio de GitHub.
 
-## Decisiones de diseño
- 
-1. **Sass sobre Bootstrap.** `scss/_variables.scss` sobrescribe algunas variables  (colores de tema, tipografía, radios, espaciado, formularios,
-   navbar, modal, toast) antes de importar Bootstrap. Los parciales `_base`, `_navbar`, `_hero`, `_tarjetas` y `_formularios` agregan solo lo que Bootstrap no ofrece.
-2. **Identidad visual.** Pense en la identidad de marca de Cenfotec, con un fuerte color azul como color primario primario `#2563EB`. Luego, tomando en cuenta
-   que es un proyecto independiente opte por una paleta de colores mas viva, que tuviera relacion directa en la rueda de colores con ese azul. Un degradado marino → azul →
-   petróleo en el hero, verde menta y ámbar para necesidad y reto. Tipografía Sora para títulos y DM Sans para texto. Botones y badges en forma de píldora,
-   tarjetas sin borde con sombra suave. Iconografía de Bootstrap Icons para mayor facilidad no buscarlos en otro lugar o generarlos uno a uno.
-3. **Contenido generado desde datos.** Tarjetas, detalle, perfil, selects y badges se construyen en JavaScript a partir de los JSON para esta primer entrega que no 
-   hay bases de datos. El HTML solo contiene la estructura y el contenido fijo de la portada.
-4. **Persistencia.** Los JSON son los datos estaticos para esta entrega. Las altas, ediciones,
-   eliminaciones y solicitudes se guardan además en `localStorage` para que el catálogo refleje los cambios entre páginas, y la experiencia visual sea un poco mas enriquecedora. 
-   El botón **Restablecer datos de ejemplo** del perfil vuelve a los JSON originales.
-5. **Eliminar o archivar.** Si la iniciativa tiene equipo, solicitudes o proyecto, se archiva en lugar de eliminarse como pide las reglas de negocio. La confirmación se hace con
-   un modal de Bootstrap que muestra el título y la acción que se ejecutará.
-6. **Validación propia.** Obligatoriedad, longitud mínima y máxima, rango,
-   selección válida, formato (etiquetas y disponibilidad) y relación entre campos
-   (los integrantes estimados no pueden ser menos que el equipo actual). Los
-   mensajes son específicos por campo y se anuncian con `aria-invalid` y
-   `aria-describedby`.
-7. **Accesibilidad.** HTML semántico, enlace para saltar al contenido, jerarquía
-   de encabezados, etiquetas asociadas, pestañas con roles ARIA y navegación por
-   teclado, textos alternativos, estados que combinan icono, texto y color, y
-   respeto a `prefers-reduced-motion`.
-8. **Preparación para el Avance 2.** Cada página es un módulo con estado propio. Lo que facilitaria la escalabilidad o movilidad.
- 
+| Avance | Tecnología | Carpeta |
+|---|---|---|
+| 1 — Prototipo | HTML, Sass + Bootstrap, JavaScript, JSON | `avance1/` |
+| 2 — Cliente-servidor | React (Vite) + Node.js/Express + MongoDB | `cliente/`, `servidor/` |
+| Final | React + ASP.NET Core + EF Core | pendiente |
+
+## Arquitectura
+
+```
+cliente/ (React + Vite)  ──HTTP/JSON──▶  servidor/ (Express)  ──Mongoose──▶  MongoDB
+                         ──HTTPS──────▶  API pública de GitHub
+```
+
+El cliente nunca accede a la base de datos. Toda regla de negocio, permiso y validación definitiva
+ocurre en el servidor.
+
+## Estructura
+
+```
+innovation-hub/
+├── docs/            api-contract.md · modelo-datos.md · seguridad.md
+├── avance1/         prototipo del Avance 1 (sin cambios)
+├── cliente/         src/api · components · context · features · hooks · styles · utils
+├── servidor/        src/config · controllers · db · middleware · models · repositories · routes · seed · services · utils · validators
+├── pruebas/         colección y entorno de Postman + generador
+└── herramientas/    tabla de commits
+```
+
+## Requisitos (Windows)
+
+- Node.js 20 o superior.
+- MongoDB Community Server 8 instalado como servicio, y mongosh.
+- Git.
+
+## Puesta en marcha
+
+### 1. Base de datos
+
+Verificar que el servicio esté activo:
+
+```powershell
+Get-Service MongoDB
+mongosh "mongodb://127.0.0.1:27017" --eval "db.runCommand({ ping: 1 })"
+```
+
+Si está detenido: `Start-Service MongoDB` (PowerShell como administrador).
+
+### 2. Servidor
+
+```powershell
+cd servidor
+npm install
+Copy-Item .env.example .env
+```
+
+Editar `servidor/.env`:
+
+| Variable | Valor |
+|---|---|
+| `PORT` | `3000` |
+| `NODE_ENV` | `development` |
+| `MONGODB_URI` | `mongodb://127.0.0.1:27017/innovation_hub` |
+| `CLIENT_ORIGIN` | `http://localhost:5173` |
+| `JWT_SECRET` | cadena aleatoria: `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"` |
+| `JWT_EXPIRES_IN` | `2h` |
+| `BCRYPT_ROUNDS` | `12` |
+
+```powershell
+npm run seed     # borra y carga los datos de prueba
+npm run dev      # http://localhost:3000/api
+```
+
+### 3. Cliente
+
+En otra terminal:
+
+```powershell
+cd cliente
+npm install
+Copy-Item .env.example .env   # VITE_API_URL y VITE_GITHUB_API_URL
+npm run dev                   # http://localhost:5173
+```
+
+### Usuarios de prueba
+
+Contraseña de todos: `Prueba123!` (definida en `servidor/src/seed/seed.js`).
+
+| Usuario | Correo | Para probar |
+|---|---|---|
+| Ana Mora | ana.mora@ucenfotec.ac.cr | propietaria con equipo; miembro de una privada |
+| Luis Pérez | luis.perez@ucenfotec.ac.cr | propietario que recibe solicitudes |
+| María Solís | maria.solis@ucenfotec.ac.cr | solicitante; propietaria de una privada |
+| Diego Vargas | diego.vargas@ucenfotec.ac.cr | propietario de una restringida |
+
+### 4. Pruebas de la API
+
+Con el servidor en marcha:
+
+```powershell
+cd servidor
+npm run test:api   # recarga el seed y ejecuta la colección con Newman
+```
+
+Para abrirla en Postman: Import → `pruebas/innovation-hub.postman_collection.json` y
+`pruebas/innovation-hub.postman_environment.json`. Si se modifica, regenerarla con
+`node pruebas/generar-coleccion.mjs`.
+
+### Avance 1
+
+Abrir la raíz del repositorio en VS Code → clic derecho sobre `avance1/index.html` →
+**Open with Live Server** → `http://127.0.0.1:5500/avance1/index.html`.
+Para recompilar sus estilos: `npm install` y `npm run css` en la raíz.
+
+## Documentación
+
+- [Contrato de la API](docs/api-contract.md) — congelado desde la etiqueta `entrega-2`.
+- [Modelo de datos](docs/modelo-datos.md) — embebido frente a referencia y equivalencia en SQL.
+- [Seguridad](docs/seguridad.md) — medidas y autorización por punto de acceso.
+
+## Decisiones de diseño del Avance 2
+
+1. **Conversión primero.** El Avance 1 se migró a React contra un servidor simulado con el mismo
+   contrato; luego se reemplazó por Express cambiando una variable, sin rehacer pantallas.
+2. **Capas en el servidor.** Rutas → controladores → servicios → repositorios. Las reglas de negocio
+   son funciones puras en `services/reglas.js`.
+3. **Contrato pensado para .NET.** Recursos en inglés, enums en minúscula, ids opacos, errores con
+   formato único, acciones de estado como subrecursos `POST`.
+4. **Visibilidad en el servidor.** Las restringidas ajenas salen con proyección `summary`; las privadas
+   ajenas responden 404.
+5. **Equipo embebido, solicitudes referenciadas.** Ver `docs/modelo-datos.md`.
+6. **JWT con revocación.** Cerrar sesión invalida el token aunque no haya vencido.
+7. **Correcciones del Avance 1.** RN-03 estricta, visibilidad sin valor por defecto, contadores en todos
+   los campos con límite, errores que se limpian al corregir, etiquetas y competencias como chips,
+   eliminar desde la lista, competencias de la solicitud en intersección y roles de catálogo.
+
 ## Resumen de commits
 
 <!-- INICIO TABLA COMMITS -->
@@ -127,5 +212,6 @@ La pagina se puede abrir de dos maneras segun el proposito final:
 | 59 | 2026-11-04 | 8e485e2 | Implementar solicitudes, decisión con incorporación al equipo y proyectos | Servidor | RN-10 a RN-18 verificadas en el servidor con actualizaciones condicionales |
 | 60 | 2026-11-04 | 52fe144 | Agregar colección Postman generada con casos por recurso | Pruebas | Correcto, inválido, inexistente y no autorizado; ejecución con Newman |
 | 61 | 2026-11-04 | 611360b | Agregar login, registro, edición de perfil y búsqueda de personas en el cliente | Cliente | Sesión con token Bearer, rutas protegidas y gestión de competencias |
+| 62 | 2026-11-05 | 91cb6d6 | Generar la colección de pruebas solo con autenticación JWT | Pruebas | Se elimina el modo de desarrollo X-Dev-User del generador |
 
 <!-- FIN TABLA COMMITS -->
