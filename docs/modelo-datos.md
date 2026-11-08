@@ -48,8 +48,9 @@ palabras completas).
 
 ## Atomicidad
 
-MongoDB instalado como servicio en Windows es un servidor único y no admite transacciones con varios
-documentos. Aceptar una solicitud toca dos documentos y se resuelve así:
+La aceptación de una solicitud toca dos documentos. En lugar de una transacción, se resuelve con
+actualizaciones condicionales y compensación. Así funciona igual con MongoDB local (servidor único,
+sin transacciones) y con Atlas:
 
 1. `requests.updateOne({ _id, status: 'pending' }, { status: 'accepted', … })`: si no modifica nada, la solicitud ya no estaba pendiente → 409.
 2. `initiatives.updateOne({ _id, status ∈ [published, forming], 'members.userId' ≠ usuario, cupo disponible }, { $push: members, status: 'forming' })`.

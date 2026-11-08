@@ -35,14 +35,13 @@ innovation-hub/
 ├── avance1/         prototipo del Avance 1 (sin cambios)
 ├── cliente/         src/api · components · context · features · hooks · styles · utils
 ├── servidor/        src/config · controllers · db · middleware · models · repositories · routes · seed · services · utils · validators
-├── pruebas/         colección y entorno de Postman + generador
-└── herramientas/    tabla de commits
+└── pruebas/         colección y entorno de Postman + generador
 ```
 
 ## Requisitos (Windows)
 
-- Node.js 20 o superior.
-- MongoDB Community Server 8 instalado como servicio, y mongosh.
+- Node.js 20.6 o superior (los scripts cargan el `.env` con `--env-file`).
+- MongoDB: Community Server 8 instalado como servicio (con mongosh) **o** un clúster gratuito de MongoDB Atlas.
 - Git.
 
 ## Puesta en marcha
@@ -58,6 +57,13 @@ mongosh "mongodb://127.0.0.1:27017" --eval "db.runCommand({ ping: 1 })"
 
 Si está detenido: `Start-Service MongoDB` (PowerShell como administrador).
 
+**Con MongoDB Atlas:** crear un usuario de base de datos, agregar tu IP en *Network Access* y copiar
+la cadena de *Connect → Drivers*. En `servidor/.env` va con el nombre de la base antes del `?`:
+
+```
+MONGODB_URI=mongodb+srv://<usuario>:<contraseña>@<cluster>.mongodb.net/innovation_hub?retryWrites=true&w=majority
+```
+
 ### 2. Servidor
 
 ```powershell
@@ -72,7 +78,7 @@ Editar `servidor/.env`:
 |---|---|
 | `PORT` | `3000` |
 | `NODE_ENV` | `development` |
-| `MONGODB_URI` | `mongodb://127.0.0.1:27017/innovation_hub` |
+| `MONGODB_URI` | `mongodb://127.0.0.1:27017/innovation_hub` o la cadena de Atlas |
 | `CLIENT_ORIGIN` | `http://localhost:5173` |
 | `JWT_SECRET` | cadena aleatoria: `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"` |
 | `JWT_EXPIRES_IN` | `2h` |
@@ -145,6 +151,8 @@ Para recompilar sus estilos: `npm install` y `npm run css` en la raíz.
 7. **Correcciones del Avance 1.** RN-03 estricta, visibilidad sin valor por defecto, contadores en todos
    los campos con límite, errores que se limpian al corregir, etiquetas y competencias como chips,
    eliminar desde la lista, competencias de la solicitud en intersección y roles de catálogo.
+8. **Patrones de las prácticas de clase.** La validación del servidor está escrita a mano: cada función
+   devuelve un mensaje por campo y copia solo los campos permitidos. El `.env` se carga con `--env-file`.
 
 ## Resumen de commits
 
@@ -214,5 +222,6 @@ Para recompilar sus estilos: `npm install` y `npm run css` en la raíz.
 | 61 | 2026-11-04 | 611360b | Agregar login, registro, edición de perfil y búsqueda de personas en el cliente | Cliente | Sesión con token Bearer, rutas protegidas y gestión de competencias |
 | 62 | 2026-11-05 | 91cb6d6 | Generar la colección de pruebas solo con autenticación JWT | Pruebas | Se elimina el modo de desarrollo X-Dev-User del generador |
 | 63 | 2026-11-06 | 06bcc32 | Corregir README y verificar el build de producción | Cliente | Revisión de estados de interfaz, teclado y tamaños de pantalla |
+| 64 | 2026-11-08 | 0587de3 | Validar las entradas | Servidor | Validadores con funciones que devuelven errores por campo y datos copiados campo por campo, como en las prácticas |
 
 <!-- FIN TABLA COMMITS -->
