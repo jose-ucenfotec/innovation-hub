@@ -1,4 +1,4 @@
-// Reglas de negocio puras. Luego se mueven a BD
+// Reglas de negocio puras: no consultan la base ni dependen de Express.
 const mismoId = (a, b) => a != null && b != null && String(a) === String(b);
 
 export const ESTADOS_QUE_RECIBEN = ['published', 'forming'];

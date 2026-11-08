@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { ZodError } from 'zod';
 import { ErrorApi } from '../utils/ErrorApi.js';
 
 function conflictoPorDuplicado(err) {
@@ -14,9 +13,7 @@ function conflictoPorDuplicado(err) {
 // Nunca se envían trazas ni mensajes de MongoDB al cliente.
 export function manejadorErrores(err, req, res, _next) {
   let error = err;
-  if (err instanceof ZodError) {
-    error = ErrorApi.validacion(err.issues.map((i) => ({ field: i.path.join('.'), message: i.message })));
-  } else if (err?.type === 'entity.parse.failed') {
+  if (err?.type === 'entity.parse.failed') {
     error = ErrorApi.validacion([], 'El cuerpo de la petición no es JSON válido.');
   } else if (err?.type === 'entity.too.large') {
     error = ErrorApi.validacion([], 'El cuerpo de la petición es demasiado grande.');

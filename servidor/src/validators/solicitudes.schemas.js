@@ -1,31 +1,80 @@
-import { z } from 'zod';
+// validators/solicitudes.schemas.js
+// Cuerpo de una solicitud, la decisión del propietario y los filtros de los dos listados.
+// Cada función devuelve { errores, datos }.
+
 import { ESTADOS_SOLICITUD } from '../models/enums.js';
 import { REGEX_DISPONIBILIDAD, REGEX_FECHA } from './limites.js';
-import { objectId, opcion, paginacion, texto } from './comunes.js';
+import { OBLIGATORIO, REGEX_OBJECT_ID, falta, limpiar, revisarTexto, revisarPaginacion, revisarFiltro, revisarFiltroOpcion } from './comunes.js';
 
-export const cuerpoSolicitud = z.object({
-  message: texto('message'),
-  offeredSkillId: z.string({ required_error: 'Elegí una competencia.' }).min(1, 'Elegí una competencia.'),
-  roleId: z.string({ required_error: 'Elegí un rol.' }).min(1, 'Elegí un rol.'),
-  availability: z.string({ required_error: 'Este campo es obligatorio.' }).trim()
-    .regex(REGEX_DISPONIBILIDAD, 'Usá el formato "N h/semana", por ejemplo 4 h/semana.'),
-});
+export function cuerpoSolicitud(body) {
+  const errores = {};
 
-export const cuerpoDecision = z.object({
-  decision: z.enum(['accepted', 'rejected'], { errorMap: () => ({ message: 'La decisión debe ser accepted o rejected.' }) }),
-  comment: z.string().trim().max(300, 'No debe superar los 300 caracteres.').optional(),
-});
+  const mensaje = revisarTexto(body.message, 'message');
+  if (mensaje) errores.message = mensaje;
+  if (typeof body.offeredSkillId !== 'string' || body.offeredSkillId === '') errores.offeredSkillId = 'Elegí una competencia.';
+  if (typeof body.roleId !== 'string' || body.roleId === '') errores.roleId = 'Elegí un rol.';
 
-const fecha = z.string().regex(REGEX_FECHA, 'Usá el formato AAAA-MM-DD.');
+  if (falta(body.availability)) errores.availability = OBLIGATORIO;
+  else if (typeof body.availability !== 'string' || !REGEX_DISPONIBILIDAD.test(body.availability.trim())) {
+    errores.availability = 'Usá el formato "N h/semana", por ejemplo 4 h/semana.';
+  }
 
-export const consultaMias = z.object({ ...paginacion, status: opcion(ESTADOS_SOLICITUD).optional() });
+  const datos = {
+    message: limpiar(body.message),
+    offeredSkillId: body.offeredSkillId,
+    roleId: body.roleId,
+    availability: limpiar(body.availability),
+  };
+  return { errores, datos };
+}
 
-export const consultaRecibidas = z.object({
-  ...paginacion,
-  initiativeId: objectId.optional(),
-  status: opcion(ESTADOS_SOLICITUD).optional(),
-  skill: z.string().max(40).optional(),
-  role: z.string().max(40).optional(),
-  from: fecha.optional(),
-  to: fecha.optional(),
-}).refine((q) => !q.from || !q.to || q.from <= q.to, { message: 'La fecha inicial no puede ser posterior a la final.', path: ['from'] });
+export function cuerpoDecision(body) {
+  const errores = {};
+  if (!['accepted', 'rejected'].includes(body.decision)) errores.decision = 'La decisión debe ser accepted o rejected.';
+
+  const datos = { decision: body.decision };
+  if (body.comment !== undefined) {
+    if (typeof body.comment !== 'string' || body.comment.trim().length > 300) errores.comment = 'No debe superar los 300 caracteres.';
+    datos.comment = limpiar(body.comment);
+  }
+  return { errores, datos };
+}
+
+export function consultaMias(query) {
+  const errores = {};
+  const datos = {
+    ...revisarPaginacion(query, errores),
+    status: revisarFiltroOpcion(query, 'status', ESTADOS_SOLICITUD, errores),
+  };
+  return { errores, datos };
+}
+
+// Fecha opcional en formato AAAA-MM-DD.
+function revisarFecha(query, campo, errores) {
+  const valor = query[campo];
+  if (valor === undefined) return undefined;
+  if (typeof valor !== 'string' || !REGEX_FECHA.test(valor)) {
+    errores[campo] = 'Usá el formato AAAA-MM-DD.';
+    return undefined;
+  }
+  return valor;
+}
+
+export function consultaRecibidas(query) {
+  const errores = {};
+  const datos = {
+    ...revisarPaginacion(query, errores),
+    status: revisarFiltroOpcion(query, 'status', ESTADOS_SOLICITUD, errores),
+    skill: revisarFiltro(query, 'skill', 40, errores),
+    role: revisarFiltro(query, 'role', 40, errores),
+    from: revisarFecha(query, 'from', errores),
+    to: revisarFecha(query, 'to', errores),
+  };
+  if (query.initiativeId !== undefined) {
+    if (typeof query.initiativeId === 'string' && REGEX_OBJECT_ID.test(query.initiativeId)) datos.initiativeId = query.initiativeId;
+    else errores.initiativeId = 'Identificador inválido.';
+  }
+  // Regla entre campos: solo si las dos fechas son válidas.
+  if (datos.from && datos.to && datos.from > datos.to) errores.from = 'La fecha inicial no puede ser posterior a la final.';
+  return { errores, datos };
+}

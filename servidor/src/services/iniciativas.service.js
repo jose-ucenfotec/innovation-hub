@@ -81,14 +81,11 @@ export async function archivar(id, usuario) {
   return detalle(await repo.actualizar(id, { status: 'archived' }), usuario);
 }
 
-export async function listarMiembros(id, q, usuario) {
+export async function listarMiembros(id, usuario) {
   const { ini, nivel } = await cargarVisible(id, usuario);
   if (nivel !== 'full') throw ErrorApi.prohibido('No tenés acceso al equipo de esta iniciativa.');
   const ctx = await contextoIniciativas([ini], usuario);
-  let miembros = ini.members;
-  if (q.role) miembros = miembros.filter((m) => m.roleId === q.role);
-  if (q.skill) miembros = miembros.filter((m) => ctx.usuarios.get(String(m.userId))?.skills?.some((s) => s.skillId === q.skill));
-  return miembros.map((m) => serializarMiembro(m, ctx));
+  return ini.members.map((m) => serializarMiembro(m, ctx));
 }
 
 export async function retirarMiembro(id, userId, usuario) {

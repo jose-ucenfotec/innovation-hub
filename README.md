@@ -213,5 +213,6 @@ Para recompilar sus estilos: `npm install` y `npm run css` en la raíz.
 | 60 | 2026-11-04 | 52fe144 | Agregar colección Postman generada con casos por recurso | Pruebas | Correcto, inválido, inexistente y no autorizado; ejecución con Newman |
 | 61 | 2026-11-04 | 611360b | Agregar login, registro, edición de perfil y búsqueda de personas en el cliente | Cliente | Sesión con token Bearer, rutas protegidas y gestión de competencias |
 | 62 | 2026-11-05 | 91cb6d6 | Generar la colección de pruebas solo con autenticación JWT | Pruebas | Se elimina el modo de desarrollo X-Dev-User del generador |
+| 63 | 2026-11-06 | 06bcc32 | Corregir README y verificar el build de producción | Cliente | Revisión de estados de interfaz, teclado y tamaños de pantalla |
 
 <!-- FIN TABLA COMMITS -->

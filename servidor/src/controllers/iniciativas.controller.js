@@ -21,7 +21,7 @@ export async function archivar(req, res) {
   res.json(await servicio.archivar(req.params.id, req.usuario));
 }
 export async function miembros(req, res) {
-  res.json(await servicio.listarMiembros(req.params.id, req.validado.query, req.usuario));
+  res.json(await servicio.listarMiembros(req.params.id, req.usuario));
 }
 export async function retirarMiembro(req, res) {
   await servicio.retirarMiembro(req.params.id, req.params.userId, req.usuario);

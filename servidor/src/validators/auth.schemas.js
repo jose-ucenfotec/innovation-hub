@@ -1,25 +1,78 @@
-import { z } from 'zod';
+// validators/auth.schemas.js
+// Registro e inicio de sesión. Cada función devuelve { errores, datos }:
+// errores trae un mensaje por campo ({} si todo está bien) y datos solo los campos permitidos, limpios.
+
 import { TIPOS_MIEMBRO } from '../models/enums.js';
-import { opcion } from './comunes.js';
+import { OBLIGATORIO, OPCION_INVALIDA, falta, limpiar, revisarLargo } from './comunes.js';
 
-const obligatorio = { required_error: 'Este campo es obligatorio.', invalid_type_error: 'Debe ser texto.' };
-export const nombre = z.string(obligatorio).trim().min(2, 'Debe tener al menos 2 caracteres.').max(60, 'No debe superar los 60 caracteres.');
-const correo = z.string(obligatorio).trim().toLowerCase().max(120, 'No debe superar los 120 caracteres.').email('Ingresá un correo válido.');
+const REGEX_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export const cuerpoRegistro = z.object({
-  firstName: nombre,
-  lastName: nombre,
-  secondLastName: nombre.nullable().optional(),
-  email: correo,
-  password: z.string(obligatorio).min(8, 'Debe tener al menos 8 caracteres.').max(72, 'No debe superar los 72 caracteres.')
-    .regex(/[A-Za-zÁÉÍÓÚáéíóúÑñ]/, 'Debe incluir al menos una letra.').regex(/\d/, 'Debe incluir al menos un número.'),
-  confirmPassword: z.string(obligatorio),
-  memberType: opcion(TIPOS_MIEMBRO),
-  career: nombre,
-  acceptTerms: z.literal(true, { errorMap: () => ({ message: 'Debés aceptar los términos de uso.' }) }),
-}).refine((d) => d.password === d.confirmPassword, { message: 'Las contraseñas no coinciden.', path: ['confirmPassword'] });
+// Nombre, apellidos y carrera: de 2 a 60 caracteres.
+export const revisarNombre = (valor) => revisarLargo(valor, 2, 60);
 
-export const cuerpoLogin = z.object({
-  email: correo,
-  password: z.string(obligatorio).min(1, 'Este campo es obligatorio.'),
-});
+function revisarCorreo(valor) {
+  if (falta(valor)) return OBLIGATORIO;
+  if (typeof valor !== 'string') return 'Debe ser texto.';
+  if (valor.trim().length > 120) return 'No debe superar los 120 caracteres.';
+  if (!REGEX_CORREO.test(valor.trim())) return 'Ingresá un correo válido.';
+  return null;
+}
+
+// El correo se guarda y se busca siempre en minúsculas.
+const limpiarCorreo = (valor) => (typeof valor === 'string' ? valor.trim().toLowerCase() : valor);
+
+function revisarClave(clave) {
+  if (falta(clave)) return OBLIGATORIO;
+  if (typeof clave !== 'string') return 'Debe ser texto.';
+  if (clave.length < 8) return 'Debe tener al menos 8 caracteres.';
+  if (clave.length > 72) return 'No debe superar los 72 caracteres.';
+  if (!/[A-Za-zÁÉÍÓÚáéíóúÑñ]/.test(clave)) return 'Debe incluir al menos una letra.';
+  if (!/\d/.test(clave)) return 'Debe incluir al menos un número.';
+  return null;
+}
+
+export function cuerpoRegistro(body) {
+  const errores = {};
+
+  for (const campo of ['firstName', 'lastName', 'career']) {
+    const mensaje = revisarNombre(body[campo]);
+    if (mensaje) errores[campo] = mensaje;
+  }
+  // El segundo apellido es opcional: si viene, cumple la misma regla que el primero.
+  if (!falta(body.secondLastName)) {
+    const mensaje = revisarNombre(body.secondLastName);
+    if (mensaje) errores.secondLastName = mensaje;
+  }
+
+  const mensajeCorreo = revisarCorreo(body.email);
+  if (mensajeCorreo) errores.email = mensajeCorreo;
+
+  const mensajeClave = revisarClave(body.password);
+  if (mensajeClave) errores.password = mensajeClave;
+  if (typeof body.confirmPassword !== 'string') errores.confirmPassword = OBLIGATORIO;
+  else if (!mensajeClave && body.confirmPassword !== body.password) errores.confirmPassword = 'Las contraseñas no coinciden.';
+
+  if (!TIPOS_MIEMBRO.includes(body.memberType)) errores.memberType = OPCION_INVALIDA;
+  if (body.acceptTerms !== true) errores.acceptTerms = 'Debés aceptar los términos de uso.';
+
+  // confirmPassword y acceptTerms solo se revisan: no se guardan.
+  const datos = {
+    firstName: limpiar(body.firstName),
+    lastName: limpiar(body.lastName),
+    secondLastName: limpiar(body.secondLastName) ?? null,
+    email: limpiarCorreo(body.email),
+    password: body.password,
+    memberType: body.memberType,
+    career: limpiar(body.career),
+  };
+  return { errores, datos };
+}
+
+export function cuerpoLogin(body) {
+  const errores = {};
+  const mensajeCorreo = revisarCorreo(body.email);
+  if (mensajeCorreo) errores.email = mensajeCorreo;
+  if (typeof body.password !== 'string' || body.password === '') errores.password = OBLIGATORIO;
+
+  return { errores, datos: { email: limpiarCorreo(body.email), password: body.password } };
+}

@@ -1,5 +1,3 @@
-import 'dotenv/config';
-
 const requeridas = ['MONGODB_URI', 'CLIENT_ORIGIN', 'JWT_SECRET'];
 const faltantes = requeridas.filter((nombre) => !process.env[nombre]);
 if (faltantes.length) {

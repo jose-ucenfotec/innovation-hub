@@ -66,7 +66,6 @@ Formato único en toda la API:
 | 403 | `FORBIDDEN` | Hay sesión pero no hay permiso sobre el recurso |
 | 404 | `NOT_FOUND` | El recurso o la ruta no existen, o es privado y el usuario no es propietario ni miembro |
 | 409 | ver 1.4 | El estado actual impide la operación |
-| 429 | `TOO_MANY_REQUESTS` | Más de 20 intentos de login fallidos desde la misma IP en 15 minutos |
 | 500 | `INTERNAL_ERROR` | Error inesperado; mensaje genérico, sin detalles internos |
 
 ### 1.4 Conflictos (409)
@@ -194,7 +193,7 @@ Acceso: **público** (sin token), **opcional** (con o sin token; cambia la respu
 | Verbo y ruta | Acceso | Cuerpo | Éxito | Errores |
 |---|---|---|---|---|
 | `POST /auth/register` | público | `{ firstName, lastName, secondLastName?, email, password, confirmPassword, memberType, career, acceptTerms: true }` | 201 `UserMe` + `Location: /api/users/{id}` | 400, 409 `EMAIL_TAKEN` |
-| `POST /auth/login` | público | `{ email, password }` | 200 `{ token, tokenType: "Bearer", expiresAt, user: UserMe }` | 400, 401 `INVALID_CREDENTIALS`, 429 |
+| `POST /auth/login` | público | `{ email, password }` | 200 `{ token, tokenType: "Bearer", expiresAt, user: UserMe }` | 400, 401 `INVALID_CREDENTIALS` |
 | `POST /auth/logout` | auth | — | 204; el token queda revocado | 401 |
 | `GET /auth/me` | auth | — | 200 `UserMe` | 401 |
 
