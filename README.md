@@ -225,5 +225,6 @@ Para recompilar sus estilos: `cd avance1`, `npm install` y `npm run css`.
 | 64 | 2026-11-08 | 0587de3 | Validar las entradas | Servidor | Validadores con funciones que devuelven errores por campo y datos copiados campo por campo, como en las prácticas |
 | 65 | 2026-11-08 | c17c8b2 | Actualizar el README | Documentación | README del Avance 2 completo |
 | 66 | 2026-11-08 | 849c081 | Corregir documentación y estructura | Documentación | Readme y package.json de avance1 |
+| 67 | 2026-11-08 | 83246ca | Actualizar los datos de prueba | Datos | Seed y colección con información de prueba |
 
 <!-- FIN TABLA COMMITS -->
