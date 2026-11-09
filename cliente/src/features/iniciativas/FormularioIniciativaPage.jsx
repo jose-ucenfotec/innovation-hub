@@ -142,7 +142,7 @@ export default function FormularioIniciativaPage() {
               ayuda="Elegí una competencia y presioná Agregar"
             />
             <SelectorChips
-              className="col-12" id="tags" etiqueta="Etiquetas" libre max={5} placeholder="voluntariado"
+              className="col-12" id="tags" etiqueta="Etiquetas" libre max={5} placeholder="ciberseguridad"
               valores={form.valores.tags} error={form.errores.tags}
               onChange={(lista) => form.cambiar('tags', lista)}
               validarNuevo={formato(REGEX_ETIQUETA, 'Usá letras, números, espacios o guiones (2 a 30 caracteres).')}

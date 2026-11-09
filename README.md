@@ -226,5 +226,6 @@ Para recompilar sus estilos: `cd avance1`, `npm install` y `npm run css`.
 | 65 | 2026-11-08 | c17c8b2 | Actualizar el README | Documentación | README del Avance 2 completo |
 | 66 | 2026-11-08 | 849c081 | Corregir documentación y estructura | Documentación | Readme y package.json de avance1 |
 | 67 | 2026-11-08 | 83246ca | Actualizar los datos de prueba | Datos | Seed y colección con información de prueba |
+| 68 | 2026-11-08 | f149b10 | Actualizar los datos de prueba | Datos | Seed y colección con información de prueba |
 
 <!-- FIN TABLA COMMITS -->
