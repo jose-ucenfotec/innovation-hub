@@ -39,7 +39,7 @@
       "name": "00 Preparación",
       "item": [
         {
-          "name": "Login ana",
+          "name": "Login leonardo",
           "event": [
             {
               "listen": "test",
@@ -47,7 +47,7 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Responde 200', () => pm.response.to.have.status(200));",
-                  "pm.collectionVariables.set('token_ana', pm.response.json().token);"
+                  "pm.collectionVariables.set('token_leonardo', pm.response.json().token);"
                 ]
               }
             }
@@ -63,12 +63,12 @@
             "url": "{{baseUrl}}/auth/login",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"ana.mora@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
+              "raw": "{\n  \"email\": \"leonardo.brenes@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
             }
           }
         },
         {
-          "name": "Login luis",
+          "name": "Login donatello",
           "event": [
             {
               "listen": "test",
@@ -76,7 +76,7 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Responde 200', () => pm.response.to.have.status(200));",
-                  "pm.collectionVariables.set('token_luis', pm.response.json().token);"
+                  "pm.collectionVariables.set('token_donatello', pm.response.json().token);"
                 ]
               }
             }
@@ -92,12 +92,12 @@
             "url": "{{baseUrl}}/auth/login",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"luis.perez@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
+              "raw": "{\n  \"email\": \"donatello.quiros@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
             }
           }
         },
         {
-          "name": "Login maria",
+          "name": "Login rafael",
           "event": [
             {
               "listen": "test",
@@ -105,7 +105,7 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Responde 200', () => pm.response.to.have.status(200));",
-                  "pm.collectionVariables.set('token_maria', pm.response.json().token);"
+                  "pm.collectionVariables.set('token_rafael', pm.response.json().token);"
                 ]
               }
             }
@@ -121,12 +121,12 @@
             "url": "{{baseUrl}}/auth/login",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"maria.solis@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
+              "raw": "{\n  \"email\": \"rafael.montero@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
             }
           }
         },
         {
-          "name": "Login diego",
+          "name": "Login miguel",
           "event": [
             {
               "listen": "test",
@@ -134,7 +134,7 @@
                 "type": "text/javascript",
                 "exec": [
                   "pm.test('Responde 200', () => pm.response.to.have.status(200));",
-                  "pm.collectionVariables.set('token_diego', pm.response.json().token);"
+                  "pm.collectionVariables.set('token_miguel', pm.response.json().token);"
                 ]
               }
             }
@@ -150,7 +150,7 @@
             "url": "{{baseUrl}}/auth/login",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"diego.vargas@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
+              "raw": "{\n  \"email\": \"miguel.solano@ucenfotec.ac.cr\",\n  \"password\": \"Prueba123!\"\n}"
             }
           }
         }
@@ -242,7 +242,7 @@
             "url": "{{baseUrl}}/auth/register",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Otra\",\n  \"lastName\": \"Persona\",\n  \"email\": \"ana.mora@ucenfotec.ac.cr\",\n  \"password\": \"Clave2026x\",\n  \"confirmPassword\": \"Clave2026x\",\n  \"memberType\": \"student\",\n  \"career\": \"Diseño\",\n  \"acceptTerms\": true\n}"
+              "raw": "{\n  \"firstName\": \"Otra\",\n  \"lastName\": \"Persona\",\n  \"email\": \"leonardo.brenes@ucenfotec.ac.cr\",\n  \"password\": \"Clave2026x\",\n  \"confirmPassword\": \"Clave2026x\",\n  \"memberType\": \"student\",\n  \"career\": \"Diseño\",\n  \"acceptTerms\": true\n}"
             }
           }
         },
@@ -271,7 +271,7 @@
             "url": "{{baseUrl}}/auth/login",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"ana.mora@ucenfotec.ac.cr\",\n  \"password\": \"incorrecta1\"\n}"
+              "raw": "{\n  \"email\": \"leonardo.brenes@ucenfotec.ac.cr\",\n  \"password\": \"incorrecta1\"\n}"
             }
           }
         },
@@ -441,7 +441,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/users?skill=comp-gestion&available=true"
@@ -470,7 +470,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/users?size=abc"
@@ -499,7 +499,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/users/6a0000000000000000000099"
@@ -552,13 +552,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_diego}}"
+                "value": "Bearer {{token_miguel}}"
               }
             ],
             "url": "{{baseUrl}}/users/me",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Diego\",\n  \"lastName\": \"Vargas\",\n  \"secondLastName\": null,\n  \"career\": \"Administración\",\n  \"bio\": \"Marketing para emprendimientos.\",\n  \"skills\": [\n    {\n      \"skillId\": \"comp-marketing\",\n      \"level\": \"advanced\"\n    }\n  ],\n  \"interests\": [\n    \"emprendimiento\"\n  ],\n  \"availability\": {\n    \"hoursPerWeek\": 2,\n    \"detail\": \"viernes\"\n  },\n  \"portfolioUrl\": null\n}"
+              "raw": "{\n  \"firstName\": \"Miguel\",\n  \"lastName\": \"Solano\",\n  \"secondLastName\": null,\n  \"career\": \"Tecnologías de Información\",\n  \"bio\": \"Administro la infraestructura en la nube del campus.\",\n  \"skills\": [\n    {\n      \"skillId\": \"comp-cloud\",\n      \"level\": \"advanced\"\n    }\n  ],\n  \"interests\": [\n    \"infraestructura\"\n  ],\n  \"availability\": {\n    \"hoursPerWeek\": 2,\n    \"detail\": \"viernes\"\n  },\n  \"portfolioUrl\": null\n}"
             }
           }
         },
@@ -585,13 +585,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_diego}}"
+                "value": "Bearer {{token_miguel}}"
               }
             ],
             "url": "{{baseUrl}}/users/me",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"Diego\",\n  \"lastName\": \"Vargas\",\n  \"career\": \"Administración\",\n  \"email\": \"otro@ucenfotec.ac.cr\"\n}"
+              "raw": "{\n  \"firstName\": \"Miguel\",\n  \"lastName\": \"Solano\",\n  \"career\": \"Tecnologías de Información\",\n  \"email\": \"otro@ucenfotec.ac.cr\"\n}"
             }
           }
         }
@@ -725,7 +725,7 @@
                 "value": "application/json"
               }
             ],
-            "url": "{{baseUrl}}/initiatives?type=challenge&category=cat-sostenibilidad&sort=title"
+            "url": "{{baseUrl}}/initiatives?type=challenge&category=cat-ciberseguridad&sort=title"
           }
         },
         {
@@ -826,7 +826,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000005"
@@ -855,7 +855,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_diego}}"
+                "value": "Bearer {{token_miguel}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000007"
@@ -935,13 +935,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+              "raw": "{\n  \"title\": \"Comunidad de práctica de hacking ético\",\n  \"type\": \"idea\",\n  \"summary\": \"Sesiones semanales para practicar retos de seguridad en equipo.\",\n  \"description\": \"Proponemos un espacio semanal con máquinas vulnerables controladas, guías y revisión de soluciones entre pares.\",\n  \"problem\": \"Los estudiantes practican seguridad solos y sin retroalimentación.\",\n  \"beneficiaries\": \"Estudiantes de Ciberseguridad.\",\n  \"categoryId\": \"cat-ciberseguridad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion-agil\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"hacking ético\",\n    \"comunidad\"\n  ]\n}"
             }
           }
         },
@@ -968,13 +968,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"abc\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 50,\n  \"visibility\": \"secreta\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+              "raw": "{\n  \"title\": \"abc\",\n  \"type\": \"idea\",\n  \"summary\": \"Sesiones semanales para practicar retos de seguridad en equipo.\",\n  \"description\": \"Proponemos un espacio semanal con máquinas vulnerables controladas, guías y revisión de soluciones entre pares.\",\n  \"problem\": \"Los estudiantes practican seguridad solos y sin retroalimentación.\",\n  \"beneficiaries\": \"Estudiantes de Ciberseguridad.\",\n  \"categoryId\": \"cat-ciberseguridad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion-agil\"\n  ],\n  \"estimatedMembers\": 50,\n  \"visibility\": \"secreta\",\n  \"tags\": [\n    \"hacking ético\",\n    \"comunidad\"\n  ]\n}"
             }
           }
         },
@@ -1003,7 +1003,7 @@
             "url": "{{baseUrl}}/initiatives",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+              "raw": "{\n  \"title\": \"Comunidad de práctica de hacking ético\",\n  \"type\": \"idea\",\n  \"summary\": \"Sesiones semanales para practicar retos de seguridad en equipo.\",\n  \"description\": \"Proponemos un espacio semanal con máquinas vulnerables controladas, guías y revisión de soluciones entre pares.\",\n  \"problem\": \"Los estudiantes practican seguridad solos y sin retroalimentación.\",\n  \"beneficiaries\": \"Estudiantes de Ciberseguridad.\",\n  \"categoryId\": \"cat-ciberseguridad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion-agil\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"hacking ético\",\n    \"comunidad\"\n  ]\n}"
             }
           }
         },
@@ -1029,13 +1029,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 5,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+              "raw": "{\n  \"title\": \"Comunidad de práctica de hacking ético\",\n  \"type\": \"idea\",\n  \"summary\": \"Sesiones semanales para practicar retos de seguridad en equipo.\",\n  \"description\": \"Proponemos un espacio semanal con máquinas vulnerables controladas, guías y revisión de soluciones entre pares.\",\n  \"problem\": \"Los estudiantes practican seguridad solos y sin retroalimentación.\",\n  \"beneficiaries\": \"Estudiantes de Ciberseguridad.\",\n  \"categoryId\": \"cat-ciberseguridad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion-agil\"\n  ],\n  \"estimatedMembers\": 5,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"hacking ético\",\n    \"comunidad\"\n  ]\n}"
             }
           }
         },
@@ -1062,13 +1062,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+              "raw": "{\n  \"title\": \"Comunidad de práctica de hacking ético\",\n  \"type\": \"idea\",\n  \"summary\": \"Sesiones semanales para practicar retos de seguridad en equipo.\",\n  \"description\": \"Proponemos un espacio semanal con máquinas vulnerables controladas, guías y revisión de soluciones entre pares.\",\n  \"problem\": \"Los estudiantes practican seguridad solos y sin retroalimentación.\",\n  \"beneficiaries\": \"Estudiantes de Ciberseguridad.\",\n  \"categoryId\": \"cat-ciberseguridad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion-agil\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"hacking ético\",\n    \"comunidad\"\n  ]\n}"
             }
           }
         },
@@ -1095,13 +1095,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/6a0000000000000000000099",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+              "raw": "{\n  \"title\": \"Comunidad de práctica de hacking ético\",\n  \"type\": \"idea\",\n  \"summary\": \"Sesiones semanales para practicar retos de seguridad en equipo.\",\n  \"description\": \"Proponemos un espacio semanal con máquinas vulnerables controladas, guías y revisión de soluciones entre pares.\",\n  \"problem\": \"Los estudiantes practican seguridad solos y sin retroalimentación.\",\n  \"beneficiaries\": \"Estudiantes de Ciberseguridad.\",\n  \"categoryId\": \"cat-ciberseguridad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion-agil\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"hacking ético\",\n    \"comunidad\"\n  ]\n}"
             }
           }
         },
@@ -1128,13 +1128,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Plataforma de voluntariado universitario\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 1,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+              "raw": "{\n  \"title\": \"Plataforma de mentorías de programación\",\n  \"type\": \"idea\",\n  \"summary\": \"Sesiones semanales para practicar retos de seguridad en equipo.\",\n  \"description\": \"Proponemos un espacio semanal con máquinas vulnerables controladas, guías y revisión de soluciones entre pares.\",\n  \"problem\": \"Los estudiantes practican seguridad solos y sin retroalimentación.\",\n  \"beneficiaries\": \"Estudiantes de Ciberseguridad.\",\n  \"categoryId\": \"cat-ciberseguridad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion-agil\"\n  ],\n  \"estimatedMembers\": 1,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"hacking ético\",\n    \"comunidad\"\n  ]\n}"
             }
           }
         },
@@ -1161,7 +1161,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001"
@@ -1190,7 +1190,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}"
@@ -1219,7 +1219,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}/archive"
@@ -1248,13 +1248,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Huerta comunitaria en el campus\",\n  \"type\": \"idea\",\n  \"summary\": \"Cultivar hortalizas con estudiantes y vecinos del campus.\",\n  \"description\": \"Proponemos habilitar un espacio de huerta con turnos de cuidado y talleres abiertos a la comunidad.\",\n  \"problem\": \"No existen espacios verdes productivos en el campus.\",\n  \"beneficiaries\": \"Estudiantes y vecinos.\",\n  \"categoryId\": \"cat-sostenibilidad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"huerta\",\n    \"comunidad\"\n  ]\n}"
+              "raw": "{\n  \"title\": \"Comunidad de práctica de hacking ético\",\n  \"type\": \"idea\",\n  \"summary\": \"Sesiones semanales para practicar retos de seguridad en equipo.\",\n  \"description\": \"Proponemos un espacio semanal con máquinas vulnerables controladas, guías y revisión de soluciones entre pares.\",\n  \"problem\": \"Los estudiantes practican seguridad solos y sin retroalimentación.\",\n  \"beneficiaries\": \"Estudiantes de Ciberseguridad.\",\n  \"categoryId\": \"cat-ciberseguridad\",\n  \"requiredSkillIds\": [\n    \"comp-gestion-agil\"\n  ],\n  \"estimatedMembers\": 4,\n  \"visibility\": \"public\",\n  \"tags\": [\n    \"hacking ético\",\n    \"comunidad\"\n  ]\n}"
             }
           }
         },
@@ -1280,7 +1280,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/{{nuevaIniciativa}}"
@@ -1309,7 +1309,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/6a0000000000000000000099"
@@ -1342,7 +1342,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/members"
@@ -1371,7 +1371,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000005/members"
@@ -1400,7 +1400,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/members/650000000000000000000001"
@@ -1429,7 +1429,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000006/members/650000000000000000000004"
@@ -1458,7 +1458,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/members/650000000000000000000004"
@@ -1486,7 +1486,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000006/members/650000000000000000000004"
@@ -1520,13 +1520,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_maria}}"
+                "value": "Bearer {{token_rafael}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000006/requests",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+              "raw": "{\n  \"message\": \"Puedo coordinar los turnos y las plantillas del laboratorio.\",\n  \"offeredSkillId\": \"comp-gestion-agil\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
             }
           }
         },
@@ -1553,13 +1553,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_maria}}"
+                "value": "Bearer {{token_rafael}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000006/requests",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+              "raw": "{\n  \"message\": \"Puedo coordinar los turnos y las plantillas del laboratorio.\",\n  \"offeredSkillId\": \"comp-gestion-agil\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
             }
           }
         },
@@ -1586,13 +1586,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000008/requests",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-redes\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+              "raw": "{\n  \"message\": \"Puedo coordinar los turnos y las plantillas del laboratorio.\",\n  \"offeredSkillId\": \"comp-redes\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
             }
           }
         },
@@ -1619,13 +1619,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/requests",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+              "raw": "{\n  \"message\": \"Puedo coordinar los turnos y las plantillas del laboratorio.\",\n  \"offeredSkillId\": \"comp-gestion-agil\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
             }
           }
         },
@@ -1652,13 +1652,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_diego}}"
+                "value": "Bearer {{token_miguel}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000002/requests",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+              "raw": "{\n  \"message\": \"Puedo coordinar los turnos y las plantillas del laboratorio.\",\n  \"offeredSkillId\": \"comp-gestion-agil\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
             }
           }
         },
@@ -1685,13 +1685,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_maria}}"
+                "value": "Bearer {{token_rafael}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/6a0000000000000000000099/requests",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+              "raw": "{\n  \"message\": \"Puedo coordinar los turnos y las plantillas del laboratorio.\",\n  \"offeredSkillId\": \"comp-gestion-agil\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
             }
           }
         },
@@ -1720,7 +1720,7 @@
             "url": "{{baseUrl}}/initiatives/660000000000000000000006/requests",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
+              "raw": "{\n  \"message\": \"Puedo coordinar los turnos y las plantillas del laboratorio.\",\n  \"offeredSkillId\": \"comp-gestion-agil\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"3 h/semana\"\n}"
             }
           }
         },
@@ -1746,7 +1746,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_maria}}"
+                "value": "Bearer {{token_rafael}}"
               }
             ],
             "url": "{{baseUrl}}/requests/mine?status=pending"
@@ -1774,7 +1774,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/requests/received?initiativeId=660000000000000000000006&status=pending"
@@ -1803,7 +1803,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/requests/received?from=2026-12-01&to=2026-01-01"
@@ -1832,7 +1832,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}"
@@ -1860,13 +1860,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_maria}}"
+                "value": "Bearer {{token_rafael}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"message\": \"Puedo coordinar las actividades del espacio.\",\n  \"offeredSkillId\": \"comp-gestion\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"4 h/semana\"\n}"
+              "raw": "{\n  \"message\": \"Puedo coordinar los turnos y las plantillas del laboratorio.\",\n  \"offeredSkillId\": \"comp-gestion-agil\",\n  \"roleId\": \"rol-coordinacion\",\n  \"availability\": \"4 h/semana\"\n}"
             }
           }
         },
@@ -1893,7 +1893,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_maria}}"
+                "value": "Bearer {{token_rafael}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
@@ -1926,7 +1926,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
@@ -1958,7 +1958,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
@@ -1991,7 +1991,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/decision",
@@ -2024,7 +2024,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_maria}}"
+                "value": "Bearer {{token_rafael}}"
               }
             ],
             "url": "{{baseUrl}}/requests/{{nuevaSolicitud}}/cancel"
@@ -2052,7 +2052,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_maria}}"
+                "value": "Bearer {{token_rafael}}"
               }
             ],
             "url": "{{baseUrl}}/requests/670000000000000000000003/cancel"
@@ -2081,7 +2081,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_maria}}"
+                "value": "Bearer {{token_rafael}}"
               }
             ],
             "url": "{{baseUrl}}/requests/6a0000000000000000000099/cancel"
@@ -2115,13 +2115,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"\",\n  \"objective\": \"Centralizar convocatorias de voluntariado del campus.\",\n  \"description\": \"Aplicación web para publicar convocatorias, inscribirse y certificar horas de voluntariado.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2026-01-01\",\n  \"repositoryUrl\": null\n}"
+              "raw": "{\n  \"name\": \"\",\n  \"objective\": \"Emparejar mentores y estudiantes por tecnología.\",\n  \"description\": \"Aplicación web para publicar horarios de mentoría, reservar sesiones y registrar el avance.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2026-01-01\",\n  \"repositoryUrl\": null\n}"
             }
           }
         },
@@ -2148,13 +2148,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Plataforma de voluntariado\",\n  \"objective\": \"Centralizar convocatorias de voluntariado del campus.\",\n  \"description\": \"Aplicación web para publicar convocatorias, inscribirse y certificar horas de voluntariado.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
+              "raw": "{\n  \"name\": \"Plataforma de mentorías\",\n  \"objective\": \"Emparejar mentores y estudiantes por tecnología.\",\n  \"description\": \"Aplicación web para publicar horarios de mentoría, reservar sesiones y registrar el avance.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
             }
           }
         },
@@ -2181,13 +2181,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_diego}}"
+                "value": "Bearer {{token_miguel}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000008/project",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Plataforma de voluntariado\",\n  \"objective\": \"Centralizar convocatorias de voluntariado del campus.\",\n  \"description\": \"Aplicación web para publicar convocatorias, inscribirse y certificar horas de voluntariado.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
+              "raw": "{\n  \"name\": \"Plataforma de mentorías\",\n  \"objective\": \"Emparejar mentores y estudiantes por tecnología.\",\n  \"description\": \"Aplicación web para publicar horarios de mentoría, reservar sesiones y registrar el avance.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
             }
           }
         },
@@ -2214,13 +2214,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Plataforma de voluntariado\",\n  \"objective\": \"Centralizar convocatorias de voluntariado del campus.\",\n  \"description\": \"Aplicación web para publicar convocatorias, inscribirse y certificar horas de voluntariado.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
+              "raw": "{\n  \"name\": \"Plataforma de mentorías\",\n  \"objective\": \"Emparejar mentores y estudiantes por tecnología.\",\n  \"description\": \"Aplicación web para publicar horarios de mentoría, reservar sesiones y registrar el avance.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
             }
           }
         },
@@ -2247,13 +2247,13 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_ana}}"
+                "value": "Bearer {{token_leonardo}}"
               }
             ],
             "url": "{{baseUrl}}/initiatives/660000000000000000000001/project",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Plataforma de voluntariado\",\n  \"objective\": \"Centralizar convocatorias de voluntariado del campus.\",\n  \"description\": \"Aplicación web para publicar convocatorias, inscribirse y certificar horas de voluntariado.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
+              "raw": "{\n  \"name\": \"Plataforma de mentorías\",\n  \"objective\": \"Emparejar mentores y estudiantes por tecnología.\",\n  \"description\": \"Aplicación web para publicar horarios de mentoría, reservar sesiones y registrar el avance.\",\n  \"technologies\": [\n    \"React\",\n    \"Express\"\n  ],\n  \"startDate\": \"2026-11-10\",\n  \"estimatedEndDate\": \"2027-03-01\",\n  \"repositoryUrl\": null\n}"
             }
           }
         },
@@ -2279,7 +2279,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/projects?sort=name"
@@ -2308,7 +2308,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/projects/{{nuevoProyecto}}"
@@ -2337,7 +2337,7 @@
               },
               {
                 "key": "Authorization",
-                "value": "Bearer {{token_luis}}"
+                "value": "Bearer {{token_donatello}}"
               }
             ],
             "url": "{{baseUrl}}/projects/6a0000000000000000000099"
