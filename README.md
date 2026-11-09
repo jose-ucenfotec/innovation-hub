@@ -128,7 +128,7 @@ Para abrirla en Postman: Import → `pruebas/innovation-hub.postman_collection.j
 
 Abrir la raíz del repositorio en VS Code → clic derecho sobre `avance1/index.html` →
 **Open with Live Server** → `http://127.0.0.1:5500/avance1/index.html`.
-Para recompilar sus estilos: `npm install` y `npm run css` en la raíz.
+Para recompilar sus estilos: `cd avance1`, `npm install` y `npm run css`.
 
 ## Documentación
 
@@ -223,5 +223,6 @@ Para recompilar sus estilos: `npm install` y `npm run css` en la raíz.
 | 62 | 2026-11-05 | 91cb6d6 | Generar la colección de pruebas solo con autenticación JWT | Pruebas | Se elimina el modo de desarrollo X-Dev-User del generador |
 | 63 | 2026-11-06 | 06bcc32 | Corregir README y verificar el build de producción | Cliente | Revisión de estados de interfaz, teclado y tamaños de pantalla |
 | 64 | 2026-11-08 | 0587de3 | Validar las entradas | Servidor | Validadores con funciones que devuelven errores por campo y datos copiados campo por campo, como en las prácticas |
+| 65 | 2026-11-08 | c17c8b2 | Actualizar el README | Documentación | README del Avance 2 completo |
 
 <!-- FIN TABLA COMMITS -->

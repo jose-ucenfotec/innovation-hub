@@ -228,7 +228,7 @@ Acceso: **público** (sin token), **opcional** (con o sin token; cambia la respu
 
 | Verbo y ruta | Acceso | Parámetros | Éxito | Errores |
 |---|---|---|---|---|
-| `GET /initiatives/{id}/members` | acceso `full` | `skill`, `role` | 200 `Member[]` | 401, 403 (acceso `summary`), 404 |
+| `GET /initiatives/{id}/members` | acceso `full` | — | 200 `Member[]` | 401, 403 (acceso `summary`), 404 |
 | `DELETE /initiatives/{id}/members/{userId}` | propietario | — | 204 | 401, 403, 404, 409 `CANNOT_REMOVE_OWNER` |
 
 ### 5.6 Solicitudes

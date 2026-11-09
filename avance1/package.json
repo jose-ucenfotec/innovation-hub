@@ -4,7 +4,7 @@
   "description": "Proyecto del curso SOFT-12 — Desarrollo Web Full Stack.",
   "main": "index.js",
   "scripts": {
-    "css": "sass --load-path=node_modules --no-source-map --quiet-deps --silence-deprecation=import avance1/scss/main.scss avance1/css/main.css",
+    "css": "sass --load-path=node_modules --no-source-map --quiet-deps --silence-deprecation=import scss/main.scss css/main.css",
     "css:watch": "npm run css -- --watch"
   },
   "repository": {
