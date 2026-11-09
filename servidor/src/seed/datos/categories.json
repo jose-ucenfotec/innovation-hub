@@ -1,10 +1,10 @@
 [
-  { "id": "cat-tecnologia", "name": "Tecnología", "icon": "bi-cpu" },
-  { "id": "cat-educacion", "name": "Educación", "icon": "bi-mortarboard" },
-  { "id": "cat-sostenibilidad", "name": "Sostenibilidad", "icon": "bi-tree" },
+  { "id": "cat-software", "name": "Desarrollo de software", "icon": "bi-code-slash" },
+  { "id": "cat-ciberseguridad", "name": "Ciberseguridad", "icon": "bi-shield-lock" },
+  { "id": "cat-sistemas", "name": "Sistemas e infraestructura", "icon": "bi-hdd-network" },
+  { "id": "cat-diseno", "name": "Diseño y experiencia digital", "icon": "bi-palette" },
+  { "id": "cat-educacion", "name": "Educación y mentorías", "icon": "bi-mortarboard" },
+  { "id": "cat-emprendimiento", "name": "Emprendimiento tecnológico", "icon": "bi-rocket-takeoff" },
   { "id": "cat-impacto-social", "name": "Impacto social", "icon": "bi-people" },
-  { "id": "cat-negocios", "name": "Negocios y emprendimiento", "icon": "bi-graph-up-arrow" },
-  { "id": "cat-salud", "name": "Salud y bienestar", "icon": "bi-heart-pulse" },
-  { "id": "cat-cultura", "name": "Cultura y creatividad", "icon": "bi-palette" },
   { "id": "cat-otro", "name": "Otro", "icon": "bi-three-dots" }
 ]

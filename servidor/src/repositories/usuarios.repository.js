@@ -23,7 +23,7 @@ export const actualizar = (id, cambios) => User.findByIdAndUpdate(id, cambios, {
 
 export function buscar(q) {
   const condiciones = [{ status: 'active' }];
-  // Cada palabra debe aparecer en alguno de los nombres: "ana mora" encuentra a Ana Mora Jiménez.
+  // Cada palabra debe aparecer en alguno de los nombres: "Leonardo Brenes" encuentra a Leonardo Brenes Jiménez.
   for (const palabra of (q.q ?? '').split(/\s+/).filter(Boolean)) {
     const patron = new RegExp(escaparRegex(palabra), 'i');
     condiciones.push({ $or: [{ firstName: patron }, { lastName: patron }, { secondLastName: patron }] });

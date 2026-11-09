@@ -106,10 +106,10 @@ Contraseña de todos: `Prueba123!` (definida en `servidor/src/seed/seed.js`).
 
 | Usuario | Correo | Para probar |
 |---|---|---|
-| Ana Mora | ana.mora@ucenfotec.ac.cr | propietaria con equipo; miembro de una privada |
-| Luis Pérez | luis.perez@ucenfotec.ac.cr | propietario que recibe solicitudes |
-| María Solís | maria.solis@ucenfotec.ac.cr | solicitante; propietaria de una privada |
-| Diego Vargas | diego.vargas@ucenfotec.ac.cr | propietario de una restringida |
+| Leonardo Brenes | leonardo.brenes@ucenfotec.ac.cr | propietario con equipo; miembro de una privada |
+| Donatello Quirós | donatello.quiros@ucenfotec.ac.cr | propietario que recibe solicitudes |
+| Rafael Montero | rafael.montero@ucenfotec.ac.cr | solicitante; propietario de una privada |
+| Miguel Solano | miguel.solano@ucenfotec.ac.cr | propietario de una restringida |
 
 ### 4. Pruebas de la API
 
@@ -224,5 +224,6 @@ Para recompilar sus estilos: `cd avance1`, `npm install` y `npm run css`.
 | 63 | 2026-11-06 | 06bcc32 | Corregir README y verificar el build de producción | Cliente | Revisión de estados de interfaz, teclado y tamaños de pantalla |
 | 64 | 2026-11-08 | 0587de3 | Validar las entradas | Servidor | Validadores con funciones que devuelven errores por campo y datos copiados campo por campo, como en las prácticas |
 | 65 | 2026-11-08 | c17c8b2 | Actualizar el README | Documentación | README del Avance 2 completo |
+| 66 | 2026-11-08 | 849c081 | Corregir documentación y estructura | Documentación | Readme y package.json de avance1 |
 
 <!-- FIN TABLA COMMITS -->
