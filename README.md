@@ -15,6 +15,7 @@ proyectos con su repositorio de GitHub.
 |---|---|---|
 | 1 — Prototipo | HTML, Sass + Bootstrap, JavaScript, JSON | `avance1/` |
 | 2 — Cliente-servidor | React (Vite) + Node.js/Express + MongoDB | `cliente/`, `servidor/` |
+| 3 — Diseño relacional (Tarea 3) | SQL Server (diseño para EF Core) | `docs/` |
 | Final | React + ASP.NET Core + EF Core | pendiente |
 
 ## Arquitectura
@@ -31,7 +32,7 @@ ocurre en el servidor.
 
 ```
 innovation-hub/
-├── docs/            api-contract.md · modelo-datos.md · seguridad.md
+├── docs/            api-contract.md · seguridad.md · modelo-datos.md · consultas.sql · rutas.md · investigacion-efcore.md
 ├── avance1/         prototipo del Avance 1 (sin cambios)
 ├── cliente/         src/api · components · context · features · hooks · styles · utils
 ├── servidor/        src/config · controllers · db · middleware · models · repositories · routes · seed · services · utils · validators
@@ -128,13 +129,23 @@ Para abrirla en Postman: Import → `pruebas/innovation-hub.postman_collection.j
 
 Abrir la raíz del repositorio en VS Code → clic derecho sobre `avance1/index.html` →
 **Open with Live Server** → `http://127.0.0.1:5500/avance1/index.html`.
-Para recompilar sus estilos: `cd avance1`, `npm install` y `npm run css`.
+Para recompilar sus estilos: `npm install` y `npm run css` en la raíz.
 
 ## Documentación
 
 - [Contrato de la API](docs/api-contract.md) — congelado desde la etiqueta `entrega-2`.
-- [Modelo de datos](docs/modelo-datos.md) — embebido frente a referencia y equivalencia en SQL.
 - [Seguridad](docs/seguridad.md) — medidas y autorización por punto de acceso.
+
+### Diseño de la base de datos para la entrega final (Tarea 3)
+
+El modelo de MongoDB del Avance 2 se diseñó en tablas de SQL Server, para implementarlo después con Entity Framework Core. Es un trabajo de diseño: todavía no hay código C# ni base SQL Server en el repositorio. La versión entregada está en la etiqueta `tarea-3`.
+
+| Documento | Qué contiene |
+|---|---|
+| [Modelo de datos](docs/modelo-datos.md) | **Diagrama** entidad-relación en Mermaid con las 14 tablas y sus llaves, cómo se resuelve cada relación y la tabla «Del documento a la tabla». **Tablas**: columnas, tipos, obligatoriedad, llaves, reglas UNIQUE y CHECK, y qué pasa al borrar. **Plan de migración** de MongoDB a SQL Server en 6 pasos, con los datos de prueba. Al final, el modelo MongoDB anterior para comparar |
+| [Consultas SQL](docs/consultas.sql) | Consultas escritas a mano y comentadas, con su resultado esperado: JOIN 1 a muchos, JOIN muchos a muchos, GROUP BY, UPDATE y DELETE con WHERE, e INSERT que la base rechaza |
+| [Rutas de lectura](docs/rutas.md) | Diseño de `GET /api/initiatives/{id}` y `GET /api/initiatives?category=…`: tablas que leen, consulta SQL y JSON de respuesta con el formato del contrato |
+| [Investigación sobre EF Core](docs/investigacion-efcore.md) | `Select` frente a `Include` y `AsNoTracking`, tabla intermedia frente a entidad intermedia, y paginación con `Skip`/`Take`, con fuentes de la documentación oficial |
 
 ## Decisiones de diseño del Avance 2
 
@@ -230,5 +241,6 @@ Para recompilar sus estilos: `cd avance1`, `npm install` y `npm run css`.
 | 69 | 2026-11-08 | e0a82a2 | Actualizar los datos de prueba | Datos | Seed y colección con información de prueba |
 | 70 | 2026-11-08 | 6aa645b | Actualizar los datos de prueba | Datos | Seed y colección con información de prueba |
 | 71 | 2026-11-08 | 24e3fcf | "Actualizar los datos de prueba" --trailer "Seccion: Datos" --trailer "Cambio: Seed y colección con información de prueba" | General | "Actualizar los datos de prueba" --trailer "Seccion: Datos" --trailer "Cambio: Seed y colección con información de prueba" |
+| 72 | 2026-11-08 | aefe0d4 | Actualizar el README | Documentación | README del Avance 2 completo |
 
 <!-- FIN TABLA COMMITS -->
